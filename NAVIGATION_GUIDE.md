@@ -1,4 +1,4 @@
-﻿# Phase 5B navigation and route foundations
+# Phase 5B navigation and route foundations
 
 Phase 5B implements the requested organizational hierarchy, informed by the category grouping at [Shreyas](https://shreyas.org/). SEVA retains its own identity, content and assets. Detailed page development belongs to Phase 5C.
 
@@ -57,3 +57,26 @@ Run `npm run typecheck`, `npm run lint`, `npm run format:check`, `npm run build`
 ## Phase 5C.1: Profile composition extension
 
 The five Profile destinations now dispatch to `ProfilePage` from the existing route allowlist. They reuse the extracted `Breadcrumbs` component and canonical navigation configuration; Profile implementation statuses are now available. Editorial sibling links provide the same destinations without introducing a second menu hierarchy. Other categories retain their Phase 5B foundations. All original desktop/mobile behavior, active matching and no-JavaScript fallback routes remain. History is an implemented page with limited confirmed source material, not a claim that every historical record is available. See PHASE_5C_1_REPORT.md.
+
+## Phase 5C.2B: Project Detail Routes & Hierarchical Breadcrumbs
+
+Phase 5C.2B implements the six project detail routes under their parent programmes:
+
+- `/programmes/education/cnewa` (CNEWA Non-Formal Education)
+- `/programmes/education/vidya-jyoti` (Vidya Jyoti Scholarship Programme)
+- `/programmes/women-empowerment/jeevan` (Jeevan Project)
+- `/programmes/women-empowerment/sui-daga` (Sui Daga Tailoring Project)
+- `/programmes/community-welfare/seva-ruby-meal` (SEVA Ruby Meal)
+- `/programmes/healthcare/medical-outreach` (Healthcare and Medical Outreach)
+
+### Hierarchical Breadcrumb System
+
+The `Breadcrumbs` component now leverages `getBreadcrumbAncestors(item)` to dynamically trace the full ancestor chain:
+`Home` → `Programmes` → `[Programme Name]` → `[Project Name]` (`aria-current="page"`).
+
+### Active Navigation States
+
+- When viewing a project (e.g., `/programmes/education/cnewa`), both `Programmes` and `Education` retain `aria-current="location"` via `match: "subtree"`.
+- The top-level desktop disclosure panel and mobile accordion continue to cleanly list the 7 core programme areas without overcrowding.
+- Programme preview cards on the parent programme pages link directly to their corresponding project detail routes.
+- Statically generated via `generateStaticParams()` through `interiorNavigation` recursive flattening (32 interior pages + 1 home page = 33 total routes).

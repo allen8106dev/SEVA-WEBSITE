@@ -11,6 +11,7 @@ import "@/styles/home.css";
 import "@/styles/navigation.css";
 import "@/styles/profile.css";
 import "@/styles/programmes.css";
+import "@/styles/projects.css";
 
 const editorial = localFont({
   src: [

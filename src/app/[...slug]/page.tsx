@@ -5,8 +5,10 @@ import { InteriorPage } from "@/components/layout/interior-page";
 import { InteriorContent } from "@/components/sections/interior-content";
 import { ProfilePage } from "@/components/sections/profile-pages";
 import { ProgrammePage } from "@/components/sections/programme-pages";
+import { ProjectPage } from "@/components/sections/project-pages";
 import { isProfilePageId, profileContent } from "@/content/profile";
 import { isProgrammePageId, programmesContent } from "@/content/programmes";
+import { getProjectByRoute } from "@/content/projects";
 import { siteConfig } from "@/config/site";
 
 export const dynamicParams = false;
@@ -30,18 +32,21 @@ export async function generateMetadata({
   params,
 }: PageProps<"/[...slug]">): Promise<Metadata> {
   const item = await getItem(params);
+  const project = getProjectByRoute(item.href);
   const description = isProfilePageId(item.id)
     ? profileContent[item.id].description
     : isProgrammePageId(item.id)
       ? programmesContent[item.id].metaDescription
-      : item.description;
+      : project
+        ? project.metaDescription
+        : item.description;
   return {
     title: item.label,
     description,
     robots: { index: false, follow: false },
     openGraph: { title: item.label, description },
     ...(siteConfig.url &&
-    (isProfilePageId(item.id) || isProgrammePageId(item.id))
+    (isProfilePageId(item.id) || isProgrammePageId(item.id) || project)
       ? { alternates: { canonical: new URL(item.href, siteConfig.url) } }
       : {}),
   };
@@ -52,6 +57,8 @@ export default async function Page({ params }: PageProps<"/[...slug]">) {
   if (isProfilePageId(item.id)) return <ProfilePage item={item} id={item.id} />;
   if (isProgrammePageId(item.id))
     return <ProgrammePage item={item} id={item.id} />;
+  const project = getProjectByRoute(item.href);
+  if (project) return <ProjectPage item={item} project={project} />;
   return (
     <InteriorPage item={item}>
       <InteriorContent item={item} />

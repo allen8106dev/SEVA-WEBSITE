@@ -154,9 +154,14 @@ function ProjectPreviewCard({ project }: { project: ProjectRecord }) {
           </div>
         )}
         <div className="prog-project-card__footer">
-          <p className="prog-project-card__notice">
-            Comprehensive project detail page in preparation for Phase 5C.2B.
-          </p>
+          <Link
+            href={project.detailRoute}
+            className="prog-project-card__cta"
+            aria-label={`Explore ${project.name}`}
+          >
+            <span>Explore Project</span>
+            <span aria-hidden="true">→</span>
+          </Link>
         </div>
       </div>
     </article>
@@ -676,8 +681,11 @@ function SkillDevelopmentPage({ item }: { item: NavigationItem }) {
       >
         <Container width="narrow">
           <p className="prog-cross-link__note">
-            The Sui Daga Tailoring Project operates as a shared initiative
-            bridging{" "}
+            The{" "}
+            <Link href="/programmes/women-empowerment/sui-daga">
+              Sui Daga Tailoring Project
+            </Link>{" "}
+            operates as a shared initiative bridging{" "}
             <Link href="/programmes/women-empowerment">Women Empowerment</Link>{" "}
             and Skill Development, providing structured garment design
             instruction and micro-enterprise mentoring across two operational

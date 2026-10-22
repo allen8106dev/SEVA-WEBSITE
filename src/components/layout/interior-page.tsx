@@ -2,7 +2,11 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { Container } from "@/components/ui/layout";
 import { Eyebrow } from "@/components/ui/typography";
-import { navigation, type NavigationItem } from "@/config/navigation";
+import {
+  interiorNavigation,
+  navigation,
+  type NavigationItem,
+} from "@/config/navigation";
 
 export function ContentStatusNotice({ children }: { children: ReactNode }) {
   return (
@@ -13,21 +17,33 @@ export function ContentStatusNotice({ children }: { children: ReactNode }) {
   );
 }
 
+export function getBreadcrumbAncestors(
+  item: NavigationItem,
+): readonly NavigationItem[] {
+  const segments = item.href.slice(1).split("/");
+  const ancestors: NavigationItem[] = [];
+  let path = "";
+  for (let i = 0; i < segments.length - 1; i++) {
+    path += `/${segments[i]}`;
+    const found = interiorNavigation.find((nav) => nav.href === path);
+    if (found) ancestors.push(found);
+  }
+  return ancestors;
+}
+
 export function Breadcrumbs({ item }: { item: NavigationItem }) {
-  const parent = navigation.find((group) =>
-    group.children?.some((child) => child.href === item.href),
-  );
+  const ancestors = getBreadcrumbAncestors(item);
   return (
     <nav className="breadcrumbs" aria-label="Breadcrumb">
       <ol>
         <li>
           <Link href="/">Home</Link>
         </li>
-        {parent && (
-          <li>
-            <Link href={parent.href}>{parent.label}</Link>
+        {ancestors.map((ancestor) => (
+          <li key={ancestor.href}>
+            <Link href={ancestor.href}>{ancestor.label}</Link>
           </li>
-        )}
+        ))}
         <li>
           <span aria-current="page">{item.label}</span>
         </li>

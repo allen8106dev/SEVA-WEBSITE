@@ -1,8 +1,19 @@
-# SEVA website · Phase 5C.1
+# SEVA website · Phase 5C.2B
 
 The official website for **SEVA Social Service Society** ("Love In Action", Est. 2015), built on Next.js App Router and the approved **Vibrant Humanism** design system.
 
-Phase 5A.1 integrates authentic SEVA photographic assets supplied by the organization into the website. 13 source images were inspected from two supplied archives (`Pictures.zip` and `Founders.zip`). 15 optimized WebP derivatives are now published to `public/images/`. Two leadership portraits are withheld pending identity confirmation. A typed media registry at `src/content/media.ts` centralizes all asset records. The official SEVA emblem now powers the favicon.
+Phase 5C.2B delivers six complete, visually exceptional project detail pages with distinct editorial layouts, authentic approved photography, organization-reported metrics, and full ancestor breadcrumbs:
+
+- `/programmes/education/cnewa` (CNEWA Non-Formal Education)
+- `/programmes/education/vidya-jyoti` (Vidya Jyoti Scholarship Programme)
+- `/programmes/women-empowerment/jeevan` (Jeevan Project)
+- `/programmes/women-empowerment/sui-daga` (Sui Daga Tailoring Project)
+- `/programmes/community-welfare/seva-ruby-meal` (SEVA Ruby Meal)
+- `/programmes/healthcare/medical-outreach` (Healthcare and Medical Outreach)
+
+Phase 5C.2A delivered the Programmes overview (`/programmes`) and all seven focus area editorial pages, and resolved all four official leadership portraits.
+
+Phase 5A.1 integrates authentic SEVA photographic assets supplied by the organization into the website. 13 source images were inspected from two supplied archives (`Pictures.zip` and `Founders.zip`). 17 optimized WebP derivatives are published to `public/images/`. A typed media registry at `src/content/media.ts` centralizes all asset records. The official SEVA emblem powers the favicon and header lockups.
 
 Phase 5A integrates the actual organizational identity, leadership directory, seven focus areas, six project initiatives, organization-reported impact data, CSR partnership frameworks, and centralized directorate contact information into strongly-typed content models.
 

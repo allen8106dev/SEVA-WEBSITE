@@ -205,3 +205,27 @@ The five Profile routes now have distinct completed compositions: an emblem-led 
 `src/content/profile.ts` contains typed editorial copy, media IDs and confirmed timeline records, reusing canonical organizational and leadership models. Only two confirmed portraits render; name-based placeholders preserve the two pending identities. ValueEmphasis is the sole new client motion component, with native-scroll typographic emphasis and static reduced-motion/no-JavaScript output. All five Profile previews remain noindex. No Phase 5C.2, dependency, homepage redesign, media deletion or hosting change is included. A local checkpoint branch `checkpoint/phase-5b-before-profile` preserves verified commit d818058.
 
 Verification: typecheck, lint, formatting and production build passed; full suite 71/71 passed; final caption refinement was rechecked by 20 Profile browser cases and two Profile style cases; actual development checks passed 5/5. The original homepage references and all source media remain unchanged. PHASE_5C_1_REPORT.md records the visual review, final verification and content limits.
+
+## Phase 5C.2B: Project Detail Pages
+
+Phase 5C.2B completes the six project detail routes:
+
+- `/programmes/education/cnewa` (CNEWA Non-Formal Education)
+- `/programmes/education/vidya-jyoti` (Vidya Jyoti Scholarship Programme)
+- `/programmes/women-empowerment/jeevan` (Jeevan Project)
+- `/programmes/women-empowerment/sui-daga` (Sui Daga Tailoring Project)
+- `/programmes/community-welfare/seva-ruby-meal` (SEVA Ruby Meal)
+- `/programmes/healthcare/medical-outreach` (Healthcare and Medical Outreach)
+
+### Architectural Highlights
+
+1. **Extended Canonical Model**: `src/content/projects.ts` provides complete typed data models (`ProjectRecord`, `ProjectStat`, `ProjectParticipation`) containing verified introductions, objectives, documented activities, reported metrics, approved images, and participation pathways without duplication in JSX.
+2. **Distinctive Editorial Layouts**: Each page features a unique visual presentation aligned with Vibrant Humanism:
+   - **CNEWA**: Sunshine yellow hero, dual stat cards (75+ enrolled, ~65% daily attendance), 6-pillar foundational learning grid, 3-frame authentic classroom photo gallery with `ImageMaskReveal`.
+   - **Vidya Jyoti**: Royal blue hero, side-by-side comparative metric cards (~700 children assisted vs 478 in tuition centres with clear non-additive disclosure), 5-dimension support continuum, full-width 8-panel multi-state collage.
+   - **Jeevan**: Coral red hero, Raigad District geolocation badge, 75–100 women trained metric, SHG collective governance model, and transparent documentary archival notice.
+   - **Sui Daga**: Warm craft ochre hero, "2 Active Centres" operational milestone, 4-stage vocational skill progression, and dual focus-area synergy linking Women Empowerment and Skill Development.
+   - **SEVA Ruby Meal**: Midnight black & warm cream hero, Friday service schedule clock badge, Khadki-Pune marker, 3-image reverent photo gallery with compassion statements.
+   - **Healthcare**: Clean clinical royal blue & white layout, 6-pillar preventive healthcare continuum, strict truth-in-advertising healthcare protocol disclosure.
+3. **Navigation & Breadcrumbs**: Full hierarchical ancestor trail (`Home` → `Programmes` → `Focus Area` → `Project`), active subtree navigation, sibling project links, and direct links from parent programme preview cards.
+4. **Verification**: 26 Playwright browser tests in `tests/projects.spec.ts` verify all 6 routes across 6 responsive widths (320px–1920px), zero console errors, valid media natural dimensions, breadcrumbs, and reduced-motion support. Production build generates all 39 static routes cleanly.

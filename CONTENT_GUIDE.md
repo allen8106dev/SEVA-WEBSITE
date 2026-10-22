@@ -305,3 +305,41 @@ The following items are deliberately withheld or marked pending until official a
 Append history entries only after confirmation, with an ID, year, source and confirmed status. The current timeline has one entry: establishment in 2015. Current programme links do not assert launch dates. Do not fill gaps with invented milestones or biographies. To approve a portrait, update both the leadership reference/status and the registry approval/identity fields; the page checks all of them. The Bishop and Director remain name-based placeholders until correctly identified portraits are approved.
 
 Profile photography references `tuition-classroom-group`, `ruby-meals-service` and `vidhya-jyothi-sisters`; captions and alt text come from the unchanged registry. Original assets and all other gallery/project arrays are retained. Phase 5C.2 and full media curation remain separate. See PHASE_5C_1_REPORT.md for verification and limitations.
+
+## Phase 5C.2B: Project Detail Pages Architecture
+
+All factual content for SEVA's six project detail pages is centralized in `src/content/projects.ts`. No factual claims, statistics, or locations are hardcoded in JSX.
+
+### Data Model (`ProjectRecord`)
+
+Each project record supports:
+
+- `id`: Unique identifier (e.g., `"cnewa-education"`, `"vidya-jyoti"`)
+- `name`: Full project title
+- `slug`: Destination slug (e.g., `"cnewa"`, `"vidya-jyoti"`)
+- `parentProgrammeId` / `parentProgrammeName`: Parent programme association
+- `secondaryFocusAreaId` / `secondaryFocusAreaName`: Optional cross-cutting programme synergy (e.g. Sui Daga bridging Women Empowerment and Skill Development)
+- `headline` / `headlineEm`: Large editorial display typography
+- `subtitle`: Descriptive role subtitle
+- `description`: Overview summary
+- `introduction`: In-depth project narrative
+- `objectives`: Verified institutional goals
+- `activities`: Documented field activities
+- `location`: Confirmed operational geography (e.g., `"Raigad District, Maharashtra"`, `"Khadki-Pune, Maharashtra"`)
+- `reportedImpact`: Formatted reach statement
+- `reportedStats`: Sourced metrics with `metric`, `value`, `label`, `context`
+- `reportingPeriod`: Verification period (e.g., `"2025–26 programme"`, `"Weekly ongoing schedule"`)
+- `approvedImages`: Media asset IDs from `src/content/media.ts`
+- `imagePlaceholder`: Documentary placeholder object for projects awaiting field photo curation
+- `relatedProjectIds`: Sibling project references
+- `participationInfo`: Pathway title, description, pathway label, and contact CTA
+- `detailRoute`: Destination URL
+- `verificationStatus` & `publicationStatus`: Strict audit status flags
+- `metaDescription`: Page-specific SEO metadata
+- `themeColor`: Vibrant Humanism theme token (`yellow`, `blue`, `coral`, `black`, `ochre`)
+
+### Truth in Reporting Safeguards
+
+- Reported figures carry explicit "Organization reported · Audit pending" disclosures.
+- Vidya Jyoti clearly separates ~700 children assisted from 478 tuition centre students as non-additive touchpoints.
+- Projects without authentic photographs (Jeevan, Sui Daga, Healthcare) carry explicit curatorial review notices and use licensed documentary studies. No stock photo is ever attributed as an authentic beneficiary.

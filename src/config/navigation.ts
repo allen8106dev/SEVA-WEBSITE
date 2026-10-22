@@ -15,6 +15,7 @@ function child(
   parent: string,
   description: string,
   status: NavigationItem["status"] = "foundation",
+  children?: readonly NavigationItem[],
 ): NavigationItem {
   return {
     id,
@@ -24,6 +25,24 @@ function child(
     visible: true,
     status,
     match: "subtree",
+    children,
+  };
+}
+
+function projectChild(
+  id: string,
+  label: string,
+  programmeSlug: string,
+  description: string,
+): NavigationItem {
+  return {
+    id,
+    label,
+    href: `/programmes/${programmeSlug}/${id}`,
+    description,
+    visible: true,
+    status: "available",
+    match: "exact",
   };
 }
 
@@ -91,6 +110,20 @@ export const navigation: readonly NavigationItem[] = [
         "programmes",
         "Learning, mentoring and educational support.",
         "available",
+        [
+          projectChild(
+            "cnewa",
+            "CNEWA Non-Formal Education",
+            "education",
+            "Foundational learning for migrant & vulnerable children.",
+          ),
+          projectChild(
+            "vidya-jyoti",
+            "Vidya Jyoti Scholarship Programme",
+            "education",
+            "Comprehensive educational assistance & mentoring.",
+          ),
+        ],
       ),
       child(
         "healthcare",
@@ -98,6 +131,14 @@ export const navigation: readonly NavigationItem[] = [
         "programmes",
         "Community health and preventive care.",
         "available",
+        [
+          projectChild(
+            "medical-outreach",
+            "Healthcare and Medical Outreach",
+            "healthcare",
+            "Preventive health camps & medical assistance.",
+          ),
+        ],
       ),
       child(
         "women-empowerment",
@@ -105,6 +146,20 @@ export const navigation: readonly NavigationItem[] = [
         "programmes",
         "Livelihoods, self-help groups and leadership.",
         "available",
+        [
+          projectChild(
+            "jeevan",
+            "Jeevan Project",
+            "women-empowerment",
+            "Women's empowerment & sustainable community governance in Raigad.",
+          ),
+          projectChild(
+            "sui-daga",
+            "Sui Daga Tailoring Project",
+            "women-empowerment",
+            "Vocational tailoring training & livelihood development.",
+          ),
+        ],
       ),
       child(
         "community-welfare",
@@ -112,6 +167,14 @@ export const navigation: readonly NavigationItem[] = [
         "programmes",
         "Compassionate support for vulnerable communities.",
         "available",
+        [
+          projectChild(
+            "seva-ruby-meal",
+            "SEVA Ruby Meal",
+            "community-welfare",
+            "Weekly Friday community nutrition initiative in Khadki-Pune.",
+          ),
+        ],
       ),
       child(
         "rural-tribal-development",
@@ -250,6 +313,13 @@ export function isNavigationActive(
   );
 }
 
-export const interiorNavigation = navigation
-  .filter((item) => item.href !== "/")
-  .flatMap((item) => [item, ...(item.children ?? [])]);
+function flattenNav(items: readonly NavigationItem[]): NavigationItem[] {
+  return items.flatMap((item) => [
+    item,
+    ...(item.children ? flattenNav(item.children) : []),
+  ]);
+}
+
+export const interiorNavigation: readonly NavigationItem[] = flattenNav(
+  navigation.filter((item) => item.href !== "/"),
+);
