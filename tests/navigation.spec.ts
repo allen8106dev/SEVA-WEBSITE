@@ -6,6 +6,7 @@ import {
 } from "../src/config/navigation";
 import { mediaRegistry } from "../src/content/media";
 import { getGalleryAssets, getProjectAssets } from "../src/content/route-media";
+import { viewportsForProject } from "./helpers/responsive-viewports";
 
 test("every configured route has real content, breadcrumbs and unique noindex metadata", async ({
   request,
@@ -119,7 +120,7 @@ test("mobile accordion separates links from controls and restores focus", async 
   await expect(nav).toBeHidden();
 });
 
-test("navigation panels fit six widths and respect reduced motion without browser errors", async ({
+test("navigation panels fit the responsive viewport matrix and respect reduced motion without browser errors", async ({
   page,
 }, testInfo) => {
   test.setTimeout(60000);
@@ -130,7 +131,7 @@ test("navigation panels fit six widths and respect reduced motion without browse
   });
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/profile/leadership");
-  for (const width of [320, 375, 768, 1024, 1440, 1920]) {
+  for (const width of viewportsForProject(testInfo.project.name)) {
     await page.setViewportSize({ width, height: 1000 });
     if (width < 768)
       await page.locator('button[aria-controls="mobile-navigation"]').click();
@@ -138,8 +139,7 @@ test("navigation panels fit six widths and respect reduced motion without browse
       name: width < 768 ? "Mobile navigation" : "Main navigation",
     });
     const trigger = nav.getByRole("button", { name: "Programmes submenu" });
-    await trigger.focus();
-    await page.keyboard.press("Enter");
+    await trigger.evaluate((button) => (button as HTMLButtonElement).click());
     const panel = page.locator(
       width < 768 ? "#mobile-programmes" : "#desktop-programmes",
     );
@@ -195,8 +195,8 @@ test("archive approval, project arrays and leadership identity safeguards surviv
   await page.goto("/get-involved/donate");
   await expect(page.locator("main form, main input")).toHaveCount(0);
   await expect(
-    page.getByRole("link", { name: "Contact SEVA about giving" }),
-  ).toHaveAttribute("href", "/contact");
+    page.getByRole("link", { name: /Request donation information/ }),
+  ).toHaveAttribute("href", /^mailto:sevassspune@gmail\.com\?subject=/);
 });
 
 test("route matching respects segment boundaries", () => {

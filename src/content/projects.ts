@@ -56,7 +56,7 @@ export interface ProjectRecord {
   verificationStatus: "reported_pending_audit" | "verified";
   publicationStatus: "confirmed_official" | "reported_pending_audit";
   metaDescription: string;
-  themeColor: "yellow" | "blue" | "coral" | "black" | "ochre";
+  themeColor: "yellow" | "blue" | "coral" | "black";
   featuredOnHome?: boolean;
 }
 
@@ -336,7 +336,7 @@ export const projects: readonly ProjectRecord[] = [
     publicationStatus: "confirmed_official",
     metaDescription:
       "Sui Daga Tailoring Project by SEVA Social Service Society: vocational cutting and stitching training across two active centres, building women's livelihood capacity.",
-    themeColor: "ochre",
+    themeColor: "yellow",
     featuredOnHome: false,
   },
   {

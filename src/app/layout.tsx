@@ -12,6 +12,10 @@ import "@/styles/navigation.css";
 import "@/styles/profile.css";
 import "@/styles/programmes.css";
 import "@/styles/projects.css";
+import "@/styles/media.css";
+import "@/styles/resources.css";
+import "@/styles/involvement.css";
+import "@/styles/phase-6-1-refinements.css";
 
 const editorial = localFont({
   src: [

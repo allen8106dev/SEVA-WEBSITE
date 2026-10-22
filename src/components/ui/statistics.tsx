@@ -6,7 +6,11 @@ export function Statistics({ items }: { items: readonly StatisticContent[] }) {
   return (
     <dl className="statistics">
       {items.map((item) => (
-        <div key={item.label} className="statistic">
+        <div
+          key={item.label}
+          className="statistic"
+          data-statistic-status={item.status}
+        >
           <dt>{item.label}</dt>
           <dd>
             {item.status === "verified" ? (
@@ -23,7 +27,19 @@ export function Statistics({ items }: { items: readonly StatisticContent[] }) {
                     item.value
                   )}
                 </span>
-                <span className="statistic__source">Source: {item.source}</span>
+                <span className="statistic__source">
+                  Source: {item.source} · {item.reportingPeriod}
+                </span>
+              </>
+            ) : item.status === "reported" ? (
+              <>
+                <span className="statistic__value">{item.value}</span>
+                <span className="statistic__source">
+                  Source: {item.source} · {item.reportingPeriod}
+                </span>
+                <span className="statistic__audit">
+                  Organization-reported · Audit pending
+                </span>
               </>
             ) : (
               <>

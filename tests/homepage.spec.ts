@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { viewportsForProject } from "./helpers/responsive-viewports";
 
 test("homepage has seven accessible chapters and no misleading previews", async ({
   page,
@@ -22,6 +23,35 @@ test("homepage has seven accessible chapters and no misleading previews", async 
   ]);
   await expect(page.locator(".statistics .statistic__pending")).toHaveCount(0);
   await expect(page.locator(".statistics .statistic__value")).toHaveCount(3);
+  await expect(page.locator(".statistics .statistic__value")).toHaveText([
+    "1,000+",
+    "15+",
+    "3",
+  ]);
+  await expect(
+    page.locator('.statistic[data-statistic-status="reported"]'),
+  ).toHaveCount(3);
+  await expect(page.locator(".statistic__audit")).toHaveText([
+    "Organization-reported · Audit pending",
+    "Organization-reported · Audit pending",
+    "Organization-reported · Audit pending",
+  ]);
+  await expect(page.locator(".focus-area-directory li")).toHaveCount(7);
+  expect(
+    await page
+      .locator(".focus-area-directory a")
+      .evaluateAll((links) =>
+        links.map((link) => (link as HTMLAnchorElement).getAttribute("href")),
+      ),
+  ).toEqual([
+    "/programmes/education",
+    "/programmes/healthcare",
+    "/programmes/women-empowerment",
+    "/programmes/community-welfare",
+    "/programmes/rural-tribal-development",
+    "/programmes/skill-development",
+    "/programmes/relief-works",
+  ]);
   await expect(page.locator(".participation-options li")).toHaveCount(4);
   await expect(
     page.locator(".participation-options a, .participation-options button"),
@@ -55,7 +85,8 @@ test("participation actions reach real content and chapters retain mobile compos
   await expect(page).toHaveURL(/#contact$/);
   await expect(page.getByText("sevassspune@gmail.com")).toBeVisible();
   await expect(page.getByText("+91 8856031349")).toBeVisible();
-  for (const width of [320, 390, 768, 1024, 1440, 1920]) {
+  const widths = viewportsForProject(testInfo.project.name);
+  for (const width of widths) {
     await page.setViewportSize({ width, height: 900 });
     for (const id of [
       "introduction",

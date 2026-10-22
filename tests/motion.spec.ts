@@ -7,6 +7,21 @@ test("hero choreography stays readable and immediately interactive", async ({
   await page.goto("/");
   const lines = page.locator(".home-hero h1 > :is(span, em)");
   await expect(lines).toHaveCount(3);
+  await expect
+    .poll(
+      () =>
+        lines.evaluateAll((elements) =>
+          elements.map((element) => {
+            const style = getComputedStyle(element);
+            return (
+              style.opacity === "1" &&
+              style.animationName === "hero-line-settle"
+            );
+          }),
+        ),
+      { message: "All hero lines should finish their entrance animation." },
+    )
+    .toEqual([true, true, true]);
   const timings = await lines.evaluateAll((elements) =>
     elements.map((element) => {
       const style = getComputedStyle(element);
@@ -102,8 +117,8 @@ test("rapid native scrolling leaves every chapter readable and story movement bo
         behavior: "instant",
       }),
     );
-    await expect.poll(read).toBeGreaterThanOrEqual(-12);
-    await expect.poll(read).toBeLessThanOrEqual(12);
+    await expect.poll(read).toBeGreaterThanOrEqual(-8);
+    await expect.poll(read).toBeLessThanOrEqual(8);
     const before = await read();
     await page.evaluate(() =>
       window.scrollBy({ top: 200, behavior: "instant" }),
@@ -130,7 +145,10 @@ test("rapid native scrolling leaves every chapter readable and story movement bo
       () => document.documentElement.scrollWidth <= innerWidth,
     ),
   ).toBe(true);
-  await expect(page.locator("[data-count-value]")).toHaveCount(3);
+  await expect(page.locator("[data-count-value]")).toHaveCount(0);
+  await expect(
+    page.locator('.statistic[data-statistic-status="reported"]'),
+  ).toHaveCount(3);
   if (capable) {
     const area = page.locator(".impact-area").first();
     await area.hover();

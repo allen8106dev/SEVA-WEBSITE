@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { focusAreas } from "../src/content/focus-areas";
 import { projects } from "../src/content/projects";
+import { viewportsForProject } from "./helpers/responsive-viewports";
 import {
   programmesContent,
   type ProgrammePageId,
@@ -23,7 +24,7 @@ const routes: readonly { id: ProgrammePageId; path: string }[] = [
 for (const route of routes) {
   test(`${route.path} has polished responsive content, working media and safe metadata`, async ({
     page,
-  }) => {
+  }, testInfo) => {
     test.setTimeout(90000);
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
@@ -76,7 +77,7 @@ for (const route of routes) {
     }
 
     // Responsive checks across all required widths
-    for (const width of [320, 375, 768, 1024, 1440, 1920]) {
+    for (const width of viewportsForProject(testInfo.project.name)) {
       await page.setViewportSize({ width, height: 1000 });
       await page.evaluate(() => scrollTo({ top: 0, behavior: "instant" }));
       expect(

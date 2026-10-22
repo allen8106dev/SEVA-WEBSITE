@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { organization } from "../src/content/organization";
 import { leadershipProfiles } from "../src/content/leadership";
+import { viewportsForProject } from "./helpers/responsive-viewports";
 import {
   historyMilestones,
   profileContent,
@@ -59,7 +60,7 @@ for (const route of routes) {
         .toBeGreaterThan(0);
       expect(await image.getAttribute("alt")).toBeTruthy();
     }
-    for (const width of [320, 375, 768, 1024, 1440, 1920]) {
+    for (const width of viewportsForProject(testInfo.project.name)) {
       await page.setViewportSize({ width, height: 1000 });
       await page.evaluate(() => scrollTo({ top: 0, behavior: "instant" }));
       expect(

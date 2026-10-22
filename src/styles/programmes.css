@@ -45,10 +45,10 @@
 }
 .prog-hero--women-empowerment {
   background: var(--color-coral);
-  color: var(--color-on-primary);
+  color: var(--color-foreground);
 }
 .prog-hero--community-welfare {
-  background: var(--color-foreground);
+  background: var(--color-dark-surface);
   color: var(--color-background);
 }
 .prog-hero--rural-tribal-development {
@@ -61,7 +61,7 @@
 }
 .prog-hero--relief-works {
   background: var(--color-coral);
-  color: var(--color-on-primary);
+  color: var(--color-foreground);
 }
 
 /* Breadcrumbs contrast on light-on-dark/colored hero backgrounds */
@@ -89,6 +89,12 @@
   color: inherit;
   opacity: 0.85;
 }
+.prog-hero--women-empowerment .breadcrumbs a,
+.prog-hero--relief-works .breadcrumbs a,
+.prog-hero--women-empowerment .eyebrow,
+.prog-hero--relief-works .eyebrow {
+  opacity: 1;
+}
 
 .prog-hero__grid {
   display: grid;
@@ -98,8 +104,8 @@
 }
 
 .prog-title {
-  font-size: clamp(3rem, 7.2vw, 7.6rem);
-  line-height: 0.96;
+  font-size: var(--type-hero);
+  line-height: 1.04;
   font-family: var(--font-editorial);
   font-weight: 400;
   margin-top: var(--space-3);
@@ -120,6 +126,10 @@
 .prog-hero--relief-works .prog-title > em {
   color: var(--color-yellow);
 }
+.prog-hero--women-empowerment .prog-title > em,
+.prog-hero--relief-works .prog-title > em {
+  color: var(--color-foreground);
+}
 
 .prog-intro {
   margin-top: var(--space-4);
@@ -134,18 +144,18 @@
 }
 .prog-hero__media .media-frame__visual {
   border: 1.5px solid var(--color-foreground);
-  box-shadow: 6px 6px 0 var(--color-foreground);
+  box-shadow: var(--shadow-card);
 }
 .prog-hero--community-welfare .prog-hero__media .media-frame__visual {
   border-color: var(--color-background);
-  box-shadow: 6px 6px 0 var(--color-background);
+  box-shadow: var(--shadow-card);
 }
 .prog-hero--healthcare .prog-hero__media .media-frame__visual,
 .prog-hero--women-empowerment .prog-hero__media .media-frame__visual,
 .prog-hero--skill-development .prog-hero__media .media-frame__visual,
 .prog-hero--relief-works .prog-hero__media .media-frame__visual {
   border-color: var(--color-on-primary);
-  box-shadow: 6px 6px 0 var(--color-on-primary);
+  box-shadow: var(--shadow-card);
 }
 
 /* ─── Chapter / Seal indicator ────────────────────────────────────────────── */
@@ -192,7 +202,7 @@
   display: inline-flex;
   align-items: center;
   padding: 0.45rem 1rem;
-  background: var(--color-foreground);
+  background: var(--color-dark-surface);
   color: var(--color-background);
   font-family: var(--font-body);
   font-weight: 700;
@@ -230,13 +240,19 @@
 .prog-photo-grid .media-frame__visual {
   border: 1.5px solid var(--color-foreground);
   background: var(--color-background);
-  box-shadow: 4px 4px 0 var(--color-foreground);
+  box-shadow: var(--shadow-card);
 }
 .prog-photo-grid .media-frame__caption {
   font-size: var(--type-caption);
   color: var(--color-muted);
   line-height: 1.5;
   padding-top: var(--space-2);
+}
+
+.prog-hero .media-frame__caption {
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-background);
+  color: var(--color-foreground);
 }
 
 /* ─── Projects Section ───────────────────────────────────────────────────── */
@@ -263,7 +279,7 @@
   flex-direction: column;
   border: 1.5px solid var(--color-foreground);
   background: var(--color-surface);
-  box-shadow: 6px 6px 0 var(--color-foreground);
+  box-shadow: var(--shadow-card);
   transition:
     transform 0.2s var(--motion-ease, ease),
     box-shadow 0.2s var(--motion-ease, ease);
@@ -272,7 +288,7 @@
 @media (hover: hover) {
   .prog-project-card:hover {
     transform: translate(-3px, -3px);
-    box-shadow: 9px 9px 0 var(--color-foreground);
+    box-shadow: var(--shadow-card);
   }
 }
 
@@ -515,7 +531,7 @@
   position: relative;
   overflow: hidden;
   border: 1.5px solid var(--color-foreground);
-  box-shadow: 4px 4px 0 var(--color-foreground);
+  box-shadow: var(--shadow-card);
   background: var(--color-surface);
 }
 .programme-entry__img-wrap--landscape {
@@ -564,7 +580,7 @@
   padding: var(--space-5);
   background: var(--color-background);
   border: 1.5px solid var(--color-foreground);
-  box-shadow: 4px 4px 0 var(--color-foreground);
+  box-shadow: var(--shadow-card);
   text-decoration: none;
   color: var(--color-foreground);
   transition:
@@ -575,7 +591,7 @@
   .prog-nav__link:hover,
   .prog-nav__link:focus-visible {
     transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0 var(--color-foreground);
+    box-shadow: var(--shadow-card);
   }
 }
 .prog-nav__label {

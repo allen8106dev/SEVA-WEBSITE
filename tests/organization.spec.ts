@@ -74,9 +74,7 @@ test("rendered homepage faithfully reflects SEVA organizational identity", async
     "Love in action. Restoring dignity, transforming lives.",
   );
   await expect(page.locator(".home-hero")).toContainText("LOVE IN ACTION");
-  await expect(page.locator(".home-hero")).toContainText(
-    "EST. 2015 · REGISTERED SOCIETY",
-  );
+  await expect(page.locator(".home-hero")).toContainText("Established 2015");
 
   // No provisional 2026 references exist in the rendered markup
   const pageContent = await page.content();

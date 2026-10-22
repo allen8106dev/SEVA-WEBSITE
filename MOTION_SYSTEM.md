@@ -1,4 +1,8 @@
-# SEVA motion system · Phase 4 + Vibrant Humanism
+# SEVA motion system · Phases 4–6.1
+
+## Phase 5D.2: Resources motion
+
+Numbered resource pathways reuse bounded, once-only `Reveal` entrances. The transparency introduction uses the existing statement reveal; statistics remain static with canonical audit-pending labels. Fine-pointer card hover translates only a decorative arrow, using shared root timing/easing. Reduced motion removes this transform and transition and disables the existing entrance primitives. Official document listings and compliance details are static; server content and native scrolling remain visible and usable without JavaScript. No new animation library or subscription was added.
 
 Motion connects the existing seven chapters without changing their content or accessibility contracts. The vocabulary covers a short CSS entrance sequence, editorial reveals, gentle media settling, bounded parallax, a CSS marquee, three signature scroll interactions, and immediate control feedback. Native scrolling remains in place. No GSAP, Lenis, new package, global animation provider, pinned scene, or loading screen is used.
 
@@ -6,17 +10,27 @@ Motion connects the existing seven chapters without changing their content or ac
 
 `src/config/motion.ts` is the single source for CSS and Motion timings. The root layout already exports these settings as CSS variables; its import order and the repaired Next.js cache configuration are preserved.
 
-- Fast feedback 180ms; standard interaction 300ms; reveal 550ms; entrance 650ms; media settle 850ms; verified count 900ms.
+- Fast feedback 180ms; standard interaction 300ms; reveal 550ms; entrance 600ms; media settle 750ms; verified count 900ms.
 - Shared ease: cubic-bezier(0.22, 1, 0.36, 1).
-- **Bounce ease**: cubic-bezier(0.34, 1.56, 0.64, 1) — used for card hover and punchy button effects.
+- The former overshooting bounce token now uses the shared ease so hover feedback settles without a bounce.
 - Hero line stagger 75ms; impact-area stagger 100ms, capped at 200ms.
-- Entrance distance 12px, halved for the mobile hero. Purpose heading displacement is only 8px.
+- Entrance distance 8px, halved for the mobile hero. Purpose heading displacement is 8px.
 - Viewport entry thresholds: 18% for editorial reveals and 22% for media.
-- Media settle scale 1.025; hover emphasis 1.015; button press scale 0.985; menu movement 4px.
-- Story parallax is bounded to ±12px with 1.06 overscan. Its spring uses stiffness 260, damping 40, and mass 0.8.
-- **Marquee speed**: `--motion-marquee: 28s` — the CSS animation duration for the hero marquee strip.
+- Media settle scale 1.015; hover emphasis 1.012; button press scale 0.99; menu movement 4px.
+- Story parallax is bounded to ±8px with 1.06 overscan. Its spring uses stiffness 260, damping 40, and mass 0.8.
+- **Marquee speed**: `--motion-marquee: 40s` — the CSS animation duration for the hero marquee strip.
+- **Carousel slide transition**: `--motion-carousel: 650ms`, exported from `motionTokens.duration.carousel`.
+- **Carousel interval**: six seconds, exported from `motionTokens.duration.carouselInterval`.
 
-Adjust this vocabulary centrally rather than adding unrelated durations to sections. No perpetual decoration is running.
+Adjust this vocabulary centrally rather than adding unrelated durations to sections. The homepage carousel is the sole new automatic slide movement; its controls and reduced-motion behavior are part of the component contract.
+
+## Phase 6.1 header and homepage carousel
+
+The sticky header changes between expanded and compact states at the existing 60px scroll threshold. CSS transitions the bounded header and logo sizes; reduced motion removes these transitions. The listener updates only when the state changes, and the logo remains linked and accessible in both states.
+
+`HomeHeroCarousel` uses three publication-approved registry assets and CSS horizontal translation. The 650ms transition and six-second interval come from the shared motion tokens. Only slide one is preloaded; the remaining Next Images keep lazy-loading behavior. Pointer entry, focus, and manual navigation pause automatic movement. Visitors can resume it with the play control. Arrow keys move between slides without moving focus. The carousel disables autoplay and its transition for `prefers-reduced-motion: reduce`, while retaining manual controls. It does not announce timed changes or hide server-rendered slide content from assistive technology.
+
+The carousel's 4:3 reserved frame prevents image loading from shifting layout. At mobile and narrow tablet widths the caption sits above the controls; at wider widths it uses a neutral caption panel beside the controls. Photograph pixels remain untinted.
 
 ## Hero choreography
 
@@ -33,9 +47,9 @@ The hero headline must remain three children: `<span>`, `<em>`, `<span>`. CSS ap
 
 Do not change the element types, count, or animation name without updating the test.
 
-## Signature scroll interactions (Vibrant Humanism)
+## Existing shared scroll interactions
 
-Three new scroll-driven components implement the signature interactions:
+The existing scroll-driven components retain the signature interactions:
 
 ### Signature 1: HeroScroll (`src/components/animations/hero-scroll.tsx`)
 
@@ -51,7 +65,7 @@ The closing section kinetic banner. Uses `useScroll` + `useTransform` to horizon
 
 ## Marquee (`src/components/animations/marquee.tsx`)
 
-A horizontal CSS marquee strip at the base of the hero section. Uses the `kinetic-marquee` CSS class defined in `globals.css` with the `marquee-scroll` keyframe animation. Speed is controlled by `--motion-marquee: 28s` from `src/config/motion.ts`. Behaviour:
+A horizontal CSS marquee strip at the base of the hero section. Uses the `kinetic-marquee` CSS class defined in `globals.css` with the `marquee-scroll` keyframe animation. Speed is controlled by `--motion-marquee: 40s` from `src/config/motion.ts`. Behaviour:
 
 - Pauses on hover (CSS `animation-play-state: paused`)
 - Immediately stops when `prefers-reduced-motion: reduce` is set (via `@media` rule)
@@ -77,7 +91,7 @@ Motion manages viewport observation and animation teardown. Reduced-motion prefe
 
 `ScrollMedia` enhances a server-rendered media frame. A useSyncExternalStore subscription watches the combined capability query: at least 48rem wide, fine pointer, hover available, and no reduced-motion request. Only qualifying devices mount `ActiveScrollMedia`, which uses Motion useScroll/useSpring/useTransform. Unmounting it removes the scroll subscription, including when preferences, device capabilities, or viewport size change. This also works under React Strict Mode.
 
-During parallax, only the image/SVG inside the reserved frame moves; the frame, caption, adjacent copy, and reading order stay fixed. A separate once-only media settle introduces the story. Existing ratios, focal points, and future photograph configuration remain intact. The modest overscan covers frame edges. Video is explicitly excluded so controls/captions are not moved by parallax. Phones, coarse-pointer tablets, reduced-motion users, and no-JavaScript clients receive static media plus an optional short entrance. MotionValues update the visual without React state updates on every scroll frame. The spring is bounded by the output mapping, so rapid scrolling cannot send the media beyond ±12px.
+During parallax, only the image/SVG inside the reserved frame moves; the frame, caption, adjacent copy, and reading order stay fixed. A separate once-only media settle introduces the story. Existing ratios, focal points, and future photograph configuration remain intact. The modest overscan covers frame edges. Video is explicitly excluded so controls/captions are not moved by parallax. Phones, coarse-pointer tablets, reduced-motion users, and no-JavaScript clients receive static media plus an optional short entrance. MotionValues update the visual without React state updates on every scroll frame. The spring is bounded by the output mapping, so rapid scrolling cannot send the media beyond ±8px.
 
 ## Controls, impact areas, and navigation
 
@@ -95,7 +109,7 @@ Current homepage statistics remain pending text. No count-up runs for those entr
 
 ## Accessibility and performance
 
-Keep all content readable before enhancement. Use transforms/opacity and small composited regions; do not animate document geometry, large blurs, or shadows. No scroll hijacking, scroll snapping, autoplay media, repeated flashing, or hidden reading content is introduced. Native links, browser history, hash navigation, focus indicators, and normal touch scrolling remain authoritative. Active scenes use no global state store and no custom per-frame scroll event handler.
+Keep all content readable before enhancement. Use transforms/opacity and small composited regions; do not animate document geometry, large blurs, or shadows. No scroll hijacking, scroll snapping, autoplay video, repeated flashing, or hidden reading content is introduced. The homepage's controlled image carousel is the only automatic slide movement. Native links, browser history, hash navigation, focus indicators, and normal touch scrolling remain authoritative. Active scenes use no global state store and no custom per-frame scroll event handler.
 
 No numerical Core Web Vitals or frame-rate score is claimed. Real documentary media, lower-powered devices, other browsers, and physical-device/screen-reader testing still need evaluation before launch.
 
@@ -127,3 +141,21 @@ Profile pages reuse SplitReveal, Reveal and ImageMaskReveal. SplitReveal now tak
 `ValueEmphasis` uses Motion useScroll/useSpring/useTransform to progress decorative rules beneath Love, Equality, Equity and Peace and translate labels by at most `motionTokens.statement.distance`. The shared spring drives native-scroll progress; there is no per-frame React state update. This small typographic interaction also works on mobile without enabling photographic parallax. A cleaned-up media-query subscription switches to a static list when reduced motion changes; unmounting the active subtree releases Motion subscriptions. Static words and complete rules remain readable without JavaScript or with reduced motion. All motion timings remain centralized; no new library, scroll hijacking, pinning or body scroll lock is introduced.
 
 `tests/profile.spec.ts` checks the native-scroll progression at mobile/desktop widths, dynamic reduced-motion teardown, server-visible content and no-JavaScript reading. Separate Profile opening references are used by production and actual-development style checks; homepage references remain unchanged.
+
+## Phase 5D.1: Media interaction motion
+
+The Media overview reuses SplitReveal for the editorial heading and ImageMaskReveal for the approved lead image. Highlight and gallery images use the existing staggered Reveal media settle. Gallery card insertion/filter changes use a short translate settle; hover emphasizes the image. The native modal uses a brief image scale settle. CSS durations/distances/easing come from the root layout's central motion variables; no timing constants, dependencies, scroll interception or new parallax were added.
+
+All server content is visible before enhancement. Reduced motion disables Media CSS entrances and existing primitives retain their preference handling. Modal focus/inertness uses browser behavior, never a hand-written focus trap. Browser chrome can receive focus between native modal controls; background page controls remain inert. Production and actual-development Media styles use the same reduced-motion references; original references are unchanged.
+
+## Phase 5E
+
+The participation pages use the established Reveal primitive to introduce volunteer list entries. No new motion library or scroll behavior was added. Server HTML contains all content and links; the reveal utility preserves visibility without JavaScript and honors reduced-motion preferences.
+
+## Phase 6 motion verification
+
+The hero choreography remains unchanged. Its browser assertion now waits for all three lines to reach the exact settled opacity and animation name before checking their stagger order, avoiding a transient style read during concurrent browser load. Reduced-motion, touch-layout, native-scroll and bounded parallax checks remain in the production suite.
+
+## Phase 6.1 visual refresh
+
+The hero now places the SEVA photograph behind the headline with an indigo overlay; captions and actions remain readable in the server-rendered layout. The existing staggered text entrance, image settle, reveal primitives, story parallax, and slow marquee remain. Shared easing, distances, scale, and timing were softened in `src/config/motion.ts`. Reduced motion still shows the complete static scene, and pending reported statistics remain unanimated.

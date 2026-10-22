@@ -39,12 +39,12 @@ for (const width of [375, 768, 1440]) {
 
     await expect(page.locator("body")).toHaveCSS(
       "background-color",
-      "rgb(255, 249, 235)",
+      "rgb(255, 255, 255)",
     );
-    await expect(page.locator("body")).toHaveCSS("color", "rgb(23, 23, 23)");
-    await expect(page.locator("h1")).toHaveCSS("color", "rgb(23, 23, 23)");
+    await expect(page.locator("body")).toHaveCSS("color", "rgb(41, 41, 41)");
+    await expect(page.locator("h1")).toHaveCSS("color", "rgb(41, 41, 41)");
     const button = page.locator(".home-hero .button--primary");
-    await expect(button).toHaveCSS("background-color", "rgb(37, 65, 178)");
+    await expect(button).toHaveCSS("background-color", "rgb(43, 36, 105)");
     await expect(button).toHaveCSS("color", "rgb(255, 255, 255)");
     expect(
       await button.evaluate(
@@ -92,14 +92,14 @@ for (const width of [375, 768, 1440]) {
         utility,
       };
     });
-    expect(metrics.background).toBe("#fff9eb");
+    expect(["#fff", "#ffffff"]).toContain(metrics.background);
     expect(metrics.displayFont).not.toBe("");
     expect(metrics.h1Font).toContain(metrics.displayFont);
     expect(metrics.configuredBodyFont).not.toBe("");
     expect(metrics.bodyFont).toContain(metrics.configuredBodyFont);
     expect(metrics.h1Size).toBeGreaterThanOrEqual(43);
-    expect(metrics.sectionPadding).toBeGreaterThanOrEqual(32);
-    expect(metrics.columns).toBe(width < 768 ? 1 : 2);
+    expect(metrics.sectionPadding).toBe(0);
+    expect(metrics.columns).toBe(width >= 768 ? 2 : 1);
     expect(metrics.utility).toBe("absolute");
     expect(metrics.overflow).toBe(false);
 
@@ -130,12 +130,16 @@ for (const width of [375, 768, 1440]) {
       body: JSON.stringify(metrics, null, 2),
       contentType: "application/json",
     });
-    await expect(page).toHaveScreenshot(`homepage-navigation-${width}.png`, {
-      animations: "disabled",
-      scale: "css",
-      caret: "hide",
-      maxDiffPixelRatio: 0.005,
-      stylePath: path.join(__dirname, "screenshot.css"),
-    });
+    await expect(page).toHaveScreenshot(
+      `phase6-1-refinements-homepage-${width}.png`,
+      {
+        animations: "disabled",
+        scale: "css",
+        caret: "initial",
+        maxDiffPixelRatio: 0.005,
+        stylePath: path.join(__dirname, "screenshot.css"),
+      },
+    );
+    expect(failures).toEqual([]);
   });
 }

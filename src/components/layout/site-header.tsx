@@ -2,12 +2,15 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Container } from "@/components/ui/layout";
 import { MobileNavigation } from "./mobile-navigation";
 import { RouteNavigation } from "./route-navigation";
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     function onScroll() {
@@ -20,7 +23,7 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`site-header ${scrolled ? "site-header--floating" : ""}`}
+      className={`site-header ${scrolled ? "site-header--floating site-header--compact" : "site-header--expanded"}`}
       data-scrolled={scrolled ? "true" : "false"}
     >
       <Container width="wide" className="header-inner">
@@ -30,26 +33,27 @@ export function SiteHeader() {
             className="wordmark"
             aria-label="SEVA Social Service Society home"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/images/seva-logo.png"
-              alt=""
+            <Image
+              src="/images/seva-logo-header.png"
+              alt="SEVA Social Service Society official logo"
               className="wordmark-logo-emblem"
-              width={36}
-              height={32}
-              aria-hidden="true"
+              width={443}
+              height={431}
+              preload
             />
-            <span className="wordmark__lettering">SEVA</span>
-            <span className="wordmark__dot" aria-hidden="true" />
           </Link>
-          <span className="wordmark-note">
-            Love In Action
-            <br />
-            Est. 2015
-          </span>
         </div>
         <nav aria-label="Main navigation" className="desktop-nav">
           <RouteNavigation />
+          <Link
+            className="nav-donate"
+            href="/get-involved/donate"
+            aria-current={
+              pathname === "/get-involved/donate" ? "page" : undefined
+            }
+          >
+            Donate
+          </Link>
         </nav>
         <MobileNavigation />
       </Container>

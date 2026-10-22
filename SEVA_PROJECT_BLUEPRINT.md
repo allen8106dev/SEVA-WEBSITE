@@ -1,5 +1,21 @@
 # SEVA project blueprint
 
+## Phase 6: Responsive, accessibility and performance audit
+
+Phase 6 reviews all 33 public routes across the nine target desktop widths and four touch viewport widths. The audit preserves the existing Server Component structure, route approval and noindex safeguards, official palette, approved photography and shared motion system. It adds route-wide accessibility checks, more complete heading-fit coverage, lazy gallery loading, a user-triggered lightbox, and accessible contrast refinements. See `PHASE_6_REPORT.md` for the baseline, before/after measurements, checks, limitations and Phase 7 readiness. Deployment and indexing remain outside this phase.
+
+## Phase 6.1: Management-approved visual redesign
+
+The shared site palette follows the indigo, lavender, periwinkle, and white relationships shown in management's Shreyas screenshots. Flat screenshot samples were recorded as image-derived values, not computed CSS; the main tokens are `#2B2469`, `#EFEEFF`, and `#DEE1FF`. The homepage pairs approved editorial copy with an automatically advancing, horizontally sliding carousel of publication-approved registry photos. Photographs retain natural colors, and only the first slide is preloaded. The header scales its official logo between expanded and compact scroll states, with a single far-right desktop Donate route. Content-sized interior heroes reveal useful page content sooner. The compact footer includes canonical contact details and an honest email-app inquiry form; direct message delivery is not configured. Shared tokens apply across page families. See `PHASE_6_1_REPORT.md` for reviewed screenshots, responsiveness, accessibility, verification, and remaining configuration needs. Phase 7, indexing approval, and deployment remain out of scope.
+
+## Phase 5E: Get Involved, giving information and contact
+
+Completed `/get-involved`, `/get-involved/volunteer`, `/get-involved/csr`, `/get-involved/donate`, and `/contact` in the existing static route dispatcher. The pages consume the centralized partnership, donation, and contact records. Volunteer and CSR pathways compose mailto inquiries; donation instructions are requested directly from SEVA and no banking/payment details are published. Contact uses verified tel/mailto links and an address-based map search without invented coordinates. All routes remain noindex/nofollow. See `PHASE_5E_REPORT.md` for implementation and checks.
+
+## Phase 5D.2: Resources and transparency
+
+Completed the four existing Resources routes using Server Components and the established catch-all dispatcher. `resources.ts` supplies a typed document registry, publication gates, report-type/year filtering and editorial content. Approved records render as year-grouped downloads; the registry is empty until genuine approved public documents are supplied. Compliance references consume the existing seven-category model, distinguishing referenced documentation, verification and public access without private identifiers or validity claims. Transparency consumes canonical impact figures with their sources, periods and audit status, without count-up animation. No dependency, CMS, backend, hosting, indexing or Phase 5E change was introduced. See PHASE_5D_2_REPORT.md for files and verification.
+
 ## Phase 5A.1: Authentic Media Integration
 
 Phase 5A.1 integrates authentic SEVA photographic assets — supplied in `Pictures.zip` (programme photography) and `Founders.zip` (leadership portraits) — into the Phase 5A website. All existing visual design, animations, responsive layouts, and accessibility guarantees are preserved. No architectural changes were introduced.
@@ -105,7 +121,7 @@ Phase 5A integrates SEVA Social Service Society's actual institutional identity,
    - Development server regression tests (`test:styles:dev`) pass 3/3.
    - TypeScript checks (`next typegen && tsc --noEmit`), ESLint (`max-warnings=0`), Prettier formatting, and Next.js production build pass cleanly.
 
-## Phase 5 (Vibrant Humanism) visual redesign
+## Phase 5 (Vibrant Humanism) visual redesign — historical
 
 The existing seven-section homepage was substantially redesigned with a bold editorial visual identity called **Vibrant Humanism**. The new palette (Yellow `#ffd93d` + Coral Red `#ff4d4d` + Royal Blue `#2541b2` + Near Black `#171717` + Warm Cream `#fff9eb`) replaces the former olive/ivory/terracotta scheme. Three signature scroll interactions were added using the existing Motion library. The navigation was redesigned with a scroll-responsive floating treatment and a SEVA wordmark with a coral accent dot. A kinetic typography marquee runs across the hero section. No new npm dependencies were introduced. All 31 automated tests pass (with `--workers=2`). Phase 5 content approval (official branding, approved copy, sourced statistics, real media, participation destinations) is not implemented and remains pending.
 
@@ -133,11 +149,11 @@ Create public media, hooks, types, utilities, services, and feature folders when
 
 ## Design and accessibility
 
-**Vibrant Humanism** is the current creative direction: Yellow (`#ffd93d`), Coral Red (`#ff4d4d`), Royal Blue (`#2541b2`), Near Black (`#171717`), and Warm Cream (`#fff9eb`), with semantic color tokens for all roles. The palette uses intentional color relationships and deliberate sequencing between high-energy and quiet visual moments. Cormorant Garamond regular/italic 400 pairs with Manrope variable body/UI text (400–800 weight range). Three Latin WOFF2 files total 71,372 bytes, bundled with original OFL licenses and next/font/local. CSS tokens centralize the responsive type scale, spacing, 72rem/43rem/86rem container widths, radii, and elevation. DESIGN_SYSTEM.md documents the component APIs, palette, color sequencing rules, accessibility, and extension conventions.
+The current creative direction follows management's Shreyas screenshot palette: white and lavender surfaces, pale-periwinkle panels, and indigo for the header state, controls, mission surface, and footer. Semantic tokens centralize colors, text contrast, typography, spacing, radii, and elevation. Cormorant Garamond regular/italic 400 pairs with Manrope variable body/UI text (400–800 weight range). Three Latin WOFF2 files total 71,372 bytes and retain their OFL licenses and provenance. DESIGN_SYSTEM.md documents the current palette, component APIs, accessibility, and extension conventions. The prior Vibrant Humanism palette is historical.
 
 The 48rem navigation/grid breakpoint is mirrored in mobile-navigation.tsx. Fluid typography and gutters support mobile through wide desktop. Documentary photographs are visibly captioned as provisional under Unsplash license, with decorative geometry hidden from assistive technology. Future authentic photography uses MediaFrame with reserved ratios, Next.js image optimization, focal points, responsive sizes, alt text, and captions. No fictional documentary imagery is used. Image overlays, video, and gallery interfaces are deferred until real requirements exist.
 
-Semantic landmarks, a skip link, heading hierarchy, visible focus, and minimum 46px controls are included. The header is now a client component with scroll-responsive behavior: it transitions from a full yellow bar to a compact floating cream bar with backdrop-filter as the user scrolls. Both navigation versions mark the selected destination with aria-current="location". The mobile navigation is a nonmodal disclosure with native links, expanded state, Escape dismissal with focus restoration, outside click, focus-leave handling, and breakpoint cleanup. Footer navigation remains available without JavaScript. Links from the 404 return to actual homepage anchors. Buttons support disabled/loading states with native semantics; loading preserves the label and exposes busy state.
+Semantic landmarks, a skip link, heading hierarchy, visible focus, and minimum 46px controls are included. The header uses a white background and scroll-responsive compact floating treatment, with indigo active states. Both navigation versions mark the selected destination with aria-current="location". The mobile navigation is a nonmodal disclosure with native links, expanded state, Escape dismissal with focus restoration, outside click, focus-leave handling, and breakpoint cleanup. Footer navigation remains available without JavaScript. Links from the 404 return to actual homepage anchors. Buttons support disabled/loading states with native semantics; loading preserves the label and exposes busy state.
 
 ## Animation strategy
 
@@ -220,7 +236,7 @@ Phase 5C.2B completes the six project detail routes:
 ### Architectural Highlights
 
 1. **Extended Canonical Model**: `src/content/projects.ts` provides complete typed data models (`ProjectRecord`, `ProjectStat`, `ProjectParticipation`) containing verified introductions, objectives, documented activities, reported metrics, approved images, and participation pathways without duplication in JSX.
-2. **Distinctive Editorial Layouts**: Each page features a unique visual presentation aligned with Vibrant Humanism:
+2. **Distinctive Editorial Layouts**: Each page features a distinct composition aligned with the shared indigo/lavender system:
    - **CNEWA**: Sunshine yellow hero, dual stat cards (75+ enrolled, ~65% daily attendance), 6-pillar foundational learning grid, 3-frame authentic classroom photo gallery with `ImageMaskReveal`.
    - **Vidya Jyoti**: Royal blue hero, side-by-side comparative metric cards (~700 children assisted vs 478 in tuition centres with clear non-additive disclosure), 5-dimension support continuum, full-width 8-panel multi-state collage.
    - **Jeevan**: Coral red hero, Raigad District geolocation badge, 75–100 women trained metric, SHG collective governance model, and transparent documentary archival notice.
@@ -229,3 +245,9 @@ Phase 5C.2B completes the six project detail routes:
    - **Healthcare**: Clean clinical royal blue & white layout, 6-pillar preventive healthcare continuum, strict truth-in-advertising healthcare protocol disclosure.
 3. **Navigation & Breadcrumbs**: Full hierarchical ancestor trail (`Home` → `Programmes` → `Focus Area` → `Project`), active subtree navigation, sibling project links, and direct links from parent programme preview cards.
 4. **Verification**: 26 Playwright browser tests in `tests/projects.spec.ts` verify all 6 routes across 6 responsive widths (320px–1920px), zero console errors, valid media natural dimensions, breadcrumbs, and reduced-motion support. Production build generates all 39 static routes cleanly.
+
+## Phase 5D.1: recovered Media experience
+
+Continued the interrupted local implementation without resetting Git or replacing the established route dispatcher. Four Media routes are implemented; approved future article slugs join the same static parameter allowlist. Typed news/video registries remain empty pending approved material. News featured imagery uses an approved media ID, never an arbitrary image URL.
+
+Gallery data continues to come from `getGalleryAssets()`: 11 approved Pictures.zip derivatives, with recorded categories/programmes and project membership supplied by `getProjectAssets()`. Native `dialog.showModal()` handles background inertness and keyboard containment. Gallery links also provide full-size access without JavaScript. Central motion tokens and existing Reveal/SplitReveal/ImageMaskReveal are reused. No original files, registry records, homepage sections or existing screenshot references were replaced. See PHASE_5D_1_REPORT.md. Stop point: Phase 5D.1; no Phase 5D.2 work or publication.

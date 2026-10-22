@@ -52,6 +52,8 @@ test("verified numeric fixtures render their complete accessible value in server
           value: 1250,
           suffix: "+",
           source: "Isolated test fixture",
+          reportingPeriod: "Fixture period",
+          note: "Fixture only.",
         },
         { label: "Pending fixture", status: "pending" },
       ],

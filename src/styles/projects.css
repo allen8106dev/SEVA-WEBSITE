@@ -102,16 +102,21 @@
 
 .proj-hero--jeevan {
   background: var(--color-coral);
-  color: var(--color-on-primary);
+  color: var(--color-foreground);
 }
 
 .proj-hero--sui-daga {
-  background: #d9822b;
-  color: #fff9eb;
+  background: var(--color-yellow);
+  color: var(--color-foreground);
+}
+
+.proj-hero--jeevan .proj-location-tag {
+  background: var(--color-background);
+  color: var(--color-foreground);
 }
 
 .proj-hero--seva-ruby-meal {
-  background: var(--color-foreground);
+  background: var(--color-dark-surface);
   color: var(--color-background);
 }
 
@@ -138,13 +143,16 @@
   opacity: 1;
   color: currentColor;
 }
+.proj-hero--jeevan .breadcrumbs a {
+  opacity: 1;
+}
 
 .proj-hero__card-placeholder {
   background: var(--color-surface);
   color: var(--color-foreground);
   border: 1.5px solid var(--color-foreground);
   border-radius: var(--radius-md);
-  box-shadow: 6px 6px 0 var(--color-foreground);
+  box-shadow: var(--shadow-card);
   overflow: hidden;
 }
 
@@ -161,6 +169,12 @@
   background: var(--color-surface);
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   margin: 0;
+}
+
+.proj-hero .media-frame__caption {
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-background);
+  color: var(--color-foreground);
 }
 
 /* ─── Stats Strip ─────────────────────────────────────────────────────────── */
@@ -182,7 +196,7 @@
   border: 1.5px solid var(--color-foreground);
   border-radius: var(--radius-md);
   padding: var(--space-5);
-  box-shadow: 4px 4px 0 var(--color-foreground);
+  box-shadow: var(--shadow-card);
 }
 
 .proj-stat-card__metric {
@@ -194,12 +208,8 @@
   margin-bottom: 0.25rem;
 }
 
-.proj-hero--jeevan ~ .proj-stats-strip .proj-stat-card__metric {
-  color: var(--color-coral);
-}
-
 .proj-hero--sui-daga ~ .proj-stats-strip .proj-stat-card__metric {
-  color: #c76d1a;
+  color: var(--color-foreground);
 }
 
 .proj-hero--cnewa ~ .proj-stats-strip .proj-stat-card__metric {
@@ -310,7 +320,7 @@
   border: 1.5px solid var(--color-foreground);
   border-radius: var(--radius-md);
   padding: var(--space-6);
-  box-shadow: 6px 6px 0 var(--color-foreground);
+  box-shadow: var(--shadow-card);
 }
 
 .proj-highlight-pill {
@@ -319,7 +329,7 @@
   font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-coral);
+  color: var(--color-accent);
   margin-bottom: var(--space-2);
 }
 
@@ -346,11 +356,11 @@
 
 /* Skills Continuum (Sui Daga) */
 .proj-skills-continuum {
-  background: #fff9eb;
+  background: var(--color-page);
   border: 1.5px solid var(--color-foreground);
   border-radius: var(--radius-md);
   padding: var(--space-6);
-  box-shadow: 6px 6px 0 var(--color-foreground);
+  box-shadow: var(--shadow-card);
 }
 
 .proj-skills-steps {
@@ -377,8 +387,8 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: #c76d1a;
-  color: #ffffff;
+  background: var(--color-blue);
+  color: var(--color-background);
   font-weight: 800;
   font-size: 0.75rem;
   flex-shrink: 0;
@@ -419,7 +429,7 @@
   border: 1.5px solid var(--color-foreground);
   border-radius: var(--radius-md);
   padding: var(--space-6);
-  box-shadow: 6px 6px 0 var(--color-foreground);
+  box-shadow: var(--shadow-card);
 }
 
 .proj-clinical-services {
@@ -456,7 +466,7 @@
   border: 2px solid var(--color-foreground);
   border-radius: var(--radius-lg);
   padding: clamp(var(--space-5), 4vw, var(--space-8));
-  box-shadow: 8px 8px 0 var(--color-foreground);
+  box-shadow: var(--shadow-card);
 }
 
 .proj-distinction__lead {
@@ -482,13 +492,13 @@
   border: 1.5px solid var(--color-foreground);
   border-radius: var(--radius-md);
   padding: var(--space-6);
-  box-shadow: 4px 4px 0 var(--color-foreground);
+  box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
 }
 
 .proj-distinction__col--highlight {
-  background: #edf1fa;
+  background: var(--color-surface-highlight);
   border-color: var(--color-primary);
 }
 
@@ -562,7 +572,7 @@
   border: 1.5px solid var(--color-foreground);
   border-radius: var(--radius-md);
   padding: var(--space-5);
-  box-shadow: 4px 4px 0 var(--color-foreground);
+  box-shadow: var(--shadow-card);
 }
 
 .proj-continuum__icon {
@@ -596,7 +606,7 @@
   padding-block: var(--space-6);
   border: 1.5px solid var(--color-foreground);
   border-radius: var(--radius-md);
-  box-shadow: 6px 6px 0 var(--color-foreground);
+  box-shadow: var(--shadow-card);
   margin-top: var(--space-6);
 }
 
@@ -611,7 +621,7 @@
   background: var(--color-background);
   border: 2px solid var(--color-foreground);
   border-radius: var(--radius-md);
-  box-shadow: 8px 8px 0 var(--color-foreground);
+  box-shadow: var(--shadow-card);
   overflow: hidden;
   padding: var(--space-4);
 }
@@ -652,7 +662,7 @@
 .proj-field-spotlight__img {
   border: 1.5px solid var(--color-foreground);
   border-radius: var(--radius-md);
-  box-shadow: 6px 6px 0 var(--color-foreground);
+  box-shadow: var(--shadow-card);
   overflow: hidden;
 }
 
@@ -697,7 +707,7 @@
   border: 1.5px solid var(--color-foreground);
   border-radius: var(--radius-md);
   padding: var(--space-4) var(--space-5);
-  box-shadow: 4px 4px 0 var(--color-foreground);
+  box-shadow: var(--shadow-card);
   display: flex;
   align-items: center;
   gap: var(--space-3);
@@ -743,7 +753,7 @@
   background: var(--color-surface);
   border: 1.5px solid var(--color-foreground);
   border-radius: var(--radius-md);
-  box-shadow: 6px 6px 0 var(--color-foreground);
+  box-shadow: var(--shadow-card);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -793,7 +803,7 @@
   border: 1.5px solid var(--color-foreground);
   border-radius: var(--radius-md);
   padding: clamp(var(--space-4), 3vw, var(--space-6));
-  box-shadow: 6px 6px 0 var(--color-foreground);
+  box-shadow: var(--shadow-card);
 }
 
 .proj-archive-notice__tag,
@@ -808,11 +818,11 @@
 }
 
 .proj-archive-notice__tag {
-  color: var(--color-coral);
+  color: var(--color-accent);
 }
 
 .proj-synergy-banner__tag {
-  color: #c76d1a;
+  color: var(--color-accent);
 }
 
 .proj-clinical-protocol__badge {
@@ -873,7 +883,7 @@
   border: 1.5px solid var(--color-foreground);
   border-radius: var(--radius-md);
   padding: var(--space-4) var(--space-5);
-  box-shadow: 4px 4px 0 var(--color-foreground);
+  box-shadow: var(--shadow-card);
 }
 
 .proj-objective-index {
@@ -904,7 +914,7 @@
   border: 2px solid var(--color-foreground);
   border-radius: var(--radius-lg);
   padding: clamp(var(--space-6), 5vw, var(--space-8));
-  box-shadow: 8px 8px 0 var(--color-foreground);
+  box-shadow: var(--shadow-card);
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -947,12 +957,12 @@
   background: var(--color-yellow);
   color: var(--color-foreground);
   border: 2px solid var(--color-foreground);
-  box-shadow: 4px 4px 0 var(--color-foreground);
+  box-shadow: var(--shadow-card);
 }
 
 .proj-btn--primary:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0 var(--color-foreground);
+  box-shadow: var(--shadow-card);
 }
 
 .proj-btn--secondary {
@@ -994,7 +1004,7 @@
   border: 1.5px solid var(--color-foreground);
   border-radius: var(--radius-md);
   padding: var(--space-5);
-  box-shadow: 6px 6px 0 var(--color-foreground);
+  box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
   transition: transform var(--motion-fast, 150ms) ease;
@@ -1005,7 +1015,7 @@
 }
 
 .proj-navigation__card--parent {
-  background: #fdfaf2;
+  background: var(--color-surface-muted);
   border-style: dashed;
 }
 

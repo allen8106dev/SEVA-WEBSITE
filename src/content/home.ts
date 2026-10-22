@@ -34,20 +34,57 @@ export type ImpactAreaContent = {
   accent?: "green" | "earth";
 };
 
-export type StatisticContent = { label: string } & (
-  | { status: "pending" }
+export type StatisticContent =
+  | { label: string; status: "pending" }
   | {
+      label: string;
+      status: "reported";
+      value: string;
+      source: string;
+      reportingPeriod: string;
+      note: string;
+      auditStatus: "reported_pending_audit";
+    }
+  | {
+      label: string;
       status: "verified";
       value: string | number;
       source: string;
+      reportingPeriod: string;
+      note: string;
       prefix?: string;
       suffix?: string;
       maximumFractionDigits?: number;
-    }
-);
+    };
 
 const featuredProject =
   projects.find((p) => p.id === "jeevan-project") ?? projects[0];
+
+const headlineStatistics: StatisticContent[] = impactMetrics
+  .filter((metric) => metric.isHeadline)
+  .map((metric) => {
+    const shared = {
+      label: metric.metricLabel,
+      source: metric.source,
+      reportingPeriod: metric.reportingPeriod,
+      note: metric.note,
+    };
+    if (metric.verificationStatus === "verified") {
+      return {
+        ...shared,
+        status: "verified",
+        value: metric.numericValue,
+        prefix: metric.prefix,
+        suffix: metric.suffix,
+      };
+    }
+    return {
+      ...shared,
+      status: "reported",
+      value: metric.displayFormat,
+      auditStatus: metric.verificationStatus,
+    };
+  });
 
 export const homeContent = {
   hero: {
@@ -61,15 +98,6 @@ export const homeContent = {
     primary: { href: "#purpose", label: "Explore the beginning" },
     secondary: { href: "#participation", label: "Ways to take part" },
     notice: `Official identity · Established ${organization.establishedYear} · ${organization.legalStatus}`,
-    media: {
-      kind: "image",
-      src: "/images/programmes/community-welfare/ruby-meals-service.webp",
-      alt: "SEVA volunteer serving freshly prepared meals to community members in Khadki-Pune",
-      ratio: "portrait",
-      caption:
-        "Authentic SEVA activity · Ruby Meal food distribution program · Khadki-Pune.",
-      focalPoint: "50% 38%",
-    } satisfies HomeMedia,
   },
   purpose: {
     eyebrow: "01 / Vision & Mission",
@@ -88,7 +116,7 @@ export const homeContent = {
   },
   areas: {
     eyebrow: "02 / Core Focus Areas",
-    heading: "Seven pillars of community transformation.",
+    heading: "Seven areas of community work.",
     description:
       "SEVA Social Service Society leads seven comprehensive development programs. Below are featured initiatives, with all seven areas detailed across our mission documentation.",
     items: [
@@ -146,29 +174,7 @@ export const homeContent = {
     heading: "Organization-reported reach across 3 states.",
     description:
       "SEVA Social Service Society tracks program reach across Maharashtra, Tamil Nadu, and Andhra Pradesh. These headline figures reflect active operational reporting from official records, pending final publication audit approval.",
-    statistics: [
-      {
-        status: "verified",
-        value: impactMetrics[0].numericValue,
-        suffix: impactMetrics[0].suffix,
-        label: impactMetrics[0].metricLabel,
-        source: impactMetrics[0].source,
-      },
-      {
-        status: "verified",
-        value: impactMetrics[1].numericValue,
-        suffix: impactMetrics[1].suffix,
-        label: impactMetrics[1].metricLabel,
-        source: impactMetrics[1].source,
-      },
-      {
-        status: "verified",
-        value: impactMetrics[2].numericValue,
-        suffix: impactMetrics[2].suffix,
-        label: impactMetrics[2].metricLabel,
-        source: impactMetrics[2].source,
-      },
-    ] satisfies StatisticContent[],
+    statistics: headlineStatistics,
     noticeTitle: "Reported data awaiting final external audit approval",
     notice:
       "Figures are sourced directly from SEVA organizational records (2025–26 cycle). Project counts and beneficiary numbers are not presented as mutually exclusive. Formal third-party audit reports will be published upon management authorization.",

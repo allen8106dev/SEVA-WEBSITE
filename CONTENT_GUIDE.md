@@ -1,5 +1,21 @@
 # SEVA Content Architecture & Maintenance Guide
 
+## Phase 5E participation and contact content
+
+Edit volunteering categories, CSR alignment areas, and implementation/reporting statements in `src/content/partnerships.ts`; designated giving purposes in `src/content/donations.ts`; and all contact channels/address in `src/content/contact.ts`. The Get Involved pages render these records directly. Inquiry links use the central email and do not submit forms. Do not describe areas as open applications, add payment instructions, or publish donor benefits without explicit verification and authorization. The map link is derived from the approved postal address and does not encode guessed coordinates.
+
+## Phase 5D.2: public documents
+
+`src/content/resources.ts` owns `ResourceRecord`, the currently empty `resourceRegistry`, editorial archive copy, report-type labels and the published-record selector. `reportingYear` holds the financial/reporting year supplied with the document, without inventing missing years. Categories are annual reports, financial statements and compliance; financial report types distinguish audited statements, summaries and annual accounts. Records include a description, publication date, file format/size, verification, publication approval and public-version review status.
+
+Publication requires all of: `verificationStatus: "verified"`, `approvalStatus: "approved_for_publication"`, `publicationStatus: "published"`, `publicVersionReview: "approved"`, a title/year, valid ISO date, positive integer byte size, PDF format and a same-origin `/documents/<lowercase-name>.pdf` path. Compliance records additionally reference an existing `complianceId` whose `publicDisplayAllowed` is true. Approval to publish a redacted certificate does not establish its current validity: that remains separately recorded in `compliance.ts`.
+
+Before adding a file to `public/`, obtain explicit authorization for the intended public version, inspect identifiers and personal data, redact as required, and confirm that exact version is cleared. Preserve the original securely outside `public/` and the repository; do not put original paths, identifiers or approval correspondence in the content registry. Add only the reviewed derivative and its actual byte size. Run the model/filesystem tests and verify its download before release. The browser's `download` attribute requests a same-origin download with a descriptive title, format and size; browser settings may still offer PDF viewing.
+
+The selector is a rendering safeguard, not protection for files already in `public/`: those are directly accessible. Remove a withdrawn public derivative as well as changing its status, and handle already-distributed copies/caches separately. `tests/resource-models.spec.ts` checks the public documents directory against the approved registry and file sizes. No document files were added in Phase 5D.2.
+
+`getPublishedResources` supports category, year, report type and availability filtering. Public unavailable results are always empty and never include private record metadata. Filter controls are intentionally absent with no records; introduce them only when published records offer useful choices. The year-grouped archive renders only approved records, including supported financial types only. Future CMS loaders should validate external data into this interface on the server and preserve all gates and the secure-original/public-derivative separation. No CMS is configured.
+
 This guide documents the centralized, strongly typed content architecture implemented for **SEVA Social Service Society** in Phase 5A.
 
 ---
@@ -343,3 +359,12 @@ Each project record supports:
 - Reported figures carry explicit "Organization reported · Audit pending" disclosures.
 - Vidya Jyoti clearly separates ~700 children assisted from 478 tuition centre students as non-additive touchpoints.
 - Projects without authentic photographs (Jeevan, Sui Daga, Healthcare) carry explicit curatorial review notices and use licensed documentary studies. No stock photo is ever attributed as an authentic beneficiary.
+
+## Phase 5D.1: Media publishing models
+
+- `media-pages.ts` contains the shared Media introductions and empty-state copy. Do not promise production schedules or organizational consent policies without a supplied source.
+- `media.ts` remains the photographic approval authority. `route-media.ts` selects the 11 eligible archive derivatives and defines existing confirmed project associations; gallery filters never infer association from appearance. Add an association only after confirmation.
+- `videos.ts` holds `VideoRecord`: source-specific required playback data (embed ID for YouTube/Vimeo, URL for hosted video), optional thumbnail, title/description, publication date, programme, caption tracks and transcript. Only `approved_for_publication` entries appear. Both public video and news registries currently contain zero records. Supply approved local thumbnails/caption files; external images require explicit Next.js configuration review. Test actual playback and captions when real assets arrive.
+- `news.ts` holds article ID/slug, title/summary, paragraphs, category, publication/event dates, location, programme link, publication status and metadata. `featuredMediaAssetId` resolves through approval checks; do not add free-form image URLs. Draft/archived articles do not enter static parameters or public lookup. Categories cover news, events and programme updates/activity reports. Dates must be ISO strings; display uses Asia/Kolkata. An approved article requires a rebuild to create its route.
+
+Maintain caption accuracy and participant privacy. Gallery cards and lightbox use the exact registered captions and credits; internal registry notes are not shown in the viewer. The original tuition composite remains preserved and documented; its three separate scene extracts already appear, so no extra duplicate card was added. No CMS/admin/authentication configuration is installed.

@@ -1,109 +1,84 @@
-import { siteConfig } from "@/config/site";
-import { navigation } from "@/config/navigation";
-import { contactInfo } from "@/content/contact";
+import Image from "next/image";
 import Link from "next/link";
+import { contactInfo } from "@/content/contact";
+import { navigation } from "@/config/navigation";
+import { siteConfig } from "@/config/site";
 import { Container } from "@/components/ui/layout";
-import { Eyebrow, Heading, Text } from "@/components/ui/typography";
-import { Arrow, LinkButton } from "@/components/ui/button";
+import { FooterInquiryForm } from "./footer-inquiry-form";
 import { NavigationLinks } from "./navigation";
 
 export function SiteFooter() {
+  const essentialLinks = navigation.filter((item) =>
+    ["profile", "programmes", "media", "resources", "get-involved"].includes(
+      item.id,
+    ),
+  );
+
   return (
     <footer className="site-footer" id="contact">
       <Container width="wide">
-        <div className="footer-heading-row">
-          <Heading size="medium">
-            SEVA Social Service Society.
-            <br />
-            <em>Love In Action.</em>
-          </Heading>
-          <LinkButton
-            href="/#introduction"
-            variant="icon"
-            aria-label="Back to introduction"
-          >
-            <Arrow direction="up" />
-          </LinkButton>
-        </div>
         <div className="footer-grid">
-          <div>
-            <div className="footer-brand-lockup">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/seva-logo.png"
-                alt="SEVA Social Service Society"
+          <div className="footer-identity">
+            <Link href="/" aria-label="SEVA Social Service Society home">
+              <Image
+                src="/images/seva-logo-header.png"
+                alt="SEVA Social Service Society official logo"
                 className="footer-logo-image"
-                width={52}
-                height={46}
+                width={443}
+                height={431}
               />
-              <Link
-                href="/#introduction"
-                className="wordmark"
-                aria-label="SEVA introduction"
-              >
-                <span className="wordmark__lettering">SEVA</span>
-                <span className="wordmark__dot" aria-hidden="true" />
+            </Link>
+            <p>Love In Action</p>
+            <Link
+              className="footer-link"
+              href="/#introduction"
+              aria-label="Back to introduction"
+            >
+              Back to introduction
+            </Link>
+            <p>
+              © {new Date().getFullYear()} {siteConfig.name}. All rights
+              reserved.
+            </p>
+          </div>
+
+          <nav className="footer-links" aria-label="Footer navigation">
+            <h2 className="footer-label">Explore</h2>
+            {essentialLinks.map((item) => (
+              <Link className="footer-link" key={item.href} href={item.href}>
+                {item.label}
               </Link>
-            </div>
-            <Text size="caption" className="footer-note">
-              SEVA Social Service Society
-              <br />
-              Registered Not-for-Profit Society · Est. 2015
-              <br />
-              Maharashtra · Tamil Nadu · Andhra Pradesh
-            </Text>
+            ))}
+            <Link className="footer-link" href="/contact">
+              Contact Us
+            </Link>
+            <details className="footer-chapters">
+              <summary>Homepage sections</summary>
+              <nav aria-label="Homepage chapters">
+                <NavigationLinks />
+              </nav>
+            </details>
+          </nav>
+
+          <address className="footer-contact-details">
+            <h2 className="footer-label">Contact SEVA</h2>
+            <span>
+              {contactInfo.contactPerson}, {contactInfo.role}
+            </span>
+            <a href={contactInfo.phone.href}>{contactInfo.phone.display}</a>
+            <a href={contactInfo.email.href}>{contactInfo.email.display}</a>
+            <span>{contactInfo.address.fullFormatted}</span>
+          </address>
+
+          <div
+            className="footer-form-column"
+            aria-labelledby="footer-inquiry-title"
+          >
+            <h2 className="footer-label" id="footer-inquiry-title">
+              General inquiry
+            </h2>
+            <FooterInquiryForm recipient={contactInfo.email.display} />
           </div>
-          <div>
-            <Eyebrow className="footer-label">Explore</Eyebrow>
-            <nav className="footer-links" aria-label="Footer navigation">
-              {navigation
-                .filter((item) => item.visible)
-                .map((item) => (
-                  <Link className="nav-link" key={item.href} href={item.href}>
-                    {item.label}
-                  </Link>
-                ))}
-            </nav>
-            <Eyebrow className="footer-label">Homepage chapters</Eyebrow>
-            <nav className="footer-links" aria-label="Homepage chapters">
-              <NavigationLinks />
-            </nav>
-          </div>
-          <div>
-            <Eyebrow className="footer-label">Contact Directorate</Eyebrow>
-            <div className="footer-contact-details">
-              <Text size="caption" className="footer-contact-item">
-                <strong>{contactInfo.contactPerson}</strong>, {contactInfo.role}
-              </Text>
-              <Text size="caption" className="footer-contact-item">
-                <a
-                  href={contactInfo.phone.href}
-                  className="footer-contact-link"
-                >
-                  {contactInfo.phone.display}
-                </a>
-              </Text>
-              <Text size="caption" className="footer-contact-item">
-                <a
-                  href={contactInfo.email.href}
-                  className="footer-contact-link"
-                >
-                  {contactInfo.email.display}
-                </a>
-              </Text>
-              <Text size="caption" className="footer-contact-address">
-                {contactInfo.address.fullFormatted}
-              </Text>
-            </div>
-          </div>
-        </div>
-        <div className="footer-bottom">
-          <span>
-            © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
-          </span>
-          <span>
-            Registered Not-for-Profit Society · Est. 2015 · Love In Action
-          </span>
         </div>
       </Container>
     </footer>

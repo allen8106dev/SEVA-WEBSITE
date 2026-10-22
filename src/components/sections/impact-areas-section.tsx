@@ -1,4 +1,6 @@
+import Link from "next/link";
 import { homeContent, type ImpactAreaContent } from "@/content/home";
+import { focusAreas } from "@/content/focus-areas";
 import { Container, Section } from "@/components/ui/layout";
 import { Eyebrow, Heading, Text } from "@/components/ui/typography";
 import { HomepageMedia } from "@/components/ui/homepage-media";
@@ -85,6 +87,27 @@ export function ImpactAreasSection() {
             <ImpactArea key={area.id} area={area} order={index} />
           ))}
         </div>
+        <nav className="focus-area-directory" aria-label="SEVA focus areas">
+          <p className="eyebrow focus-area-directory__label">
+            Explore all seven focus areas
+          </p>
+          <ul>
+            {focusAreas.map((area, index) => (
+              <li key={area.id}>
+                <Link href={`/programmes/${area.id}`}>
+                  <span
+                    className="focus-area-directory__number"
+                    aria-hidden="true"
+                  >
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span>{area.title}</span>
+                  <Arrow direction="right" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </Container>
     </Section>
   );

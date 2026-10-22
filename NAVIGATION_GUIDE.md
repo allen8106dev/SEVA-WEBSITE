@@ -1,5 +1,9 @@
 # Phase 5B navigation and route foundations
 
+## Phase 5D.2: Resources destinations
+
+Resources overview, Annual Reports, Audited Financial Statements and Compliance Documents now dispatch to `ResourcePage` within the existing catch-all route. All four navigation statuses are `available`, describing working pages rather than downloadable documents. The public document registry remains empty. Desktop/mobile menus, the 48rem breakpoint, floating header, active-route semantics and shared breadcrumbs are preserved. Unique existing descriptions and explicit noindex/nofollow metadata remain; no origin or route folder was added. Resources browser tests cover desktop/mobile keyboard disclosure, exact/ancestor selection, links and no-JavaScript reading.
+
 Phase 5B implements the requested organizational hierarchy, informed by the category grouping at [Shreyas](https://shreyas.org/). SEVA retains its own identity, content and assets. Detailed page development belongs to Phase 5C.
 
 ## Configuration and hierarchy
@@ -30,7 +34,9 @@ Server-rendered footer categories, related-page links and a configuration-driven
 
 ## Visuals and motion
 
-`src/styles/navigation.css` extends existing cream, yellow, coral and royal-blue tokens. Dropdowns use a blue top rule, dark border, punchy shadow and clear link highlights. The header preserves its official logo, yellow top treatment and cream floating state after the existing 60px scroll threshold. Interior heroes use yellow and the existing editorial font; content uses existing containers and typography primitives.
+`src/styles/navigation.css` and `src/app/globals.css` use the management-approved white, indigo, lavender, and periwinkle tokens. The official cropped logo image links to Home; adjacent duplicate organization text is omitted. At page top, the white header uses an expanded 96px state. After 60px of scrolling it transitions to a 72px compact state and scales the logo with it. At 48–64rem, the desktop links use a centered second row to preserve readable labels. The far-right desktop Donate action routes to `/get-involved/donate`. Mobile exposes that route once under Get Involved. All controls retain visible focus and 46px minimum targets; reduced motion removes header and disclosure transitions.
+
+The shared footer contains the official logo, essential routes, the canonical contact model, copyright, preserved homepage chapter links, and a compact inquiry form. The form uses native required/email validation and opens a prefilled `mailto:` draft; it says clearly that the site has not sent or stored the message. A direct submission requires an approved server-side email provider and corresponding abuse controls. No provider is configured. Interior heroes are content-sized and use the same editorial typography and semantic color tokens.
 
 CSS opening and closing uses `--motion-fast`, `--motion-menu-distance` and discrete display transitions. Indicators rotate and active underlines use existing timing. Focus and links work immediately. Reduced motion disables transitions. Browsers without discrete transitions close immediately. No timers, new animation dependency or GSAP are introduced.
 
@@ -80,3 +86,13 @@ The `Breadcrumbs` component now leverages `getBreadcrumbAncestors(item)` to dyna
 - The top-level desktop disclosure panel and mobile accordion continue to cleanly list the 7 core programme areas without overcrowding.
 - Programme preview cards on the parent programme pages link directly to their corresponding project detail routes.
 - Statically generated via `generateStaticParams()` through `interiorNavigation` recursive flattening (32 interior pages + 1 home page = 33 total routes).
+
+## Phase 5D.1: Media destinations
+
+Media overview, Photo Gallery, Videos and News & Events are implemented and marked `available` in the existing navigation model. Availability describes working destinations; Videos and News display truthful empty archives pending approved material. Desktop disclosures/mobile accordions retain the same controls, breakpoint and active semantics. Gallery/archive breadcrumbs use the existing shared component; article breadcrumbs include Home / Media / News & Events / title.
+
+`src/app/[...slug]/page.tsx` dispatches all Media pages and approved article slugs. `dynamicParams = false` and approved-only static parameters retain 404s for unpublished/unknown articles. All Media metadata stays noindex/nofollow. No duplicate dynamic route folders were introduced. Media browser checks exercise desktop/mobile links, exact and ancestor states, breadcrumbs, no-JavaScript reading and modal keyboard behavior.
+
+## Phase 5E participation and contact routes
+
+`/get-involved` and its Volunteer, CSR Partnerships, and Donate children now dispatch to editorial Server Component pages. `/contact` uses its own contact composition. The parent and all children have `available` route status because their informational destinations work; this does not imply that applications or giving channels are open. Breadcrumbs and current-page/ancestor active states continue to come from the existing route navigation and breadcrumb components. Mobile accordion behavior is unchanged.

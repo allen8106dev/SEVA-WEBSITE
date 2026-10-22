@@ -1,9 +1,13 @@
 import { expect, test } from "@playwright/test";
+import {
+  expectHeadingsToFit,
+  viewportsForProject,
+} from "./helpers/responsive-viewports";
 
 test("home is readable, responsive, and free of browser errors", async ({
   page,
 }, testInfo) => {
-  // Six full-page captures of the long homepage need more time on shared hosts and mobile emulators.
+  // Full-page captures of the long homepage need more time on shared hosts and mobile emulators.
   test.setTimeout(90000);
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
@@ -19,19 +23,18 @@ test("home is readable, responsive, and free of browser errors", async ({
     /noindex/,
   );
   await expect(page.locator('link[rel="canonical"]')).toHaveCount(0);
-  for (const width of [320, 390, 768, 1024, 1440, 1920]) {
+  for (const width of viewportsForProject(testInfo.project.name)) {
     await page.setViewportSize({ width, height: 900 });
     expect(
       await page.evaluate(
         () => document.documentElement.scrollWidth <= window.innerWidth,
       ),
     ).toBe(true);
-    if ([320, 390, 768, 1024, 1440, 1920].includes(width)) {
-      await page.screenshot({
-        path: testInfo.outputPath(`home-${width}.png`),
-        fullPage: true,
-      });
-    }
+    await expectHeadingsToFit(page, `homepage headings at ${width}px`);
+    await page.screenshot({
+      path: testInfo.outputPath(`home-${width}.png`),
+      fullPage: true,
+    });
   }
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.reload();
@@ -47,6 +50,7 @@ test("mobile menu supports links, Escape, and keyboard focus", async ({
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
   const toggle = page.locator('button[aria-controls="mobile-navigation"]');
+  await page.locator(".footer-chapters summary").click();
   const navigation = page.getByRole("navigation", {
     name: "Mobile navigation",
   });
@@ -85,13 +89,12 @@ test("desktop navigation tracks anchors and the skip link works", async ({
   const navigation = page.getByRole("navigation", {
     name: "Homepage chapters",
   });
+  await page.locator(".footer-chapters summary").click();
   await navigation.getByRole("link", { name: "Contact", exact: true }).click();
   await expect(
     navigation.getByRole("link", { name: "Contact", exact: true }),
   ).toHaveAttribute("aria-current", "location");
-  await page
-    .getByRole("link", { name: "Back to introduction", exact: true })
-    .click();
+  await page.getByRole("link", { name: "Back to introduction" }).click();
   await expect(page).toHaveURL(/#introduction$/);
   await expect(
     navigation.getByRole("link", { name: "Introduction", exact: true }),
@@ -109,35 +112,53 @@ test("semantic text and control colors meet contrast targets", async ({
 }) => {
   await page.goto("/");
   const pairs = await page.evaluate(() => {
-    const styles = getComputedStyle(document.documentElement);
-    function luminance(token: string) {
-      const hex = styles.getPropertyValue(`--color-${token}`).trim();
-      const rgb = hex
-        .slice(1)
-        .match(/.{2}/g)!
-        .map((part) => parseInt(part, 16) / 255)
-        .map((v) => (v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4));
+    const probe = document.createElement("span");
+    probe.style.position = "fixed";
+    probe.style.visibility = "hidden";
+    document.body.append(probe);
+    function luminance(color: string) {
+      const rgb = color
+        .match(/[\d.]+/g)!
+        .slice(0, 3)
+        .map(Number)
+        .map((value) => {
+          const channel = value / 255;
+          return channel <= 0.04045
+            ? channel / 12.92
+            : ((channel + 0.055) / 1.055) ** 2.4;
+        });
       return rgb[0] * 0.2126 + rgb[1] * 0.7152 + rgb[2] * 0.0722;
     }
-    return [
+    const tokens = [
       ["foreground", "background"],
       ["muted", "background"],
+      ["muted", "secondary"],
+      ["muted", "yellow"],
+      ["foreground", "yellow"],
       ["primary", "background"],
       ["accent", "background"],
+      ["accent", "surface"],
+      ["on-primary", "dark-surface"],
       ["on-primary", "primary"],
       ["inverse-muted", "primary"],
       ["muted", "surface"],
       ["success", "background"],
       ["error", "background"],
       ["focus", "background"],
-    ].map(([foreground, background]) => {
-      const a = luminance(foreground),
-        b = luminance(background);
+    ];
+    const result = tokens.map(([foreground, background]) => {
+      probe.style.color = `var(--color-${foreground})`;
+      probe.style.backgroundColor = `var(--color-${background})`;
+      const styles = getComputedStyle(probe);
+      const a = luminance(styles.color);
+      const b = luminance(styles.backgroundColor);
       return {
         pair: `${foreground}/${background}`,
         ratio: (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05),
       };
     });
+    probe.remove();
+    return result;
   });
   for (const pair of pairs)
     expect(pair.ratio, pair.pair).toBeGreaterThanOrEqual(4.5);

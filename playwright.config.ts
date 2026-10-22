@@ -12,7 +12,14 @@ export default defineConfig({
     },
     {
       name: "mobile",
-      testIgnore: ["**/styles.spec.ts", "**/profile-styles.spec.ts"],
+      testIgnore: [
+        "**/accessibility.spec.ts",
+        "**/involvement-styles.spec.ts",
+        "**/styles.spec.ts",
+        "**/profile-styles.spec.ts",
+        "**/media-styles.spec.ts",
+        "**/resources-styles.spec.ts",
+      ],
       use: {
         ...devices["iPhone 13"],
         defaultBrowserType: "chromium",

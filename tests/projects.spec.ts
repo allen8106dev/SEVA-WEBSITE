@@ -1,11 +1,12 @@
 import { expect, test } from "@playwright/test";
 import { projects } from "../src/content/projects";
+import { viewportsForProject } from "./helpers/responsive-viewports";
 
 test.describe("Phase 5C.2B: Project Detail Pages", () => {
   for (const project of projects) {
     test(`${project.detailRoute} has polished responsive content, valid media, and safe metadata`, async ({
       page,
-    }) => {
+    }, testInfo) => {
       test.setTimeout(90000);
       const errors: string[] = [];
       page.on("pageerror", (error) => errors.push(error.message));
@@ -71,7 +72,7 @@ test.describe("Phase 5C.2B: Project Detail Pages", () => {
       }
 
       // Responsive checks across all required widths (320px to 1920px)
-      for (const width of [320, 375, 768, 1024, 1440, 1920]) {
+      for (const width of viewportsForProject(testInfo.project.name)) {
         await page.setViewportSize({ width, height: 1000 });
         await page.evaluate(() => scrollTo({ top: 0, behavior: "instant" }));
         expect(

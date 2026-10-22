@@ -107,7 +107,10 @@ export function RouteNavigation({
                   <p className="route-panel__intro">{item.description}</p>
                   <ul>
                     {item.children
-                      .filter((child) => child.visible)
+                      .filter(
+                        (child) =>
+                          child.visible && (mobile || child.id !== "donate"),
+                      )
                       .map((child) => (
                         <li key={child.id}>
                           <Link

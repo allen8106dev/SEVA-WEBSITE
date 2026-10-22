@@ -1,0 +1,160 @@
+/* Compact, content-led interiors shared by the Phase 6.1 route templates. */
+.interior-hero,
+.profile-opening,
+.prog-hero,
+.proj-hero,
+.resource-hero,
+.media-hero,
+.involvement-hero,
+.contact-hero,
+.news-article-hero {
+  min-height: 0;
+  padding-block: clamp(1.5rem, 3vw, 2.75rem);
+}
+
+.interior-hero h1,
+.profile-title,
+.prog-title,
+.proj-title,
+.resource-hero__title,
+.media-hero__title,
+.involvement-hero__title,
+.contact-hero h1,
+.news-article-title {
+  font-size: clamp(2.25rem, 4vw, 3.8rem);
+}
+
+.interior-hero h1,
+.profile-title,
+.prog-title,
+.proj-title,
+.resource-hero__title,
+.media-hero__title,
+.involvement-hero__title,
+.contact-hero h1,
+.news-article-title {
+  line-height: 1.05;
+  margin-block: 0.75rem 1rem;
+}
+
+.interior-hero .breadcrumbs ol,
+.profile-opening .breadcrumbs ol,
+.prog-hero .breadcrumbs ol,
+.proj-hero .breadcrumbs ol,
+.resource-hero .breadcrumbs ol,
+.media-hero .breadcrumbs ol,
+.involvement-hero .breadcrumbs ol,
+.contact-hero .breadcrumbs ol,
+.news-article-hero .breadcrumbs ol {
+  margin-bottom: 1rem;
+}
+
+.profile-opening__grid,
+.prog-hero__grid,
+.proj-hero__grid,
+.resource-hero__grid,
+.media-hero__grid,
+.contact-hero__grid {
+  gap: clamp(1rem, 2.5vw, 2rem);
+  margin-top: 1rem;
+}
+
+.profile-opening--profile .profile-seal {
+  width: min(12rem, 100%);
+}
+
+.prog-hero__media .media-frame__visual,
+.proj-hero__media .media-frame__visual,
+.resource-hero__media .media-frame__visual {
+  max-height: 21rem;
+}
+
+.resource-hero {
+  padding-block: clamp(1.5rem, 3vw, 2.75rem);
+}
+
+.resource-hero__grid {
+  align-items: start;
+}
+
+.resource-hero__note {
+  gap: var(--space-2);
+  padding-top: var(--space-3);
+}
+
+.media-page,
+.news-article-page {
+  min-height: 0;
+}
+
+.media-hero__visual {
+  max-height: 23rem;
+}
+
+.media-hero__img {
+  max-height: 20rem;
+}
+
+.media-hero__intro,
+.resource-hero__intro,
+.prog-intro,
+.proj-intro,
+.news-article-summary {
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  line-height: 1.6;
+}
+
+.involvement-hero__intro,
+.contact-hero__grid .body-text {
+  max-width: 62ch;
+}
+
+.news-article-meta-header {
+  margin-block: 0.75rem;
+}
+
+.news-article-featured-media {
+  margin-block: 1.25rem;
+}
+
+@media (min-width: 48rem) {
+  .profile-opening__grid {
+    align-items: center;
+  }
+
+  .contact-hero__grid {
+    grid-template-columns: minmax(0, 1.3fr) minmax(8rem, 0.7fr);
+  }
+}
+
+@media (min-width: 48rem) and (max-width: 63.999rem) {
+  .desktop-nav {
+    gap: 0;
+  }
+
+  .route-navigation--desktop .route-group__row {
+    flex-wrap: nowrap;
+  }
+
+  .route-navigation--desktop .nav-link {
+    padding-inline: 0.1rem;
+  }
+
+  .route-navigation--desktop .route-toggle {
+    flex: 0 0 var(--size-touch);
+  }
+
+  .nav-donate {
+    margin-left: 0;
+    padding-inline: 0.7rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  .prog-hero__grid,
+  .proj-hero__grid,
+  .resource-hero__grid,
+  .media-hero__grid {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  }
+}

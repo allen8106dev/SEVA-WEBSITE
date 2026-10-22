@@ -1,6 +1,8 @@
-# SEVA website · Phase 5C.2B
+﻿# SEVA website - Phase 6.1
 
-The official website for **SEVA Social Service Society** ("Love In Action", Est. 2015), built on Next.js App Router and the approved **Vibrant Humanism** design system.
+The official website for **SEVA Social Service Society** ("Love In Action", Est. 2015), built on Next.js App Router with the management-approved Shreyas-inspired indigo and lavender design system.
+
+Phase 5E completes Get Involved, Volunteer, CSR Partnerships, donation information, and Contact routes. Participation and donation inquiries use transparent email links; no application form, payment gateway, or bank instructions are published. See [PHASE_5E_REPORT.md](PHASE_5E_REPORT.md). All pages remain noindex/nofollow pending publication approval and a confirmed origin.
 
 Phase 5C.2B delivers six complete, visually exceptional project detail pages with distinct editorial layouts, authentic approved photography, organization-reported metrics, and full ancestor breadcrumbs:
 
@@ -75,7 +77,7 @@ npm run test:styles:dev
 - `src/components/ui`: reusable layout, typography, controls, media, and editorial panel.
 - `src/components/animations`: the single reusable reveal used by the initial layout.
 - `src/config/site.ts`: organization label, navigation, URL validation, indexing controls.
-- `src/styles/tokens.css`: provisional palette, typography, spacing, and motion tokens.
+- `src/styles/tokens.css`: screenshot-derived semantic palette, typography, spacing, and elevation tokens.
 - `src/config/motion.ts`: the shared CSS and Motion timing source.
 - `src/assets/fonts`: local WOFF2 font assets, licenses, and provenance.
 - `tests`: production browser checks for navigation, responsive overflow, SSR content, and SEO.
@@ -96,11 +98,21 @@ Metadata and SEO routes are prerendered: rebuild after changing configuration. O
 
 See [SEVA_PROJECT_BLUEPRINT.md](SEVA_PROJECT_BLUEPRINT.md) for architecture, decisions, and next steps.
 
-## Visual Transformation · "Humanity in Action"
+## Phase 6 quality audit
+
+Phase 6 adds a nine-width desktop and four-width touch responsive matrix, route-wide semantic/contrast checks, heading-fit assertions, reviewed Get Involved and Contact opening references, and contrast fixes using the existing brand palette. Gallery card images remain lazy; the lightbox and its eager image mount only after the visitor opens a photograph. No package was added. See [PHASE_6_REPORT.md](PHASE_6_REPORT.md) for production measurements, test results, scope and limitations. Phase 7 and deployment have not begun.
+
+## Phase 6.1 visual redesign
+
+The current website uses the management-supplied Shreyas screenshots as its visual reference. Flat screenshot areas sampled to indigo `#2B2469`, lavender `#EFEEFF`, and periwinkle `#DEE1FF`; SEVA keeps its official identity, verified content, and approved programme photography. The header scales between expanded and compact states, the desktop Donate action uses the existing information route, and the homepage carousel uses registry-approved photos without color tint. Interior heroes are content-sized. The compact footer form opens an honest email-app draft; no direct email provider or payment gateway is configured. See [PHASE_6_1_REPORT.md](PHASE_6_1_REPORT.md) for page coverage, responsive screenshots, accessibility checks, verification, and remaining requirements. Phase 7, indexing, and deployment remain out of scope.
+
+## Historical Phase 5 visual notes Â· "Humanity in Action"
+
+These notes describe a previous design iteration. Phase 6.1 supersedes its palette and visual treatment.
 
 A major visual redesign was implemented to transform the website from a wireframe-like prototype into a cinematic, editorial digital experience.
 
-- **Theme**: "Humanity in Action" — combining documentary-style photography with contemporary literary editorial design.
+- **Theme**: "Humanity in Action" â€” combining documentary-style photography with contemporary literary editorial design.
 - **Photography**: Phase 5A.1 replaced prior Unsplash documentary placeholders with authentic SEVA organizational photographs. 13 source images were supplied in `Pictures.zip` (9 programme photos) and `Founders.zip` (4 portraits). 15 optimized WebP derivatives are published to `public/images/`. Two portraits are withheld pending identity confirmation. All asset records are in `src/content/media.ts` and the full audit register is at `MEDIA_ASSET_REGISTER.md`.
 - **Asymmetric & Alternating Chapters**: Light editorial spreads paired with deep evergreen and obsidian dark chapters (`#1e3629`, `#162019`).
 - **Signature Visual Moments**: Hero-to-purpose transition, documentary bounded parallax on the Human Stories portrait, and high-contrast chapter rhythm.
@@ -120,9 +132,9 @@ Phase 3 adds homepage structure, truthful-placeholder, internal-anchor, and part
 
 Phase 2 verification covers TypeScript, ESLint, formatting, production build, and 14 browser tests (seven cases in desktop and emulated-mobile projects). Screenshots are captured at 320, 390, 768, 1024, 1440, and 1920px; all six layouts were reviewed. The expanded tests check semantic color contrast, native disabled/loading button states, active navigation from menu and content links, skip-link focus, mobile dismissal, reduced-motion transforms, overflow, browser/hydration errors, no-JavaScript content, robots, sitemap, and 404 responses. Device emulation is not a physical-device or screen-reader audit. No performance score is claimed.
 
-The initial delivery passed TypeScript, ESLint, Prettier, the production build, and all eight Playwright checks in Microsoft Edge (desktop and emulated mobile). Screenshots at 390px and 1440px were reviewed; overflow checks cover 320–1920px. These are browser emulations, not physical-device or assistive-technology audits. Tests also check browser errors, mobile keyboard navigation, reduced-motion rendering, no-JavaScript content, SEO endpoints, and the 404 response.
+The initial delivery passed TypeScript, ESLint, Prettier, the production build, and all eight Playwright checks in Microsoft Edge (desktop and emulated mobile). Screenshots at 390px and 1440px were reviewed; overflow checks cover 320â€“1920px. These are browser emulations, not physical-device or assistive-technology audits. Tests also check browser errors, mobile keyboard navigation, reduced-motion rendering, no-JavaScript content, SEO endpoints, and the 404 response.
 
-The Phase 1 audit reported zero production vulnerabilities and five high-severity findings in the development-only Next.js ESLint → fast-glob → micromatch → braces chain, without a compatible patch at that delivery. Package inputs are unchanged in Phase 2; no fresh security audit is claimed. Do not run `npm audit fix --force`. Recheck advisories before deployment. ESLint 9 was retained for React lint-plugin compatibility even though npm marks it unsupported. Upgrade the lint toolchain together when compatible releases become available.
+The Phase 1 audit reported zero production vulnerabilities and five high-severity findings in the development-only Next.js ESLint â†’ fast-glob â†’ micromatch â†’ braces chain, without a compatible patch at that delivery. Package inputs are unchanged in Phase 2; no fresh security audit is claimed. Do not run `npm audit fix --force`. Recheck advisories before deployment. ESLint 9 was retained for React lint-plugin compatibility even though npm marks it unsupported. Upgrade the lint toolchain together when compatible releases become available.
 
 Configuration follows the official [Next.js installation](https://nextjs.org/docs/app/getting-started/installation), [Next.js ESLint](https://nextjs.org/docs/app/api-reference/config/eslint), [Tailwind framework guides](https://tailwindcss.com/docs/installation/framework-guides), and [Motion reduced-motion](https://motion.dev/docs/react-use-reduced-motion) guidance.
 
@@ -141,3 +153,11 @@ The Profile overview, About, Vision & Mission, Leadership and History pages now 
 `test:styles:dev` now runs both the original homepage styling checks and Profile opening/font/palette checks against the actual development server. Separately named Profile references cover all five pages at 375/1440px. Existing homepage references are unchanged.
 
 Verification passed TypeScript, lint, formatting and the production build. The full production suite passed 71/71; after a final caption-spacing refinement, all 20 Profile browser checks and both production Profile styling checks passed again. The expanded actual-development-server suite passed 5/5. See PHASE_5C_1_REPORT.md for the results and pending content approvals.
+
+## Phase 5D.1: Media recovery and completion
+
+Media now has an editorial overview, an interactive gallery of 11 approved registry assets, and truthful empty video and news archives. Routes: `/media`, `/media/gallery`, `/media/videos`, `/media/news-events`; approved future articles dispatch through `/media/news-events/[slug]` in the existing catch-all route. Unknown and unpublished slugs return 404.
+
+The gallery supports category, recorded programme and confirmed project filters, result counts, an empty-state reset, native modal viewing, arrow-key navigation, Escape and focus restoration. Without JavaScript, photographs remain readable and link to their full-size derivatives. News imagery resolves through the media approval registry. Videos use a typed playback-source union and user-initiated facades, with caption-track/transcript fields. No approved videos or articles have been supplied; none were invented.
+
+See [PHASE_5D_1_REPORT.md](PHASE_5D_1_REPORT.md) for the recovery inventory, files and verification. New Media opening references are separate from existing homepage/Profile references and run against production and the actual development server. Use `npm run test:e2e -- --workers=2 --timeout=120000` for the documented complete regression run. No dependencies or hosting settings changed. Phase 5D.2 is documented above.

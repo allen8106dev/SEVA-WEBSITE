@@ -1,64 +1,53 @@
 # SEVA design system
 
+## Phase 5D.2: Resources presentation
+
+`resources.css` scopes a yellow editorial overview, cream reporting archives and a blue transparency section. Numbered pathway links combine availability text, serif titles and a directional marker. Empty archives and compliance references prioritize reading order and explicit status labels. All colors, fonts, spacing and motion timings reuse existing semantic tokens. Year-grouped document lists use native descriptive download links, including format and byte-derived size. The original homepage/Profile/Media references remain unchanged; eight Resources opening references cover 375/1440px in both production and actual development tests, including CSS responses and actual font glyph checks.
+
 Phase 4 motion and Phase 5 visual redesign extend this system without replacing its layout architecture or accessibility contracts. See MOTION_SYSTEM.md for the hero sequence, reveal variants, story parallax, scroll interactions, marquee, and accessibility rules. The styling baselines and repaired development cache configuration are retained.
 
-The creative direction is **Vibrant Humanism**: bold editorial compositions, kinetic typography, expressive color sequencing, and documentary photography. The design communicates warmth, community, and credibility through energy and contrast rather than muted minimalism. Official branding, organizational stories, statistics, and participation destinations remain pending.
+Phase 6.1 establishes a professional, photography-led identity using the management-approved Shreyas screenshot palette. SEVA keeps its own logo, verified content, programme structure, and authentic local photography. The former Vibrant Humanism palette is retired; section notes from Phases 3–6 below are historical records.
 
 ## Tokens and palette
 
 `src/styles/tokens.css` owns the semantic colors, type scale, spacing, containers, borders, radii, and elevation. Tailwind's static theme exposes every semantic token. Use semantic names rather than introducing component-specific hex values or hardcoding palette values across components.
 
-### Vibrant Humanism palette
+### Management-approved screenshot palette
 
-| Role       | Token                | Value     | Intended use                                                           |
-| ---------- | -------------------- | --------- | ---------------------------------------------------------------------- |
-| Background | `--color-background` | `#fff9eb` | Warm cream page canvas                                                 |
-| Foreground | `--color-foreground` | `#171717` | Near-black body text and headings                                      |
-| Primary    | `--color-primary`    | `#2541b2` | Royal blue — controls, nav, editorial chapters                         |
-| On primary | `--color-on-primary` | `#fffffe` | Text on royal blue (6-digit hex, prevents NaN in contrast test parser) |
-| Accent     | `--color-accent`     | `#ce2a2a` | Deep coral — emphasis, section rules, wordmark dot                     |
-| Yellow     | `--color-yellow`     | `#ffd93d` | Primary yellow — hero background, high-energy moments                  |
-| Coral      | `--color-coral`      | `#ff4d4d` | Coral red — participation section bg, pill badges                      |
-| Coral deep | `--color-coral-deep` | `#ce2a2a` | Deep coral — italic headline emphasis, accent rules                    |
-| Blue       | `--color-blue`       | `#2541b2` | Royal blue alias                                                       |
-| Blue dark  | `--color-blue-dark`  | `#162670` | Deeper blue for hover states                                           |
-| Black      | `--color-black`      | `#171717` | Near-black for punchy borders and nav pill                             |
-| Cream      | `--color-cream`      | `#fff9eb` | Warm cream alias                                                       |
-| Muted      | `--color-muted`      | `#5a5a4a` | Secondary body text                                                    |
-| Border     | `--color-border`     | `#e0ddd0` | Decorative separators                                                  |
-| Surface    | `--color-surface`    | `#f5f2e8` | Card and panel backgrounds                                             |
+The supplied desktop screenshots show white navigation, a deep indigo brand surface, pale lavender page areas, and periwinkle impact panels. Pixel samples from flat areas refine the supplied approximate values. These are screenshot samples, not claims about Shreyas's computed CSS.
 
-> [!IMPORTANT]
-> `--color-on-primary` must remain `#fffffe` (not `#ffffff`). The contrast test in `tests/site.spec.ts` reads CSS token values and parses them as 6-character hex strings. The CSS shorthand `#fff` resolves to only 3 characters after `slice(1)`, causing the hex luminance parser to return `NaN` and the ratio assertion to fail.
+| Role             | Token                                                 | Value     | Reference use                                                                   |
+| ---------------- | ----------------------------------------------------- | --------- | ------------------------------------------------------------------------------- |
+| Primary indigo   | `--color-brand-primary` / `--color-primary`           | `#2B2469` | Navigation state, controls, mission panel, footer                               |
+| Secondary indigo | `--color-brand-secondary` / `--color-accent`          | `#3D3182` | Emphasis, interactive hover, selected links                                     |
+| Page             | `--color-page` / `--color-background`                 | `#FFFFFF` | Header, primary canvas, cards                                                   |
+| Soft lavender    | `--color-surface-muted` / `--color-surface`           | `#EFEEFF` | Quiet section backgrounds and grouped content                                   |
+| Pale periwinkle  | `--color-surface-highlight` / legacy `--color-yellow` | `#DEE1FF` | Impact panels, subtle emphasis, focus on dark surfaces                          |
+| Dark surface     | `--color-dark-surface` / legacy `--color-black`       | `#2B2469` | Mission and footer backgrounds                                                  |
+| Main text        | `--color-text-primary` / `--color-foreground`         | `#292929` | Body text and headings on light surfaces                                        |
+| Secondary text   | `--color-text-secondary` / `--color-muted`            | `#5F5F5F` | Supporting copy; darkened from the screenshot estimate to pass AA on periwinkle |
+| Border           | `--color-border-neutral` / `--color-border`           | `#D1D2E8` | Quiet separators and card boundaries                                            |
+| On primary       | `--color-on-primary`                                  | `#FFFFFF` | Text and icons on indigo                                                        |
 
-> [!NOTE]
-> The new palette replaces the former olive/ivory/terracotta identity (`#f7f5ef`, `#292e29`, `#314f40`, `#995331`). Do not reintroduce muted green or earthy terracotta. All WCAG AA contrast pairs (≥ 4.5:1) have been verified by automated test and node script.
+Measured screenshot samples: `#FFFFFF` in the navigation at (500,150) in screenshot 03; `#2B2469` in the indigo mission panel at (500,200); `#EFEEFF` in the lavender section at (500,600); and `#DEE1FF` in an impact card at (300,700). Coordinates refer to the supplied 1920 × 1200 PNGs and are flat-region pixel samples. They do not establish CSS declarations.
+
+Contrast targets use WCAG AA normal-text minimum 4.5:1. Current representative token pairs are 13.47:1 for white on indigo, 11.31:1 for main text on periwinkle, 5.58:1 for secondary text on lavender, and 4.96:1 for secondary text on periwinkle. The audit in `tests/site.spec.ts` covers these combinations; page-level text is also checked in the accessibility suite. Do not communicate state only through color.
 
 ### Color sequencing
 
-Do not make every section a different bright color. Use a deliberate sequence of high-energy and low-energy visual moments:
-
-- **Hero** → yellow (`#ffd93d`) background — maximum energy, poster composition
-- **Purpose** → royal blue (`#2541b2`) background — editorial contrast
-- **Impact Areas** → white/cream surface — breathing space with punchy card borders
-- **Stories** → near-black (`#171717`) background — cinematic, immersive
-- **Impact Overview** → white surface — architectural clarity
-- **Participation** → coral red (`#ff4d4d`) background — warm call-to-action energy
-- **Closing** → warm cream — resolution and reflection
-
-Automated contrast checks cover text pairs for every background in this sequence. Recheck any new pairing; semantic colors are not universally interchangeable. Do not communicate state only with color.
+Use white and lavender as the main page surfaces, periwinkle as a light supporting surface, and indigo for a small number of strong moments. The homepage pairs its copy with a registry-backed photo carousel on white. Photographs keep their source colors; use a separate neutral caption panel or a restrained black gradient only when text sits over an image. The mission section and compact footer use deep indigo, with white/lavender programme and story areas and light impact cards.
 
 ## Typography
 
 Cormorant Garamond regular/italic at 400 gives headlines a literary quality. Manrope variable supports readable interfaces, using 400–800 in this design (heavier weights for punchy labels and pill badges). Three local Latin WOFF2 files total 71,372 bytes; licenses and provenance live in `src/assets/fonts`. `next/font/local` provides self-hosting, adjusted fallbacks, and swap behavior. No runtime Google Fonts request or font npm dependency is needed.
 
-`Heading` separates semantic level (`as`) from visual scale (`size`). Use one h1 per page; never choose a level just to resize text. Display, large, medium, small, body large/regular, captions, labels, buttons, and navigation have explicit tokens. Headlines use responsive clamp sizes, tight tracking, balanced wrapping, and restrained weight. Body line height is 1.8, with bounded reading measures.
+`Heading` separates semantic level (`as`) from visual scale (`size`). Use one h1 per page; never choose a level just to resize text. Display, large, medium, small, body large/regular, captions, labels, buttons, and navigation have explicit tokens. Headlines use responsive clamp sizes, tight tracking, balanced wrapping, and restrained weight. Body line height is 1.72, with bounded reading measures.
 
 ### Kinetic typography notes
 
-The hero h1 headline is structured as three children: `span`, `em`, `span`. CSS assigns the `hero-line-settle` animation to all three with staggered delays (55 / 130 / 205 ms). The `em` element carries the coral-deep italic emphasis color. The test in `motion.spec.ts` asserts this exact structure and animation name — do not change the element types, count, or animation name without updating the test.
+The hero h1 headline is structured as three children: `span`, `em`, `span`. The existing reveal styling keeps this semantic shape; the emphasized phrase uses the secondary indigo against the light hero surface. Preserve the element types and count when changing the headline, and update its focused motion assertions with any intentional change.
 
-The marquee in the hero section uses a CSS keyframe (`marquee-scroll`) applied via the `.kinetic-marquee` class, centralized in `globals.css`. Speed is controlled by `--motion-marquee: 28s` defined in `src/config/motion.ts`. The marquee pauses on hover and immediately stops when `prefers-reduced-motion: reduce` is set.
+The marquee in the hero section uses a CSS keyframe (`marquee-scroll`) applied via the `.kinetic-marquee` class, centralized in `globals.css`. Speed is controlled by `--motion-marquee: 40s` defined in `src/config/motion.ts`. The marquee pauses on hover and immediately stops when `prefers-reduced-motion: reduce` is set.
 
 ## Component conventions
 
@@ -75,15 +64,15 @@ Import directly from `src/components/ui`; do not add duplicate variants or a gen
 - `EditorialCard`: quiet article panel with a required heading association; no implied click target or invented article content.
 - `MediaFrame`: figure with required caption, explicit ratio (portrait 4:5, landscape 3:2, cinematic 16:9, square), and either placeholder children or a real image. Real imagery uses Next.js Image fill, reserved aspect ratio, responsive sizes, cover fitting, and an optional focalPoint such as `60% 35%`. Supply meaningful alt text or empty alt when decorative. Preload only an actual above-the-fold LCP image when justified.
 
-### Vibrant Humanism component patterns
+### Shared component patterns
 
 New visual patterns introduced with the redesign:
 
-- **Punchy shadow**: `box-shadow: 6px 6px 0px var(--color-black)` — used on impact cards and key CTAs. Hover translates the card `(-2px, -2px)` to increase the shadow depth.
-- **Pill badge**: rounded pill with tight uppercase label, 1.5px black border. Variants: `hero-pill--coral` (coral bg, white text) and `hero-pill--dark` (black bg, yellow text).
-- **Section chapter tag**: small eyebrow number/label in the section's top-left corner (e.g. `01 / 07 · HUMAN VOICES`). Dark variant for light-on-dark sections.
-- **Wordmark & Logo**: Official SEVA emblem paired with `SEVA` in bold Manrope + a coral circle accent dot rendered via `wordmark__dot` pseudo-element. Lives in `site-header.tsx` and `site-footer.tsx`. Maintains original proportions and clear space.
-- **Coral stamp**: a rotated block-letter accent beside section headings in the Purpose section.
+- **Card elevation**: subtle token-based shadow, a quiet 1px border, and a restrained lift on fine-pointer hover.
+- **Hero label**: compact white uppercase text over the full-width photo; no bright badge blocks.
+- **Section chapter tag**: small eyebrow number/label in the section's top-left corner. The dark variant uses light text against indigo.
+- **Wordmark & Logo**: The official SEVA emblem remains unchanged. The wordmark uses a restrained indigo accent dot and keeps its original proportions and clear space.
+- **Mission rule**: a small periwinkle rule anchors the mission statement on its indigo surface.
 - **Kinetic banner**: oversized horizontally-scrolling text strip in the Closing section, driven by `KineticClosing` component.
 - **Transparency pill**: status indicator in the Impact Overview section.
 
@@ -99,7 +88,7 @@ Example composition for an approved future section:
 </Section>
 ```
 
-No generic empty-state component is needed yet: the current site has no search or data failure workflow. Image overlays, galleries, and social/newsletter/donation controls are deferred until there is approved content or an implemented workflow. HomepageMedia supports a native user-controlled video when actual assets are approved; no video is currently loaded. Extend the footer grid when real destinations exist, without dead links or fictional profiles.
+The Media archive uses the approved registry and keeps empty video/news states explicit until publication material is approved. The footer inquiry form uses the canonical SEVA address to create a draft in the visitor's email app; it does not send or store messages. There is no direct-submission provider, newsletter, tracker, payment gateway, or donation processing. Keep future contact or giving workflows tied to an implemented, approved destination.
 
 ## Interaction, motion, and navigation
 
@@ -107,9 +96,9 @@ No generic empty-state component is needed yet: the current site has no search o
 
 ### Navigation behavior
 
-The header (`site-header.tsx`) is now a **client component** due to scroll state tracking. At the top of the page it presents as a full yellow-accented bar integrated with the hero. As the user scrolls past ~80px, it acquires the `site-header--floating` class: a compact cream bar with `backdrop-filter: blur(12px)` and a subtle border. This transition is smooth and does not cause layout shifts.
+The header (`site-header.tsx`) is a **client component** due to scroll state tracking. It starts expanded and transitions to a compact state after the existing 60px scroll threshold. The official image logo scales with the header; the crop is a transparent-space derivative of the original approved logo. Dark labels, indigo active/hover states, keyboard disclosures, sticky offsets, and the floating treatment remain. The scroll listener only changes state at the threshold. Reduced motion removes the transition.
 
-The SEVA wordmark uses bold Manrope with a coral accent dot (the `wordmark__dot` element). Nav links use a pill hover treatment and an animated coral underline scale on active state.
+The header links the logo image to Home with a descriptive accessible name. Desktop navigation ends with one indigo Donate link to `/get-involved/donate`; the mobile accordion exposes the same destination under Get Involved without a duplicate top-level button. Nav links use a quiet hover state and an indigo underline for the active location.
 
 The mobile disclosure preserves Escape, outside dismissal, focus-leave, link selection, breakpoint cleanup, and native Tab order. It is nonmodal, so it does not trap focus or lock scrolling.
 
@@ -123,11 +112,13 @@ Use authentic, consented human moments when photography is supplied. The existin
 
 ## Accessibility and extension
 
-Preserve semantic landmarks, heading order, the skip link, 46px control targets, visible focus, keyboard navigation, and reduced-motion behavior. The near-black footer and dark Stories section override muted text and focus tokens for contrast. New backgrounds require checking all foreground pairs. Keep decorative SVGs hidden from assistive technology and name icon-only links/actions explicitly.
+Preserve semantic landmarks, heading order, the skip link, 46px control targets, visible focus, keyboard navigation, and reduced-motion behavior. The indigo footer and mission panel override muted text and focus tokens for contrast. Stories use a light lavender surface. New backgrounds require checking all foreground pairs. Keep decorative SVGs hidden from assistive technology and name icon-only links/actions explicitly.
 
 The header (`site-header.tsx`), mobile nav (`mobile-navigation.tsx`), and all animation components (`hero-scroll.tsx`, `image-mask-reveal.tsx`, `kinetic-closing.tsx`, `marquee.tsx`, `split-reveal.tsx`) are client components. All section components remain Server Components. No additional npm package was added for the Vibrant Humanism redesign. Keep SEO guards and unfinished content unindexable.
 
 ## Phase 3 homepage compositions and Vibrant Humanism redesign
+
+The following phase summaries preserve historical implementation context. Their old color names are superseded by the Phase 6.1 palette above.
 
 `src/styles/home.css` extends the existing tokens. Seven independent Server Components compose the page: HeroSection, PurposeSection, ImpactAreasSection, StoriesSection, ImpactOverviewSection, ParticipationSection, and ClosingSection. The hero uses an asymmetric first-viewport composition with actions before media in mobile reading order.
 
@@ -135,15 +126,15 @@ The header (`site-header.tsx`), mobile nav (`mobile-navigation.tsx`), and all an
 
 The seven sections follow a deliberate alternating rhythm of high-energy and quiet moments:
 
-| Chapter | Section ID       | Background           | Visual treatment                                  |
-| ------- | ---------------- | -------------------- | ------------------------------------------------- |
-| 01      | `introduction`   | Yellow `#ffd93d`     | Poster hero, editorial grid, marquee strip        |
-| 02      | `purpose`        | Royal blue `#2541b2` | Mask-reveal photo, coral rule, asymmetric copy    |
-| 03      | `impact-areas`   | White / cream        | Punchy shadow cards, hover translate effect       |
-| 04      | `stories`        | Near-black `#171717` | Cinematic portrait, parallax, italic display mark |
-| 05      | `website-status` | White / cream        | Architectural stat grid, transparency pill        |
-| 06      | `participation`  | Coral red `#ff4d4d`  | Warm CTA energy, numbered option cards            |
-| 07      | `next-chapter`   | Warm cream `#fff9eb` | Kinetic closing banner, reflection                |
+| Chapter | Section ID       | Current surface                      | Visual treatment                         |
+| ------- | ---------------- | ------------------------------------ | ---------------------------------------- |
+| 01      | `introduction`   | Full-width photo with indigo overlay | Clear mission headline and actions       |
+| 02      | `purpose`        | Deep indigo                          | Vision, mission, and one authentic photo |
+| 03      | `impact-areas`   | White                                | Seven-area programme directory           |
+| 04      | `stories`        | Soft lavender                        | Photo and editorial story content        |
+| 05      | `website-status` | White                                | Static sourced impact figures and notes  |
+| 06      | `participation`  | Pale periwinkle                      | Noninteractive participation previews    |
+| 07      | `next-chapter`   | White                                | Restrained closing message and motion    |
 
 `src/content/home.ts` holds all section copy and the typed `HomeMedia`, `ImpactAreaContent`, and `StatisticContent` contracts. ImpactArea supports optional category, link, and restrained color accent. Statistics renders a semantic definition list: pending entries show words rather than fabricated numbers; a verified entry requires both value and source. Participation previews are plain list content, with real anchor actions kept separate.
 
@@ -168,3 +159,17 @@ Separate parent links and 46px disclosure buttons preserve clear interaction. Th
 `src/styles/profile.css` is scoped to Profile pages. Five compositions share the existing colors, Cormorant/Manrope typography, containers, spacing and controls: yellow overview/emblem seal; cream About with royal-blue geography and yellow approach; blue vision with contrasting cream mission; near-black leadership introduction and alternating portrait/name features; cream History with a large yellow establishment year and dark purpose chapter.
 
 The editorial Profile index uses unequal regions rather than four identical cards; smaller cross-link sets avoid empty grid regions. Native text remains readable over strong color blocks. Documentary images use the existing MediaFrame and mask reveal; official portraits retain natural framing and unobscured faces. Pending portraits use typographic monograms plus the official name and an explicit pending caption. Grids become a clear mobile reading sequence below the existing 48rem breakpoint. No logo, font, palette token, homepage composition or existing screenshot baseline was replaced.
+
+## Phase 5D.1: Media compositions
+
+The scoped `media.css` extends the existing palette and typography: yellow overview/gallery, near-black video hero, cream news hero, bordered photographic cards and intentional archive empty states. Existing Container, Heading/Eyebrow/Text, button classes and motion primitives are reused. Shared brand colors resolve through semantic tokens; scoped dark-hero/modal focus indicators use yellow. Filter selects have explicit labels, a 46px minimum height and constrained mobile widths. Gallery links remain keyboard accessible and useful without JavaScript; the enhanced viewer uses a native modal dialog. New separately reviewed Media opening baselines cover all four pages at 375/1440px and include real rendered-font checks. Existing homepage and Profile references are preserved.
+
+## Phase 5E participation pages
+
+The involvement compositions continue Vibrant Humanism through a yellow overview, coral volunteer chapter, royal-blue CSR editorial page, warm giving information, and a clear contact layout. Pathways use numbered editorial rows; volunteer categories and CSR areas are lists rather than repeated generic cards. `involvement.css` uses the existing semantic palette, type scale, spacing and 48rem breakpoint. Approved programme photography retains its registry caption. Motion is limited to the existing Reveal primitive; server-rendered content remains visible, and reduced motion is respected.
+
+## Phase 6.1 management-approved visual system
+
+This Phase 6.1 design system supersedes the earlier color sequencing. Shreyas's supplied screenshots were visually reviewed; sampled flat regions yielded `#2B2469` (indigo), `#EFEEFF` (lavender), and `#DEE1FF` (periwinkle), with white navigation and cards. The homepage pairs the approved editorial copy with an automatically advancing horizontal carousel of publication-approved SEVA photos. Images are not color-filtered or brand-tinted; captions use a separate neutral dark panel. Only the first carousel image is preloaded. Interior templates use content-led compact heroes; the logo, Donate action, footer, and mailto inquiry behavior follow the conventions above.
+
+The previous screenshot references remain intact. Refinement-specific baselines use `phase6-1-refinements-*` names for the homepage and styled interiors at mobile and desktop widths. See `PHASE_6_1_REPORT.md` for reviewed routes, contrast values, verification, and remaining limitations.

@@ -33,8 +33,8 @@
   gap: var(--space-7);
 }
 .profile-title {
-  font-size: clamp(3.4rem, 7.6vw, 8.2rem);
-  line-height: 0.98;
+  font-size: clamp(2.625rem, 5.2vw, 4.5rem);
+  line-height: 1.02;
   margin-top: var(--space-4);
   text-wrap: initial;
   overflow-wrap: anywhere;
@@ -193,7 +193,7 @@
   background: var(--color-yellow);
 }
 .profile-index__link--history {
-  background: var(--color-foreground);
+  background: var(--color-dark-surface);
   color: var(--color-background);
 }
 .profile-index__link:focus-visible {
@@ -484,7 +484,7 @@
   line-height: 1.15;
 }
 .profile-opening--leadership {
-  background: var(--color-foreground);
+  background: var(--color-dark-surface);
   color: var(--color-background);
   padding-bottom: var(--space-9);
 }
@@ -680,7 +680,7 @@
   line-height: 1.7;
 }
 .profile-history-purpose {
-  background: var(--color-foreground);
+  background: var(--color-dark-surface);
   color: var(--color-background);
   padding-block: var(--space-section);
 }
@@ -798,7 +798,7 @@
       translate var(--motion-base);
   }
   .leadership-feature:hover .portrait-image {
-    box-shadow: var(--shadow-punchy-blue);
+    box-shadow: var(--shadow-card);
     translate: 0 calc(-1 * var(--space-1));
   }
   .profile-index__link:hover .arrow {
