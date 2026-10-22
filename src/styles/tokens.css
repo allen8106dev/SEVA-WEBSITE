@@ -1,0 +1,78 @@
+/* Vibrant Humanism semantic brand tokens.
+   Primary Yellow (#ffd93d) + Coral Red (#ff4d4d/#ce2a2a) + Royal Blue (#2541b2) + Near Black (#171717) + Warm Cream (#fff9eb) */
+@theme static {
+  --color-background: #fff9eb;
+  --color-foreground: #171717;
+  --color-primary: #2541b2;
+  --color-primary-hover: #1a308b;
+  --color-on-primary: #fffffe;
+  --color-secondary: #fffaee;
+  --color-accent: #ce2a2a;
+  --color-muted: #525252;
+  --color-border: #e5dece;
+  --color-surface: #fff2d6;
+  --color-surface-elevated: #ffffff;
+  --color-focus: #2541b2;
+  --color-error: #ce2a2a;
+  --color-success: #1e7e45;
+  --color-disabled: #e2ded5;
+  --color-on-disabled: #757575;
+  --color-inverse-muted: #e0e7ff;
+  --color-inverse-border: #4a63cf;
+  --color-yellow: #ffd93d;
+  --color-yellow-light: #fff085;
+  --color-coral: #ff4d4d;
+  --color-coral-deep: #ce2a2a;
+  --color-blue: #2541b2;
+  --color-blue-dark: #162670;
+  --color-black: #171717;
+  --color-cream: #fff9eb;
+  --font-sans: var(--font-body), Arial, sans-serif;
+  --font-display: var(--font-editorial), Georgia, serif;
+}
+:root {
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-section: clamp(4.5rem, 9vw, 8rem);
+  --page-gutter: clamp(1.25rem, 5vw, 5rem);
+  --container-standard: 74rem;
+  --container-wide: 88rem;
+  --container-narrow: 44rem;
+  --header-height: 5.5rem;
+  --size-touch: 2.875rem;
+  --radius-control: 0.25rem;
+  --radius-panel: 0.75rem;
+  --radius-full: 9999px;
+  --shadow-subtle: 0 4px 20px rgba(23, 23, 23, 0.04);
+  --shadow-elevated: 0 12px 36px rgba(23, 23, 23, 0.08);
+  --shadow-floating: 0 20px 48px rgba(23, 23, 23, 0.14);
+  --shadow-punchy: 6px 6px 0px #171717;
+  --shadow-punchy-coral: 6px 6px 0px #ce2a2a;
+  --shadow-punchy-blue: 6px 6px 0px #2541b2;
+  --type-display: clamp(3.5rem, 8vw, 7.5rem);
+  --type-hero: clamp(3rem, 7vw, 7rem);
+  --type-statement: clamp(2.75rem, 5.5vw, 5.5rem);
+  --type-heading-lg: clamp(2.75rem, 4.5vw, 4.5rem);
+  --type-heading-md: clamp(2rem, 3.2vw, 3.25rem);
+  --type-heading-sm: clamp(1.35rem, 2vw, 1.85rem);
+  --type-body-lg: clamp(1.0625rem, 1.35vw, 1.25rem);
+  --type-body: 1rem;
+  --type-caption: 0.8125rem;
+  --type-label: 0.6875rem;
+  --type-button: 0.875rem;
+  --type-navigation: 0.875rem;
+  --leading-display: 0.95;
+  --leading-heading: 1.1;
+  --leading-body: 1.75;
+  --tracking-display: -0.04em;
+  --tracking-heading: -0.02em;
+  --tracking-label: 0.18em;
+  /* Motion timing variables are supplied by src/config/motion.ts in the root layout. */
+}

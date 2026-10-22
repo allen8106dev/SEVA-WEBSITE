@@ -1,0 +1,7 @@
+/* Exclude dev chrome and animation progress, without replacing page styles. */
+nextjs-portal {
+  visibility: hidden !important;
+}
+[data-reveal] {
+  transform: none !important;
+}

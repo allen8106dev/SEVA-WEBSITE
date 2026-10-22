@@ -1,0 +1,50 @@
+import type { CSSProperties } from "react";
+
+export const motionTokens = {
+  fast: 0.18,
+  base: 0.3,
+  reveal: 0.55,
+  ease: [0.22, 1, 0.36, 1] as const,
+  bounceEase: [0.34, 1.56, 0.64, 1] as const,
+  distance: 12,
+  duration: { entrance: 0.65, media: 0.85, marquee: 28 },
+  stagger: { line: 0.075, area: 0.1, maximum: 0.2 },
+  hero: { media: 0, headline: 0.055, copy: 0.16, actions: 0.22, detail: 0.28 },
+  viewport: { amount: 0.18, mediaAmount: 0.22 },
+  statement: { distance: 8 },
+  media: { scale: 1.025, opacity: 0.92 },
+  parallax: {
+    distance: 12,
+    overscan: 1.06,
+    offset: ["start end", "end start"] as const,
+  },
+  spring: { stiffness: 260, damping: 40, mass: 0.8 },
+  feedback: { imageScale: 1.02, pressScale: 0.985, menuDistance: 6 },
+  count: { duration: 0.9, maximumFractionDigits: 0 },
+};
+
+/** Keep CSS microinteractions and Motion entrances on the same timing scale. */
+export const motionStyles = {
+  "--motion-fast": `${motionTokens.fast}s`,
+  "--motion-base": `${motionTokens.base}s`,
+  "--motion-reveal": `${motionTokens.reveal}s`,
+  "--motion-ease": `cubic-bezier(${motionTokens.ease.join(",")})`,
+  "--motion-bounce": `cubic-bezier(${motionTokens.bounceEase.join(",")})`,
+  "--motion-entrance": `${motionTokens.duration.entrance}s`,
+  "--motion-media": `${motionTokens.duration.media}s`,
+  "--motion-marquee": `${motionTokens.duration.marquee}s`,
+  "--motion-line-stagger": `${motionTokens.stagger.line}s`,
+  "--hero-media-delay": `${motionTokens.hero.media}s`,
+  "--hero-headline-delay": `${motionTokens.hero.headline}s`,
+  "--hero-copy-delay": `${motionTokens.hero.copy}s`,
+  "--hero-actions-delay": `${motionTokens.hero.actions}s`,
+  "--hero-detail-delay": `${motionTokens.hero.detail}s`,
+  "--motion-distance": `${motionTokens.distance}px`,
+  "--motion-media-scale": motionTokens.media.scale,
+  "--motion-image-scale": motionTokens.feedback.imageScale,
+  "--motion-press-scale": motionTokens.feedback.pressScale,
+  "--parallax-overscan": motionTokens.parallax.overscan,
+  "--motion-mobile-distance": `${motionTokens.distance / 2}px`,
+  "--motion-start-opacity": motionTokens.media.opacity,
+  "--motion-menu-distance": `${motionTokens.feedback.menuDistance}px`,
+} as CSSProperties;
