@@ -135,23 +135,23 @@ _Important Rules_:
 
 Phase 5A.1 integrated authentic SEVA photography into the website. The following sections now use real SEVA photographs:
 
-| Section          | Current image                          | Content file        |
-|------------------|----------------------------------------|---------------------|
-| Hero             | Ruby Meals service photograph          | `home.ts`           |
-| Purpose          | Vidhya Jyothi sisters photograph       | `home.ts`           |
-| Impact Areas     | Education, Community Welfare, Rural/Tribal images | `focus-areas.ts` |
-| Projects         | CNEWA, Vidya Jyoti, Ruby Meal projects | `projects.ts`       |
-| Closing Section  | Vidhya Jyothi distribution photograph | `home.ts`           |
+| Section         | Current image                                     | Content file     |
+| --------------- | ------------------------------------------------- | ---------------- |
+| Hero            | Ruby Meals service photograph                     | `home.ts`        |
+| Purpose         | Vidhya Jyothi sisters photograph                  | `home.ts`        |
+| Impact Areas    | Education, Community Welfare, Rural/Tribal images | `focus-areas.ts` |
+| Projects        | CNEWA, Vidya Jyoti, Ruby Meal projects            | `projects.ts`    |
+| Closing Section | Vidhya Jyothi distribution photograph             | `home.ts`        |
 
 The following sections still use licensed documentary placeholders and require authentic replacements:
 
-| Section           | Placeholder type                           | Required replacement                     |
-|-------------------|--------------------------------------------|------------------------------------------|
-| Jeevan Project / Human Stories | Unsplash stock photograph   | Authentic Raigad women empowerment photo |
-| Healthcare        | No image integrated yet                    | Authentic healthcare outreach photo      |
-| Women Empowerment | No image integrated yet                    | Authentic SHG/tailoring programme photo  |
-| Bishop portrait   | Neutral placeholder SVG                    | Confirmed portrait of H E Dr. Mathews Mar Pachomios OIC |
-| Fr. Abraham portrait | Neutral placeholder SVG               | Confirmed portrait of Rev. Fr. Abraham Thanuvelil |
+| Section                        | Placeholder type          | Required replacement                                    |
+| ------------------------------ | ------------------------- | ------------------------------------------------------- |
+| Jeevan Project / Human Stories | Unsplash stock photograph | Authentic Raigad women empowerment photo                |
+| Healthcare                     | No image integrated yet   | Authentic healthcare outreach photo                     |
+| Women Empowerment              | No image integrated yet   | Authentic SHG/tailoring programme photo                 |
+| Bishop portrait                | Neutral placeholder SVG   | Confirmed portrait of H E Dr. Mathews Mar Pachomios OIC |
+| Fr. Abraham portrait           | Neutral placeholder SVG   | Confirmed portrait of Rev. Fr. Abraham Thanuvelil       |
 
 ### Process for Replacing a Placeholder
 
@@ -193,10 +193,10 @@ Phase 5A.1 introduced a centralized, strongly typed media registry at `src/conte
 ```typescript
 // Publication status for any media asset
 type MediaPublicationStatus =
-  | "confirmed_official"        // Approved and live on the website
+  | "confirmed_official" // Approved and live on the website
   | "pending_identity_confirmation" // Portrait with unresolved identity — withheld
-  | "pending_management_approval"   // Withheld until explicit authorization received
-  | "placeholder_documentary";      // Licensed placeholder (Unsplash) pending replacement
+  | "pending_management_approval" // Withheld until explicit authorization received
+  | "placeholder_documentary"; // Licensed placeholder (Unsplash) pending replacement
 
 // Asset category
 type MediaCategory =
@@ -213,9 +213,9 @@ type MediaCategory =
 // Full media record
 interface MediaAsset {
   id: string;
-  sourceFilename: string;         // Original filename from supplied archive
-  sourceArchive?: string;         // Which ZIP archive supplied it
-  publicUrl?: string;             // Path relative to public/ (undefined = withheld)
+  sourceFilename: string; // Original filename from supplied archive
+  sourceArchive?: string; // Which ZIP archive supplied it
+  publicUrl?: string; // Path relative to public/ (undefined = withheld)
   description: string;
   altText: string;
   width: number;
@@ -224,7 +224,7 @@ interface MediaAsset {
   programmeAssociation?: string;
   credit?: string;
   approvalStatus: MediaPublicationStatus;
-  identityConfirmed?: boolean;    // For leadership portraits
+  identityConfirmed?: boolean; // For leadership portraits
   intendedPlacements: string[];
   notes?: string;
 }
@@ -233,7 +233,11 @@ interface MediaAsset {
 ### Looking Up Assets
 
 ```typescript
-import { mediaRegistry, getApprovedAssets, getAssetById } from "@/content/media";
+import {
+  mediaRegistry,
+  getApprovedAssets,
+  getAssetById,
+} from "@/content/media";
 
 // All approved assets (publicationStatus === "confirmed_official")
 const approved = getApprovedAssets();
@@ -273,10 +277,10 @@ if (asset?.publicUrl) {
 
 Two portraits from `Founders.zip` are **permanently withheld** until the organization confirms identities in writing:
 
-| Source filename                        | Reason withheld                                                |
-|----------------------------------------|----------------------------------------------------------------|
-| `ChatGPT Image Sep 8, 2026...png`      | Hardcoded text identifies a different bishop (Yoohanon Mar Alexios, Auxiliary Bishop of Trivandrum) — not SEVA's Bishop Mathews Mar Pachomios OIC |
-| `32 fr santhosh.jpg.jpeg`              | Filename says "Fr. Santhosh"; SEVA Director is Rev. Fr. Abraham Thanuvelil |
+| Source filename                   | Reason withheld                                                                                                                                   |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ChatGPT Image Sep 8, 2026...png` | Hardcoded text identifies a different bishop (Yoohanon Mar Alexios, Auxiliary Bishop of Trivandrum) — not SEVA's Bishop Mathews Mar Pachomios OIC |
+| `32 fr santhosh.jpg.jpeg`         | Filename says "Fr. Santhosh"; SEVA Director is Rev. Fr. Abraham Thanuvelil                                                                        |
 
 These records exist in the registry with `approvalStatus: "pending_identity_confirmation"` and **no `publicUrl`** field. Do not add a `publicUrl` to these records without explicit written confirmation from SEVA management.
 
@@ -290,3 +294,9 @@ The following items are deliberately withheld or marked pending until official a
 - **Statutory Document Identifiers**: PAN numbers, 80G registration codes, 12AC codes, and FCRA certificate numbers remain unexposed in public markup.
 - **Beneficiary Case Studies**: Individual testimonials and named quotes require signed informed consent protocols before publication.
 - **Production Canonical Domain**: `SITE_URL` remains unset until the client approves the final DNS and domain cutover.
+
+## Phase 5B route content and media
+
+`src/config/navigation.ts` owns category/child labels, descriptions and route implementation status. `interior-content.tsx` consumes the existing modular organizational records; `InteriorPage` supplies breadcrumbs, hero and related routes. See NAVIGATION_GUIDE.md for the complete hierarchy and extension instructions. History milestones, detailed biographies, two verified portraits, videos, events and public document downloads remain pending. Giving mechanisms remain awaiting management authorization. Contact uses `contact.ts`. All interior previews explicitly remain noindex.
+
+`src/content/route-media.ts` returns approved gallery and project image arrays independent of homepage use. Leadership additionally requires confirmed identity and a matching leadership record. Preserve every original, derivative and withheld registry record. See MEDIA_ASSET_REGISTER.md for the unused/pending inventory and subsequent integration work. Do not infer identities or new project associations.

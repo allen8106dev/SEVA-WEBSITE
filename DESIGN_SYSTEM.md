@@ -156,3 +156,9 @@ Existing documentary photographs under the Unsplash license are in `public/image
 ## Accessibility and standards
 
 All text pairs maintain WCAG AA contrast (≥ 4.5:1). Interactive targets maintain ≥ 46px touch heights. Reduced motion preferences immediately disable all animations. All 31 automated tests pass with `--workers=2`; the `--workers=7` parallel run produces timeout failures due to resource contention on this machine, not code issues. Run `npm run test:e2e` for the standard suite.
+
+## Phase 5B navigation and interiors
+
+`src/styles/navigation.css` extends existing semantic colors, type, spacing, containers and elevation. Cream dropdowns use a royal-blue top rule, dark border, yellow highlights and existing punchy shadow. Interior heroes reuse yellow and editorial typography; informational cards use the surface token. No token or font asset changed.
+
+Separate parent links and 46px disclosure buttons preserve clear interaction. The CSS/JavaScript breakpoint stays 48rem; 48-64rem uses two header rows to accommodate seven categories. The existing 60px scroll threshold and floating cream treatment remain. Exact page and active ancestor states share the coral underline. See NAVIGATION_GUIDE.md for controls, breadcrumbs and template conventions. Original reduced-motion screenshots remain preserved; separately named Phase 5B baselines record the intentional header changes.

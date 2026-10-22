@@ -129,7 +129,7 @@ for (const width of [375, 768, 1440]) {
       body: JSON.stringify(metrics, null, 2),
       contentType: "application/json",
     });
-    await expect(page).toHaveScreenshot(`homepage-styled-${width}.png`, {
+    await expect(page).toHaveScreenshot(`homepage-navigation-${width}.png`, {
       animations: "disabled",
       scale: "css",
       caret: "hide",

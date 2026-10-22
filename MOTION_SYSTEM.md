@@ -115,3 +115,7 @@ Compose the primitives around actual sections or media rather than making entire
 > The default `npm run test:e2e` (7 workers) can produce infrastructure-only timeouts on this machine when all workers share a cold production server startup. All 31 tests pass with 2 workers. Individual test files also pass when run in isolation.
 
 The unchanged style baselines use reduced motion and must still match development and production. Keep running `npm run test:e2e` after a completed build and `npm run test:styles:dev` against the actual development server. Do not replace visual baselines simply to accommodate a motion regression. Official references: [Motion scroll](https://motion.dev/docs/react-use-scroll), [viewport detection](https://motion.dev/docs/react-use-in-view), and [reduced motion](https://motion.dev/docs/react-use-reduced-motion).
+
+## Phase 5B navigation motion
+
+Route disclosures use existing `--motion-fast`, `--motion-menu-distance` and underline timings. CSS discrete display transitions provide short opacity/translation entrances and exits; panels become inert immediately when closed. Browsers without discrete transitions close immediately. Indicators rotate with fast timing. Focus and links remain immediately usable. Reduced motion removes transitions. No GSAP, timers, body scroll locking, scroll hijacking or new dependency is introduced. Homepage Motion primitives and original reduced-motion screenshot references remain preserved.

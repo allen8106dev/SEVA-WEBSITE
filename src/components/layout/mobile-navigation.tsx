@@ -3,20 +3,17 @@
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { NavigationLinks } from "./navigation";
+import { RouteNavigation } from "./route-navigation";
+import { usePathname } from "next/navigation";
 
 export function MobileNavigation() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const root = useRef<HTMLDivElement>(null);
   const toggle = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!open) return;
-    function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") {
-        setOpen(false);
-        toggle.current?.focus();
-      }
-    }
     function onPointerDown(event: PointerEvent) {
       if (event.target instanceof Node && !root.current?.contains(event.target))
         setOpen(false);
@@ -25,11 +22,9 @@ export function MobileNavigation() {
     function onBreakpoint() {
       if (desktop.matches) setOpen(false);
     }
-    document.addEventListener("keydown", onKeyDown);
     document.addEventListener("pointerdown", onPointerDown);
     desktop.addEventListener("change", onBreakpoint);
     return () => {
-      document.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("pointerdown", onPointerDown);
       desktop.removeEventListener("change", onBreakpoint);
     };
@@ -39,6 +34,13 @@ export function MobileNavigation() {
     <div
       className="mobile-nav"
       ref={root}
+      onKeyDown={(event) => {
+        if (event.key === "Escape") {
+          event.preventDefault();
+          setOpen(false);
+          toggle.current?.focus();
+        }
+      }}
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
       }}
@@ -70,12 +72,25 @@ export function MobileNavigation() {
           <span>EST. 2015</span>
         </div>
         <div className="mobile-panel__links">
-          <NavigationLinks
+          <RouteNavigation
+            key={open ? "open" : "closed"}
+            mobile
             onNavigate={() => {
               setOpen(false);
               toggle.current?.focus();
             }}
           />
+          {pathname === "/" && (
+            <>
+              <p className="route-panel__intro">On this homepage</p>
+              <NavigationLinks
+                onNavigate={() => {
+                  setOpen(false);
+                  toggle.current?.focus();
+                }}
+              />
+            </>
+          )}
         </div>
         <div className="mobile-panel__footer" aria-hidden="true">
           <span className="mobile-panel__status-dot" />

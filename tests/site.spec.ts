@@ -54,7 +54,7 @@ test("mobile menu supports links, Escape, and keyboard focus", async ({
   await expect(toggle).toHaveAttribute("aria-expanded", "true");
   await page.keyboard.press("Tab");
   await expect(
-    navigation.getByRole("link", { name: "Introduction" }),
+    navigation.getByRole("link", { name: "Home", exact: true }),
   ).toBeFocused();
   await page.keyboard.press("Escape");
   await expect(navigation).toBeHidden();
@@ -82,7 +82,9 @@ test("desktop navigation tracks anchors and the skip link works", async ({
   ).toBeFocused();
   await page.keyboard.press("Enter");
   await expect(page.locator("main")).toBeFocused();
-  const navigation = page.getByRole("navigation", { name: "Main navigation" });
+  const navigation = page.getByRole("navigation", {
+    name: "Homepage chapters",
+  });
   await navigation.getByRole("link", { name: "Contact", exact: true }).click();
   await expect(
     navigation.getByRole("link", { name: "Contact", exact: true }),

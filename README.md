@@ -1,4 +1,4 @@
-# SEVA website · Phase 5A.1
+# SEVA website · Phase 5B
 
 The official website for **SEVA Social Service Society** ("Love In Action", Est. 2015), built on Next.js App Router and the approved **Vibrant Humanism** design system.
 
@@ -114,3 +114,11 @@ The initial delivery passed TypeScript, ESLint, Prettier, the production build, 
 The Phase 1 audit reported zero production vulnerabilities and five high-severity findings in the development-only Next.js ESLint → fast-glob → micromatch → braces chain, without a compatible patch at that delivery. Package inputs are unchanged in Phase 2; no fresh security audit is claimed. Do not run `npm audit fix --force`. Recheck advisories before deployment. ESLint 9 was retained for React lint-plugin compatibility even though npm marks it unsupported. Upgrade the lint toolchain together when compatible releases become available.
 
 Configuration follows the official [Next.js installation](https://nextjs.org/docs/app/getting-started/installation), [Next.js ESLint](https://nextjs.org/docs/app/api-reference/config/eslint), [Tailwind framework guides](https://tailwindcss.com/docs/installation/framework-guides), and [Motion reduced-motion](https://motion.dev/docs/react-use-reduced-motion) guidance.
+
+## Phase 5B navigation architecture
+
+Phase 5B adds seven navigation categories, animated desktop disclosures, accessible mobile accordions and 26 statically generated interior route foundations with breadcrumbs and unique noindex metadata. [NAVIGATION_GUIDE.md](NAVIGATION_GUIDE.md) documents the hierarchy, interactions and extension conventions. Detailed Phase 5C pages, forms, payment mechanisms and hosting are not included.
+
+Phase 5B verification passed typecheck, lint, formatting, production build, all 49 production browser tests and all three checks against the existing development server. See [PHASE_5B_REPORT.md](PHASE_5B_REPORT.md) for files, results, limitations and readiness for detailed page work.
+
+All original photographs, derivatives and the existing media registry are preserved. Leadership has four profile slots: two approved portraits and two pending confirmation. Gallery and project previews use approved arrays independently of homepage placement. See MEDIA_ASSET_REGISTER.md for unused and pending media. The original reduced-motion baselines are retained alongside separately named Phase 5B references.

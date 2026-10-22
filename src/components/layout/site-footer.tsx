@@ -1,9 +1,11 @@
 import { siteConfig } from "@/config/site";
+import { navigation } from "@/config/navigation";
 import { contactInfo } from "@/content/contact";
 import Link from "next/link";
 import { Container } from "@/components/ui/layout";
 import { Eyebrow, Heading, Text } from "@/components/ui/typography";
 import { Arrow, LinkButton } from "@/components/ui/button";
+import { NavigationLinks } from "./navigation";
 
 export function SiteFooter() {
   return (
@@ -54,15 +56,17 @@ export function SiteFooter() {
           <div>
             <Eyebrow className="footer-label">Explore</Eyebrow>
             <nav className="footer-links" aria-label="Footer navigation">
-              {siteConfig.navigation.slice(0, 3).map((item) => (
-                <Link
-                  className="nav-link"
-                  key={item.href}
-                  href={`/${item.href}`}
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {navigation
+                .filter((item) => item.visible)
+                .map((item) => (
+                  <Link className="nav-link" key={item.href} href={item.href}>
+                    {item.label}
+                  </Link>
+                ))}
+            </nav>
+            <Eyebrow className="footer-label">Homepage chapters</Eyebrow>
+            <nav className="footer-links" aria-label="Homepage chapters">
+              <NavigationLinks />
             </nav>
           </div>
           <div>

@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import localFont from "next/font/local";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { siteConfig } from "@/config/site";
 import { motionStyles } from "@/config/motion";
+import { navigation } from "@/config/navigation";
 import "./globals.css";
 import "@/styles/home.css";
+import "@/styles/navigation.css";
 
 const editorial = localFont({
   src: [
@@ -61,6 +64,20 @@ export default function RootLayout({
           Skip to content
         </a>
         <SiteHeader />
+        <noscript>
+          <nav
+            aria-label="Navigation without JavaScript"
+            className="no-script-navigation"
+          >
+            {navigation
+              .filter((item) => item.visible)
+              .map((item) => (
+                <Link key={item.id} href={item.href}>
+                  {item.label}
+                </Link>
+              ))}
+          </nav>
+        </noscript>
         <main id="main-content" tabIndex={-1}>
           {children}
         </main>

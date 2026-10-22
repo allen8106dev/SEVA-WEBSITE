@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Container } from "@/components/ui/layout";
 import { MobileNavigation } from "./mobile-navigation";
-import { NavigationLinks } from "./navigation";
+import { RouteNavigation } from "./route-navigation";
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
@@ -49,7 +49,7 @@ export function SiteHeader() {
           </span>
         </div>
         <nav aria-label="Main navigation" className="desktop-nav">
-          <NavigationLinks />
+          <RouteNavigation />
         </nav>
         <MobileNavigation />
       </Container>
