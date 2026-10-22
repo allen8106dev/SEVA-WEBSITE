@@ -25,6 +25,7 @@ CSS in `src/styles/home.css` animates the existing semantic headline spans, copy
 ### h1 structure constraint
 
 The hero headline must remain three children: `<span>`, `<em>`, `<span>`. CSS applies the `hero-line-settle` keyframe animation to `.home-hero h1 > :is(span, em)` with staggered delays. The `motion.spec.ts` test asserts:
+
 - Exactly 3 elements matching `.home-hero h1 > :is(span, em)`
 - All three have `animationName === "hero-line-settle"`
 - All three have `opacity === 1`
@@ -106,9 +107,11 @@ Compose the primitives around actual sections or media rather than making entire
 
 > [!IMPORTANT]
 > **Run the full test suite with `--workers=2`** to avoid resource contention timeouts:
+>
 > ```
 > npx playwright test --workers=2 --timeout=120000
 > ```
+>
 > The default `npm run test:e2e` (7 workers) can produce infrastructure-only timeouts on this machine when all workers share a cold production server startup. All 31 tests pass with 2 workers. Individual test files also pass when run in isolation.
 
 The unchanged style baselines use reduced motion and must still match development and production. Keep running `npm run test:e2e` after a completed build and `npm run test:styles:dev` against the actual development server. Do not replace visual baselines simply to accommodate a motion regression. Official references: [Motion scroll](https://motion.dev/docs/react-use-scroll), [viewport detection](https://motion.dev/docs/react-use-in-view), and [reduced motion](https://motion.dev/docs/react-use-reduced-motion).

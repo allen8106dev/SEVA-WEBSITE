@@ -3,8 +3,8 @@ import { expect, test } from "@playwright/test";
 test("home is readable, responsive, and free of browser errors", async ({
   page,
 }, testInfo) => {
-  // Six full-page captures of the long homepage need more time on shared hosts.
-  test.setTimeout(60000);
+  // Six full-page captures of the long homepage need more time on shared hosts and mobile emulators.
+  test.setTimeout(90000);
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   page.on("console", (message) => {
@@ -12,7 +12,7 @@ test("home is readable, responsive, and free of browser errors", async ({
   });
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "Small acts. Extraordinary change.",
+    "Love in action. Restoring dignity, transforming lives.",
   );
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
     "content",
@@ -164,7 +164,9 @@ test("essential content remains available without JavaScript", async ({
   await page.goto(baseURL!);
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   await expect(
-    page.getByRole("heading", { name: "Trust grows in the open." }),
+    page.getByRole("heading", {
+      name: "Organization-reported reach across 3 states.",
+    }),
   ).toBeVisible();
   for (const heading of await page.locator("main h1, main h2, main h3").all()) {
     await expect(heading).toBeVisible();

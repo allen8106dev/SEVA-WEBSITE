@@ -19,7 +19,7 @@ export function ClosingSection() {
           <Container width="wide">
             <div className="closing-banner-kinetic" aria-hidden="true">
               <span className="closing-banner-kinetic__text">
-                THE FUTURE IS COLLECTIVE · SEVA
+                LOVE IN ACTION · SEVA SOCIAL SERVICE SOCIETY · EST. 2015
               </span>
             </div>
             <div className="closing-wrapper">
@@ -32,7 +32,7 @@ export function ClosingSection() {
                       sizes="(min-width: 768px) 46vw, 100vw"
                     />
                     <div className="closing-badge" aria-hidden="true">
-                      <span>TOGETHER</span>
+                      <span>COMMUNITY</span>
                       <span>CHAPTER 07</span>
                     </div>
                   </div>

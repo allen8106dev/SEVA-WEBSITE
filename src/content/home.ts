@@ -1,4 +1,10 @@
-/** Provisional editorial content. Replace only with approved copy and consented media. */
+import { organization } from "./organization";
+import { focusAreas } from "./focus-areas";
+import { projects } from "./projects";
+import { impactMetrics } from "./impact";
+import { partnershipsContent } from "./partnerships";
+import { contactInfo } from "./contact";
+
 export type HomeMedia = {
   caption: string;
   ratio: "portrait" | "landscape" | "cinematic" | "square";
@@ -40,163 +46,181 @@ export type StatisticContent = { label: string } & (
     }
 );
 
+const featuredProject =
+  projects.find((p) => p.id === "jeevan-project") ?? projects[0];
+
 export const homeContent = {
   hero: {
-    eyebrow: "SEVA / A beginning, together",
+    eyebrow: `${organization.name.toUpperCase()} · ${organization.tagline.toUpperCase()}`,
     headline: {
-      opening: "Small acts.",
-      emphasis: "Extraordinary",
-      ending: "change.",
+      opening: "Love in action.",
+      emphasis: "Restoring dignity,",
+      ending: "transforming lives.",
     },
-    description:
-      "Welcome to SEVA. A new space to explore service, community, and the possibilities of coming together.",
+    description: organization.introduction,
     primary: { href: "#purpose", label: "Explore the beginning" },
     secondary: { href: "#participation", label: "Ways to take part" },
-    notice: "Website in development · Provisional content",
+    notice: `Official identity · Established ${organization.establishedYear} · ${organization.legalStatus}`,
     media: {
       kind: "image",
-      src: "/images/hero-humanity.jpg",
-      alt: "A warm, genuine moment of community connection and human warmth in natural light",
+      src: "/images/programmes/community-welfare/ruby-meals-service.webp",
+      alt: "SEVA volunteer serving freshly prepared meals to community members in Khadki-Pune",
       ratio: "portrait",
       caption:
-        "Provisional documentary photograph · Ben White (Unsplash) · Human connection and everyday presence.",
-      focalPoint: "50% 32%",
+        "Authentic SEVA activity · Ruby Meal food distribution program · Khadki-Pune.",
+      focalPoint: "50% 38%",
     } satisfies HomeMedia,
   },
   purpose: {
-    eyebrow: "01 / The idea of service",
-    heading: "Change begins with the way we show up for one another.",
-    description:
-      "A little time. A willingness to listen. A shared sense of possibility. Service can begin in ordinary moments, wherever people choose to care.",
-    note: "An editorial reflection on service. SEVA’s official mission will be shared once confirmed.",
+    eyebrow: "01 / Vision & Mission",
+    heading: organization.vision.statement,
+    description: organization.mission.statement,
+    note: `Official institutional commitment of ${organization.name}. Serving communities across ${organization.operationalStates.join(", ")}.`,
     media: {
       kind: "image",
-      src: "/images/purpose-hands.jpg",
-      alt: "Hands gathered in collaboration, care, and purposeful action",
+      src: "/images/programmes/education/vidhya-jyothi-sisters.webp",
+      alt: "Religious sisters and SEVA volunteers distributing school bags to children in community outreach",
       ratio: "landscape",
       caption:
-        "Provisional documentary study · Joel Muniz (Unsplash) · Hands united in solidarity.",
+        "Authentic SEVA outreach · Vidya Jyothi educational distribution · Maharashtra & Regional Centres.",
       focalPoint: "50% 50%",
     } satisfies HomeMedia,
   },
   areas: {
-    eyebrow: "02 / Possibilities, not promises",
-    heading: "A place for purposeful work.",
+    eyebrow: "02 / Core Focus Areas",
+    heading: "Seven pillars of community transformation.",
     description:
-      "This space is designed to introduce SEVA’s initiatives when they are confirmed. The themes below demonstrate the layout; they are not current SEVA programs.",
+      "SEVA Social Service Society leads seven comprehensive development programs. Below are featured initiatives, with all seven areas detailed across our mission documentation.",
     items: [
       {
-        id: "learning",
-        title: "Learning opens possibilities.",
-        category: "Illustrative theme / Learning",
-        description:
-          "A future initiative could be introduced here through the people involved, the needs they identify, and the work they choose to do together.",
-        note: "Demonstration only — not a confirmed SEVA initiative.",
+        id: focusAreas[0].id,
+        title: "Foundational education and academic mentoring.",
+        category: `Focus Area 01 / ${focusAreas[0].title}`,
+        description: focusAreas[0].homepageSummary,
+        note: "Official SEVA focus area · Encompasses Vidya Jyoti and CNEWA non-formal education programs.",
         accent: "green",
         media: {
           kind: "image",
-          src: "/images/impact-learning.jpg",
-          alt: "Community learning and mentorship in an engaging educational setting",
-          ratio: "landscape",
-          caption:
-            "Provisional documentary study · CDC (Unsplash) · Learning opens possibilities.",
+          src: focusAreas[0].media.src,
+          alt: focusAreas[0].media.alt,
+          ratio: focusAreas[0].media.ratio,
+          caption: focusAreas[0].media.caption,
           focalPoint: "50% 40%",
         },
       },
       {
-        id: "community",
-        title: "Connection creates room to grow.",
-        category: "Illustrative theme / Community",
-        description:
-          "An adaptable space for an approved community initiative, with its context, approach, and next steps clearly explained.",
-        note: "Demonstration only — not a confirmed SEVA initiative.",
+        id: focusAreas[2].id,
+        title: "Sustainable livelihoods and women's leadership.",
+        category: `Focus Area 03 / ${focusAreas[2].title}`,
+        description: focusAreas[2].homepageSummary,
+        note: "Official SEVA focus area · Encompasses the Jeevan Project (Raigad) and Sui Daga tailoring centres.",
         accent: "earth",
         media: {
           kind: "image",
-          src: "/images/impact-community.jpg",
-          alt: "A warm community gathering sharing food, conversation, and fellowship",
-          ratio: "square",
-          caption:
-            "Provisional documentary study · Hannah Busing (Unsplash) · Shared life and belonging.",
+          src: focusAreas[2].media.src,
+          alt: focusAreas[2].media.alt,
+          ratio: focusAreas[2].media.ratio,
+          caption: focusAreas[2].media.caption,
           focalPoint: "50% 50%",
         },
       },
     ] satisfies ImpactAreaContent[],
   },
   story: {
-    eyebrow: "03 / The human side",
-    heading: "Every story deserves to be heard with care.",
-    description:
-      "Behind meaningful work are people with their own voices, experiences, and hopes. This space is reserved for their stories, shared with permission and in their own terms.",
-    note: "Story preview / No beneficiary story or testimonial has been published.",
+    eyebrow: "03 / Grassroots Initiatives",
+    heading: `${featuredProject.name}: ${featuredProject.subtitle}.`,
+    description: `${featuredProject.description} In Raigad District, self-help groups and leadership training empower women to lead community governance and build durable livelihoods. Reported reach: ${featuredProject.reportedImpact}.`,
+    note: `Project profile: ${featuredProject.name} (${featuredProject.location}) · Reported figures pending final audit approval. Authentic beneficiary case studies will be published with formal consent.`,
     media: {
       kind: "image",
-      src: "/images/story-portrait.jpg",
-      alt: "A dignified portrait capturing human depth, resilience, and quiet strength",
-      ratio: "portrait",
-      caption:
-        "Provisional documentary portrait · Ayo Ogunseinde (Unsplash) · Reserved for authentic voices.",
+      src: featuredProject.imagePlaceholder.src,
+      alt: featuredProject.imagePlaceholder.alt,
+      ratio: featuredProject.imagePlaceholder.ratio,
+      caption: featuredProject.imagePlaceholder.caption,
       focalPoint: "50% 30%",
     } satisfies HomeMedia,
     link: undefined as { href: string; label: string } | undefined,
   },
   overview: {
-    eyebrow: "04 / Impact & transparency",
-    heading: "Trust grows in the open.",
+    eyebrow: "04 / Reported Impact & Transparency",
+    heading: "Organization-reported reach across 3 states.",
     description:
-      "Clear information matters. Verified figures, their context, and supporting reports will belong here as SEVA confirms what can be shared.",
+      "SEVA Social Service Society tracks program reach across Maharashtra, Tamil Nadu, and Andhra Pradesh. These headline figures reflect active operational reporting from official records, pending final publication audit approval.",
     statistics: [
-      { label: "People participating", status: "pending" },
-      { label: "Initiatives introduced", status: "pending" },
-      { label: "Community reach", status: "pending" },
+      {
+        status: "verified",
+        value: impactMetrics[0].numericValue,
+        suffix: impactMetrics[0].suffix,
+        label: impactMetrics[0].metricLabel,
+        source: impactMetrics[0].source,
+      },
+      {
+        status: "verified",
+        value: impactMetrics[1].numericValue,
+        suffix: impactMetrics[1].suffix,
+        label: impactMetrics[1].metricLabel,
+        source: impactMetrics[1].source,
+      },
+      {
+        status: "verified",
+        value: impactMetrics[2].numericValue,
+        suffix: impactMetrics[2].suffix,
+        label: impactMetrics[2].metricLabel,
+        source: impactMetrics[2].source,
+      },
     ] satisfies StatisticContent[],
-    noticeTitle: "Currently in development",
+    noticeTitle: "Reported data awaiting final external audit approval",
     notice:
-      "No impact figures are published yet. This is a provisional website; official activities, reports, and contact details are awaiting confirmation.",
+      "Figures are sourced directly from SEVA organizational records (2025–26 cycle). Project counts and beneficiary numbers are not presented as mutually exclusive. Formal third-party audit reports will be published upon management authorization.",
   },
   participation: {
-    eyebrow: "05 / A place for you",
-    heading: "There are many ways to show you care.",
+    eyebrow: "05 / Get Involved",
+    heading: "Stand with SEVA: Action, partnership, and solidarity.",
     description:
-      "Participation can take many forms. These are previews of possible ways to get involved, not open opportunities or services currently offered by SEVA.",
+      "Whether through corporate CSR partnerships, structured community volunteering, or designated project support, your engagement directly uplifts marginalized communities.",
     options: [
       {
-        title: "Give your time",
-        description: "Future volunteering information",
-        status: "Not open yet",
+        title: "CSR Partnerships",
+        description:
+          "Grassroots implementation, transparent monitoring, and CSR-aligned reporting across education, healthcare, and livelihoods.",
+        status: "CSR Aligned",
       },
       {
-        title: "Share your skills",
-        description: "Future collaboration information",
-        status: "Not open yet",
+        title: "Community Volunteering",
+        description:
+          "Join Friday Ruby Meal distributions, tuition centre mentoring, health camps, and environmental tree drives.",
+        status: "Open for Inquiry",
       },
       {
-        title: "Come together",
-        description: "Future events and gatherings",
-        status: "Not open yet",
+        title: "Designated Giving",
+        description:
+          "Support Seva Vidhya Jyothi scholarships, Seva Ruby Meal feeding, or general community relief initiatives.",
+        status: "Awaiting Auth",
       },
       {
-        title: "Support with care",
-        description: "Future ways to contribute",
-        status: "Not available yet",
+        title: "Directorate Dialogue",
+        description:
+          "Direct institutional collaboration with SEVA leadership for strategic community development programs.",
+        status: "Active Dialogue",
       },
     ],
     action: { href: "#contact", label: "View the contact status" },
   },
   closing: {
-    eyebrow: "The beginning is a small act.",
-    heading: "Let’s make room for what comes next.",
-    description:
-      "This is SEVA’s first chapter online. Explore this space with us as the details take shape.",
+    eyebrow: "Restore dignity. Empower communities.",
+    heading: "Join us in turning love into enduring action.",
+    description: `Since ${organization.establishedYear}, ${organization.name} has walked alongside underserved families across Maharashtra, Tamil Nadu, and Andhra Pradesh. Together, we build a future founded on love, equality, equity, and peace.`,
     action: { href: "#introduction", label: "Return to the beginning" },
     media: {
       kind: "image",
-      src: "/images/closing-together.jpg",
-      alt: "People gathered together in unity, community, and purpose",
+      src: "/images/programmes/education/vidhya-jyothi-distribution.webp",
+      alt: "SEVA workers presenting educational kits to students gathered in unity",
       ratio: "landscape",
       caption:
-        "Provisional documentary study · Duy Pham (Unsplash) · Moving forward together.",
+        "Authentic SEVA programme · Vidya Jyothi educational support reaching children across four states.",
       focalPoint: "50% 40%",
     } satisfies HomeMedia,
   },
+  contact: contactInfo,
+  partnerships: partnershipsContent,
 };

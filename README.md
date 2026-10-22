@@ -1,6 +1,12 @@
-# SEVA website · Phase 4
+# SEVA website · Phase 5A.1
 
-A preliminary seven-section homepage for SEVA’s future official website, built on the existing Next.js foundation and design system. All design and copy are provisional; demonstration themes, illustrations, pending statistics, and participation previews are explicitly labeled. No organizational activities or contact details have been assumed.
+The official website for **SEVA Social Service Society** ("Love In Action", Est. 2015), built on Next.js App Router and the approved **Vibrant Humanism** design system.
+
+Phase 5A.1 integrates authentic SEVA photographic assets supplied by the organization into the website. 13 source images were inspected from two supplied archives (`Pictures.zip` and `Founders.zip`). 15 optimized WebP derivatives are now published to `public/images/`. Two leadership portraits are withheld pending identity confirmation. A typed media registry at `src/content/media.ts` centralizes all asset records. The official SEVA emblem now powers the favicon.
+
+Phase 5A integrates the actual organizational identity, leadership directory, seven focus areas, six project initiatives, organization-reported impact data, CSR partnership frameworks, and centralized directorate contact information into strongly-typed content models.
+
+For maintenance and editing instructions, see [CONTENT_GUIDE.md](CONTENT_GUIDE.md).
 
 ## Run locally
 
@@ -34,8 +40,26 @@ npm run test:styles:dev
 
 - `src/app`: routes, root layout, global styles, error page, and metadata endpoints.
 - `src/components/layout`: shared header, mobile navigation, and footer.
-- `src/components/sections`: starter page sections.
-- `src/content/home.ts`: typed homepage copy, illustrative media, statistics, and previews.
+- `src/components/sections`: modular page sections for all seven homepage chapters.
+- `src/content`: strongly typed, centralized content architecture:
+  - `organization.ts`: core institutional identity, vision, mission, core values, branding assets.
+  - `leadership.ts`: governance profiles (Bishop, Vicar General, Chancellor, Director).
+  - `focus-areas.ts`: seven core operational focus areas and activities.
+  - `projects.ts`: six official projects with reported metrics and activities.
+  - `impact.ts`: sourced headline and initiative impact figures.
+  - `partnerships.ts`: CSR collaboration pillars and volunteering categories.
+  - `contact.ts`: directorate contact channels and canonical office address.
+  - `compliance.ts`: regulatory and statutory document registry.
+  - `donations.ts`: designated account architecture awaiting management authorization.
+  - `media.ts`: typed registry of all SEVA photographic assets with publication status, alt text, dimensions, and programme associations.
+  - `home.ts`: composition hub consuming modular content for homepage chapters.
+- `public/images`: authenticated SEVA photographic assets organized by category:
+  - `branding/`: official SEVA logo and emblem derivatives.
+  - `leadership/`: confirmed leadership portraits (Msgr. Shaji, Fr. Joshy).
+  - `programmes/education/`: education programme photographs (Vidhya Jyothi, CNEWA, tuition centres).
+  - `programmes/community-welfare/`: Ruby Meals service photographs.
+  - `programmes/rural-tribal/`: Housing project photographs (Paderu).
+  - `collages/`: compressed programme collages.
 - `src/styles/home.css`: homepage compositions extending shared design tokens.
 - `src/components/ui`: reusable layout, typography, controls, media, and editorial panel.
 - `src/components/animations`: the single reusable reveal used by the initial layout.
@@ -66,16 +90,18 @@ See [SEVA_PROJECT_BLUEPRINT.md](SEVA_PROJECT_BLUEPRINT.md) for architecture, dec
 A major visual redesign was implemented to transform the website from a wireframe-like prototype into a cinematic, editorial digital experience.
 
 - **Theme**: "Humanity in Action" — combining documentary-style photography with contemporary literary editorial design.
-- **Photography**: High-resolution curated documentary placeholder photographs from Unsplash in `public/images/`, with complete attributions and replacement instructions documented in [ATTRIBUTION.md](ATTRIBUTION.md).
+- **Photography**: Phase 5A.1 replaced prior Unsplash documentary placeholders with authentic SEVA organizational photographs. 13 source images were supplied in `Pictures.zip` (9 programme photos) and `Founders.zip` (4 portraits). 15 optimized WebP derivatives are published to `public/images/`. Two portraits are withheld pending identity confirmation. All asset records are in `src/content/media.ts` and the full audit register is at `MEDIA_ASSET_REGISTER.md`.
 - **Asymmetric & Alternating Chapters**: Light editorial spreads paired with deep evergreen and obsidian dark chapters (`#1e3629`, `#162019`).
 - **Signature Visual Moments**: Hero-to-purpose transition, documentary bounded parallax on the Human Stories portrait, and high-contrast chapter rhythm.
-- **Test Results**: All 31 automated Playwright browser tests, development server regression tests (`test:styles:dev`), TypeScript checks, ESLint, and production builds pass.
+- **Test Results**: All 35 automated Playwright browser tests, development server regression tests (`test:styles:dev`), TypeScript checks, ESLint, and production builds pass.
 
 ## Verification and dependency notes
 
 See [STYLE_REPAIR.md](STYLE_REPAIR.md) for the reproduced development styling failure, recovery, and regression safeguards. `test:e2e` includes computed-style checks and screenshot comparisons at 375/768/1440px. `test:styles:dev` reuses the actual server on port 3000, or starts one if absent, so a healthy production build cannot conceal broken development CSS. Reviewed screenshot baselines are tracked under `tests/styles.spec.ts-snapshots`. Development filesystem caching is disabled after the observed stale-output failure; production configuration and dependencies are unchanged.
 
-Phase 4 delivery passed TypeScript, ESLint, formatting, the production build, all 31 end-to-end browser tests (across desktop and emulated-mobile projects), and all three development styling regression checks. Motion verification covers readable hero entrance choreography, bounded story parallax, rapid native scrolling across all chapters, dynamic reduced-motion toggling, touch-device stability, and server-visible verified statistic fixtures.
+Phase 5A.1 (Media Integration) delivery passed TypeScript, ESLint, formatting, the production build, all 35 end-to-end browser tests (across desktop and emulated-mobile projects with `--workers=2`), and all three development styling regression checks. Two leadership portraits (`ChatGPT Image Sep 8, 2026...png` identified as a different bishop; `32 fr santhosh.jpg.jpeg` identified as Fr. Santhosh not Fr. Abraham) are permanently withheld until the organization confirms identities in writing. A `[mobile] participation actions retain mobile composition` timeout flake pre-exists from Phase 5A and is an infrastructure-only issue; all tests pass with `--workers=2`.
+
+Phase 5A delivery passed TypeScript, ESLint, formatting, the production build, all 35 end-to-end browser tests (across desktop and emulated-mobile projects), and all three development styling regression checks. Organization content, leadership directory, seven focus areas, six projects, sourced impact figures, CSR framework, compliance registry, and donation account architecture are fully integrated. Statistic count-up animations are active.
 
 Phase 3 delivery passed TypeScript, ESLint, formatting, the production build, and all 18 browser tests. Full-page and sectional screenshots were reviewed across all six target widths.
 

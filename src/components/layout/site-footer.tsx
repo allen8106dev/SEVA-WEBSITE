@@ -1,4 +1,5 @@
 import { siteConfig } from "@/config/site";
+import { contactInfo } from "@/content/contact";
 import Link from "next/link";
 import { Container } from "@/components/ui/layout";
 import { Eyebrow, Heading, Text } from "@/components/ui/typography";
@@ -10,9 +11,9 @@ export function SiteFooter() {
       <Container width="wide">
         <div className="footer-heading-row">
           <Heading size="medium">
-            A new online home.
+            SEVA Social Service Society.
             <br />
-            <em>A thoughtful beginning.</em>
+            <em>Love In Action.</em>
           </Heading>
           <LinkButton
             href="/#introduction"
@@ -24,23 +25,36 @@ export function SiteFooter() {
         </div>
         <div className="footer-grid">
           <div>
-            <Link
-              href="/#introduction"
-              className="wordmark"
-              aria-label="SEVA introduction"
-            >
-              SEVA
-            </Link>
+            <div className="footer-brand-lockup">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/seva-logo.png"
+                alt="SEVA Social Service Society"
+                className="footer-logo-image"
+                width={52}
+                height={46}
+              />
+              <Link
+                href="/#introduction"
+                className="wordmark"
+                aria-label="SEVA introduction"
+              >
+                <span className="wordmark__lettering">SEVA</span>
+                <span className="wordmark__dot" aria-hidden="true" />
+              </Link>
+            </div>
             <Text size="caption" className="footer-note">
-              A space to share our story.
+              SEVA Social Service Society
               <br />
-              More to come.
+              Registered Not-for-Profit Society · Est. 2015
+              <br />
+              Maharashtra · Tamil Nadu · Andhra Pradesh
             </Text>
           </div>
           <div>
             <Eyebrow className="footer-label">Explore</Eyebrow>
             <nav className="footer-links" aria-label="Footer navigation">
-              {siteConfig.navigation.slice(0, 2).map((item) => (
+              {siteConfig.navigation.slice(0, 3).map((item) => (
                 <Link
                   className="nav-link"
                   key={item.href}
@@ -52,17 +66,40 @@ export function SiteFooter() {
             </nav>
           </div>
           <div>
-            <Eyebrow className="footer-label">Stay connected</Eyebrow>
-            <Text size="caption" className="footer-note">
-              Official contact details will be added once confirmed.
-            </Text>
+            <Eyebrow className="footer-label">Contact Directorate</Eyebrow>
+            <div className="footer-contact-details">
+              <Text size="caption" className="footer-contact-item">
+                <strong>{contactInfo.contactPerson}</strong>, {contactInfo.role}
+              </Text>
+              <Text size="caption" className="footer-contact-item">
+                <a
+                  href={contactInfo.phone.href}
+                  className="footer-contact-link"
+                >
+                  {contactInfo.phone.display}
+                </a>
+              </Text>
+              <Text size="caption" className="footer-contact-item">
+                <a
+                  href={contactInfo.email.href}
+                  className="footer-contact-link"
+                >
+                  {contactInfo.email.display}
+                </a>
+              </Text>
+              <Text size="caption" className="footer-contact-address">
+                {contactInfo.address.fullFormatted}
+              </Text>
+            </div>
           </div>
         </div>
         <div className="footer-bottom">
           <span>
             © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
           </span>
-          <span>Website in development · Provisional identity</span>
+          <span>
+            Registered Not-for-Profit Society · Est. 2015 · Love In Action
+          </span>
         </div>
       </Container>
     </footer>

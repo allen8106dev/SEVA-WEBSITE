@@ -10,23 +10,23 @@ The creative direction is **Vibrant Humanism**: bold editorial compositions, kin
 
 ### Vibrant Humanism palette
 
-| Role          | Token                  | Value     | Intended use                                          |
-| ------------- | ---------------------- | --------- | ----------------------------------------------------- |
-| Background    | `--color-background`   | `#fff9eb` | Warm cream page canvas                                |
-| Foreground    | `--color-foreground`   | `#171717` | Near-black body text and headings                     |
-| Primary       | `--color-primary`      | `#2541b2` | Royal blue — controls, nav, editorial chapters        |
-| On primary    | `--color-on-primary`   | `#fffffe` | Text on royal blue (6-digit hex, prevents NaN in contrast test parser) |
-| Accent        | `--color-accent`       | `#ce2a2a` | Deep coral — emphasis, section rules, wordmark dot    |
-| Yellow        | `--color-yellow`       | `#ffd93d` | Primary yellow — hero background, high-energy moments |
-| Coral         | `--color-coral`        | `#ff4d4d` | Coral red — participation section bg, pill badges     |
-| Coral deep    | `--color-coral-deep`   | `#ce2a2a` | Deep coral — italic headline emphasis, accent rules   |
-| Blue          | `--color-blue`         | `#2541b2` | Royal blue alias                                      |
-| Blue dark     | `--color-blue-dark`    | `#162670` | Deeper blue for hover states                          |
-| Black         | `--color-black`        | `#171717` | Near-black for punchy borders and nav pill            |
-| Cream         | `--color-cream`        | `#fff9eb` | Warm cream alias                                      |
-| Muted         | `--color-muted`        | `#5a5a4a` | Secondary body text                                   |
-| Border        | `--color-border`       | `#e0ddd0` | Decorative separators                                 |
-| Surface       | `--color-surface`      | `#f5f2e8` | Card and panel backgrounds                            |
+| Role       | Token                | Value     | Intended use                                                           |
+| ---------- | -------------------- | --------- | ---------------------------------------------------------------------- |
+| Background | `--color-background` | `#fff9eb` | Warm cream page canvas                                                 |
+| Foreground | `--color-foreground` | `#171717` | Near-black body text and headings                                      |
+| Primary    | `--color-primary`    | `#2541b2` | Royal blue — controls, nav, editorial chapters                         |
+| On primary | `--color-on-primary` | `#fffffe` | Text on royal blue (6-digit hex, prevents NaN in contrast test parser) |
+| Accent     | `--color-accent`     | `#ce2a2a` | Deep coral — emphasis, section rules, wordmark dot                     |
+| Yellow     | `--color-yellow`     | `#ffd93d` | Primary yellow — hero background, high-energy moments                  |
+| Coral      | `--color-coral`      | `#ff4d4d` | Coral red — participation section bg, pill badges                      |
+| Coral deep | `--color-coral-deep` | `#ce2a2a` | Deep coral — italic headline emphasis, accent rules                    |
+| Blue       | `--color-blue`       | `#2541b2` | Royal blue alias                                                       |
+| Blue dark  | `--color-blue-dark`  | `#162670` | Deeper blue for hover states                                           |
+| Black      | `--color-black`      | `#171717` | Near-black for punchy borders and nav pill                             |
+| Cream      | `--color-cream`      | `#fff9eb` | Warm cream alias                                                       |
+| Muted      | `--color-muted`      | `#5a5a4a` | Secondary body text                                                    |
+| Border     | `--color-border`     | `#e0ddd0` | Decorative separators                                                  |
+| Surface    | `--color-surface`    | `#f5f2e8` | Card and panel backgrounds                                             |
 
 > [!IMPORTANT]
 > `--color-on-primary` must remain `#fffffe` (not `#ffffff`). The contrast test in `tests/site.spec.ts` reads CSS token values and parses them as 6-character hex strings. The CSS shorthand `#fff` resolves to only 3 characters after `slice(1)`, causing the hex luminance parser to return `NaN` and the ratio assertion to fail.
@@ -82,7 +82,7 @@ New visual patterns introduced with the redesign:
 - **Punchy shadow**: `box-shadow: 6px 6px 0px var(--color-black)` — used on impact cards and key CTAs. Hover translates the card `(-2px, -2px)` to increase the shadow depth.
 - **Pill badge**: rounded pill with tight uppercase label, 1.5px black border. Variants: `hero-pill--coral` (coral bg, white text) and `hero-pill--dark` (black bg, yellow text).
 - **Section chapter tag**: small eyebrow number/label in the section's top-left corner (e.g. `01 / 07 · HUMAN VOICES`). Dark variant for light-on-dark sections.
-- **Wordmark**: `SEVA` in bold Manrope + a coral circle accent dot rendered via `wordmark__dot` pseudo-element. Lives in `site-header.tsx`.
+- **Wordmark & Logo**: Official SEVA emblem paired with `SEVA` in bold Manrope + a coral circle accent dot rendered via `wordmark__dot` pseudo-element. Lives in `site-header.tsx` and `site-footer.tsx`. Maintains original proportions and clear space.
 - **Coral stamp**: a rotated block-letter accent beside section headings in the Purpose section.
 - **Kinetic banner**: oversized horizontally-scrolling text strip in the Closing section, driven by `KineticClosing` component.
 - **Transparency pill**: status indicator in the Impact Overview section.
@@ -135,15 +135,15 @@ The header (`site-header.tsx`), mobile nav (`mobile-navigation.tsx`), and all an
 
 The seven sections follow a deliberate alternating rhythm of high-energy and quiet moments:
 
-| Chapter | Section ID       | Background              | Visual treatment                                      |
-| ------- | ---------------- | ----------------------- | ----------------------------------------------------- |
-| 01      | `introduction`   | Yellow `#ffd93d`        | Poster hero, editorial grid, marquee strip            |
-| 02      | `purpose`        | Royal blue `#2541b2`    | Mask-reveal photo, coral rule, asymmetric copy        |
-| 03      | `impact-areas`   | White / cream           | Punchy shadow cards, hover translate effect           |
-| 04      | `stories`        | Near-black `#171717`    | Cinematic portrait, parallax, italic display mark     |
-| 05      | `website-status` | White / cream           | Architectural stat grid, transparency pill            |
-| 06      | `participation`  | Coral red `#ff4d4d`     | Warm CTA energy, numbered option cards                |
-| 07      | `next-chapter`   | Warm cream `#fff9eb`    | Kinetic closing banner, reflection                    |
+| Chapter | Section ID       | Background           | Visual treatment                                  |
+| ------- | ---------------- | -------------------- | ------------------------------------------------- |
+| 01      | `introduction`   | Yellow `#ffd93d`     | Poster hero, editorial grid, marquee strip        |
+| 02      | `purpose`        | Royal blue `#2541b2` | Mask-reveal photo, coral rule, asymmetric copy    |
+| 03      | `impact-areas`   | White / cream        | Punchy shadow cards, hover translate effect       |
+| 04      | `stories`        | Near-black `#171717` | Cinematic portrait, parallax, italic display mark |
+| 05      | `website-status` | White / cream        | Architectural stat grid, transparency pill        |
+| 06      | `participation`  | Coral red `#ff4d4d`  | Warm CTA energy, numbered option cards            |
+| 07      | `next-chapter`   | Warm cream `#fff9eb` | Kinetic closing banner, reflection                |
 
 `src/content/home.ts` holds all section copy and the typed `HomeMedia`, `ImpactAreaContent`, and `StatisticContent` contracts. ImpactArea supports optional category, link, and restrained color accent. Statistics renders a semantic definition list: pending entries show words rather than fabricated numbers; a verified entry requires both value and source. Participation previews are plain list content, with real anchor actions kept separate.
 

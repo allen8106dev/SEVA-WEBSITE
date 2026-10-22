@@ -73,4 +73,3 @@ export function HeroScroll({ children }: { children: ReactNode }) {
 
   return <ActiveHeroScroll>{children}</ActiveHeroScroll>;
 }
-

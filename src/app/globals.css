@@ -325,6 +325,14 @@ button {
   opacity: 0.75;
 }
 
+.wordmark-logo-emblem {
+  height: 2.15rem;
+  width: auto;
+  max-width: 44px;
+  object-fit: contain;
+  display: block;
+}
+
 /* Desktop Navigation */
 .desktop-nav {
   display: none;
@@ -664,6 +672,53 @@ button {
   display: grid;
   gap: var(--space-7);
   padding-block: var(--space-7);
+}
+
+.footer-brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
+.footer-logo-image {
+  height: 2.5rem;
+  width: auto;
+  max-width: 52px;
+  object-fit: contain;
+  display: block;
+}
+
+.footer-contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.footer-contact-item {
+  color: var(--color-cream);
+  font-size: var(--type-caption);
+  line-height: 1.5;
+}
+
+.footer-contact-link {
+  color: var(--color-yellow);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.footer-contact-link:hover {
+  color: var(--color-coral);
+}
+
+.footer-contact-address {
+  color: rgba(255, 249, 235, 0.75);
+  font-size: var(--type-caption);
+  line-height: 1.5;
+  max-width: 32ch;
+  margin-top: var(--space-1);
 }
 
 .footer-note {

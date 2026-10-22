@@ -69,7 +69,7 @@ export function ImpactAreasSection() {
         <div className="section-intro">
           <div>
             <div className="section-chapter-tag" aria-hidden="true">
-              03 / 07 · INITIATIVES
+              03 / 07 · CORE FOCUS AREAS
             </div>
             <Eyebrow>{content.eyebrow}</Eyebrow>
             <Heading id="areas-title" size="large">

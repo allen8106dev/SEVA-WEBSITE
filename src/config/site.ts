@@ -19,10 +19,12 @@ function getSiteUrl(value: string | undefined): URL | undefined {
 const url = getSiteUrl(process.env.SITE_URL);
 
 export const siteConfig = {
-  name: "SEVA",
-  title: "SEVA — Small acts. Extraordinary change.",
+  name: "SEVA Social Service Society",
+  shortName: "SEVA",
+  tagline: "Love In Action",
+  title: "SEVA Social Service Society — Love In Action",
   description:
-    "The official SEVA website is under development. A new space to learn about the organization is taking shape.",
+    "SEVA Social Service Society works with communities across Maharashtra, Tamil Nadu, and Andhra Pradesh through education, healthcare, women's empowerment, and sustainable community development.",
   url,
   // Vercel preview deployments must remain private to search engines.
   indexable: Boolean(

@@ -71,4 +71,3 @@ export function KineticClosing({ children }: { children: ReactNode }) {
 
   return <ActiveKineticClosing>{children}</ActiveKineticClosing>;
 }
-

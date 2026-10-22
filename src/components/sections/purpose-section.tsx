@@ -18,7 +18,7 @@ export function PurposeSection() {
           <div className="purpose-copy">
             <div className="purpose-eyebrow-row">
               <span className="section-chapter-tag" aria-hidden="true">
-                02 / 07
+                02 / 07 · VISION & MISSION
               </span>
               <Eyebrow className="purpose-eyebrow">{content.eyebrow}</Eyebrow>
             </div>
@@ -50,7 +50,7 @@ export function PurposeSection() {
                     sizes="(min-width: 768px) 46vw, 100vw"
                   />
                   <div className="purpose-stamp" aria-hidden="true">
-                    SOLIDARITY IN MOTION
+                    LOVE IN ACTION
                   </div>
                 </div>
               </ImageMaskReveal>

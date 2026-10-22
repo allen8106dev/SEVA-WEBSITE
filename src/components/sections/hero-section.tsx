@@ -21,10 +21,10 @@ export function HeroSection() {
               <div className="hero-badge-row">
                 <span className="hero-pill hero-pill--coral">
                   <span className="status-dot" aria-hidden="true" />
-                  <span>VIBRANT HUMANISM</span>
+                  <span>LOVE IN ACTION</span>
                 </span>
                 <span className="hero-pill hero-pill--dark">
-                  EST. 2026 · PROVISIONAL
+                  EST. 2015 · REGISTERED SOCIETY
                 </span>
               </div>
               <Eyebrow className="hero-kicker">{content.eyebrow}</Eyebrow>
@@ -85,7 +85,7 @@ export function HeroSection() {
           </EditorialGrid>
           <div className="hero-baseline">
             <span className="eyebrow hero-baseline__tagline">
-              Small beginnings. Shared possibilities.
+              Maharashtra · Tamil Nadu · Andhra Pradesh
             </span>
             <a className="nav-link hero-baseline__link" href="#purpose">
               Continue the story <Arrow direction="down" />
@@ -94,17 +94,19 @@ export function HeroSection() {
         </Container>
       </HeroScroll>
       <Marquee className="hero-marquee">
-        <span className="hero-marquee__item">SMALL ACTS</span>
+        <span className="hero-marquee__item">LOVE IN ACTION</span>
         <span className="hero-marquee__sep">✦</span>
-        <span className="hero-marquee__item">BIG IMPACT</span>
+        <span className="hero-marquee__item">SEVA SOCIAL SERVICE SOCIETY</span>
         <span className="hero-marquee__sep">✦</span>
-        <span className="hero-marquee__item">RADICAL SOLIDARITY</span>
+        <span className="hero-marquee__item">RESTORING DIGNITY</span>
         <span className="hero-marquee__sep">✦</span>
-        <span className="hero-marquee__item">PURPOSEFUL LIVING</span>
+        <span className="hero-marquee__item">SUSTAINABLE DEVELOPMENT</span>
         <span className="hero-marquee__sep">✦</span>
-        <span className="hero-marquee__item">COMMUNITY FIRST</span>
+        <span className="hero-marquee__item">EST. 2015</span>
         <span className="hero-marquee__sep">✦</span>
-        <span className="hero-marquee__item">SEVA 2026</span>
+        <span className="hero-marquee__item">EDUCATION & HEALTHCARE</span>
+        <span className="hero-marquee__sep">✦</span>
+        <span className="hero-marquee__item">WOMEN EMPOWERMENT</span>
         <span className="hero-marquee__sep">✦</span>
       </Marquee>
     </Section>

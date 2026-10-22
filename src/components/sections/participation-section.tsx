@@ -18,7 +18,7 @@ export function ParticipationSection() {
               className="section-chapter-tag section-chapter-tag--coral"
               aria-hidden="true"
             >
-              06 / 07 · ACTION
+              06 / 07 · ACTION & ENGAGEMENT
             </div>
             <Eyebrow className="participation-eyebrow">
               {content.eyebrow}

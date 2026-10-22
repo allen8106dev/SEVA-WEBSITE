@@ -67,7 +67,7 @@ export function MobileNavigation() {
       >
         <div className="mobile-panel__badge" aria-hidden="true">
           <span>NAVIGATION</span>
-          <span>EST. 2026</span>
+          <span>EST. 2015</span>
         </div>
         <div className="mobile-panel__links">
           <NavigationLinks
@@ -79,7 +79,7 @@ export function MobileNavigation() {
         </div>
         <div className="mobile-panel__footer" aria-hidden="true">
           <span className="mobile-panel__status-dot" />
-          <span>Vibrant Humanism · SEVA</span>
+          <span>Love In Action · SEVA</span>
         </div>
       </nav>
     </div>

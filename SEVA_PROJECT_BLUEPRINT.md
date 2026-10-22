@@ -1,5 +1,110 @@
 # SEVA project blueprint
 
+## Phase 5A.1: Authentic Media Integration
+
+Phase 5A.1 integrates authentic SEVA photographic assets — supplied in `Pictures.zip` (programme photography) and `Founders.zip` (leadership portraits) — into the Phase 5A website. All existing visual design, animations, responsive layouts, and accessibility guarantees are preserved. No architectural changes were introduced.
+
+### Key Deliverables in Phase 5A.1:
+
+1. **Complete Asset Inspection**:
+   - 13 source images inspected using `sharp` for dimensions, format, and file size.
+   - 9 programme photographs from `Pictures.zip`; 4 leadership portraits from `Founders.zip`.
+   - `MEDIA_ASSET_REGISTER.md` created at project root with full audit register.
+
+2. **Identity Audit (Critical Safeguard)**:
+   - `28 Msgr Shaji.png` → **Confirmed**: Rt Rev. Msgr. Dr. Shaji Mathews Vazhayil (Vicar General). ✅
+   - `41 Fr Joshy.png` → **Confirmed**: Very Rev. Dr. Joshy Vazhappillethu (Chancellor). ✅
+   - `ChatGPT Image Sep 8, 2026...png` → **Permanently withheld**: Hardcoded text in the image identifies "MOST REV. DR. YOOHANON MAR ALEXIOS, AUXILIARY BISHOP OF TRIVANDRUM" — a different bishop, not SEVA's H E Dr. Mathews Mar Pachomios OIC. ❌
+   - `32 fr santhosh.jpg.jpeg` → **Permanently withheld**: Filename identifies "Fr. Santhosh"; SEVA Director is Rev. Fr. Abraham Thanuvelil — different persons. ❌
+   - Withheld records exist in `src/content/media.ts` with `approvalStatus: "pending_identity_confirmation"` and no `publicUrl`. These must not be published without explicit written authorization from SEVA management.
+
+3. **Image Optimization**:
+   - All derivatives generated with `sharp` (no new npm dependencies).
+   - WebP format used throughout; originals preserved in gitignored `incoming-assets/`.
+   - 15 derivatives published to `public/images/` across `leadership/`, `programmes/education/`, `programmes/community-welfare/`, `programmes/rural-tribal/`, `collages/`, and `branding/`.
+   - Three 50 MB collages (`1.png`, `2.png`, `3.png` at 6250×5000px) compressed to ≈700 KB WebP each (>98% reduction).
+
+4. **Typed Media Registry**:
+   - `src/content/media.ts` created with full TypeScript interfaces and 17 records (15 approved, 2 withheld).
+   - Helper functions: `getApprovedAssets()`, `getAssetById()`, `getAssetsByCategory()`, `getAssetsByProgramme()`.
+
+5. **Content Model Updates**:
+   - `leadership.ts`: `LeaderProfile` interface extended with optional `image` field. Msgr. Shaji and Fr. Joshy have confirmed portraits. Bishop and Fr. Abraham retain neutral placeholder.
+   - `focus-areas.ts`: Education, Community Welfare, Rural Tribal areas now reference authentic SEVA images.
+   - `projects.ts`: CNEWA, Vidya Jyoti, Ruby Meal projects reference authentic SEVA images.
+   - `home.ts`: Hero (Ruby Meals service), Purpose (Vidhya Jyothi sisters), Closing (Vidhya Jyothi distribution) updated to real photographs.
+
+6. **Favicon Update**:
+   - `src/app/icon.png` (64×64, from official emblem) created.
+   - `src/app/icon.svg` updated with official emblem data URI.
+
+7. **Test Suite Update**:
+   - `motion.spec.ts`: Hover assertion updated from `.media-frame__visual > svg` to `.media-frame__visual > img, .media-frame__visual > svg:not(.media-frame__editorial-stamp)` — real `<img>` elements now present in impact area MediaFrames alongside decorative SVG stamps.
+   - Screenshot baselines (375px, 768px, 1440px) regenerated and reviewed after hero image change.
+
+8. **Documentation**:
+   - `MEDIA_ASSET_REGISTER.md`: Complete image inventory with visual subjects, dimensions, approval status.
+   - `CONTENT_GUIDE.md`: §6 updated with replacement process; §8 added explaining typed media registry; §9 updated.
+   - `README.md`: Phase header updated to 5A.1; Visual Transformation section updated; verification history updated.
+   - `.gitignore`: `incoming-assets/` excluded to prevent large originals from being committed.
+
+### Verification in Phase 5A.1:
+
+- TypeScript: ✅ (`next typegen && tsc --noEmit`)
+- ESLint: ✅ (0 warnings, 0 errors)
+- Prettier: ✅
+- Production build: ✅ (7/7 static pages)
+- `test:styles:dev` (3/3): ✅
+- `tests/organization.spec.ts` (4/4): ✅
+- `tests/components.spec.ts` (4/4): ✅
+- `tests/motion.spec.ts` (8/8 with `--workers=2`): ✅
+- `tests/site.spec.ts` (12/12 with `--workers=2`): ✅
+- Full suite with `--workers=2`: **34/35 pass** (1 pre-existing infrastructure flake: `[mobile] participation actions retain mobile composition` — 60s timeout under parallel cold-start, same flake present in Phase 5A, not a regression from Phase 5A.1).
+
+### Scope Constraints Honoured:
+
+- **No Phase 5B**: Only media integration was performed. No new pages, components, or structural changes.
+- **No fabricated assets**: All images are from the supplied archives. No placeholder photography was invented.
+- **No upscaling**: Low-resolution images published at their natural resolution.
+- **Jeevan Project / Women Empowerment placeholder retained**: No authentic Raigad women empowerment photos were supplied; `story-portrait.jpg` (Unsplash, clearly labeled) remains for the Stories/Jeevan section.
+- **All animations preserved**: Hero scroll, image-mask reveal, story parallax, KineticClosing, Marquee — all intact and all tests passing.
+
+---
+
+## Phase 5A: Organizational Identity, Content & Project Integration
+
+Phase 5A integrates SEVA Social Service Society's actual institutional identity, leadership structure, focus areas, projects, reported impact figures, and centralized contact channels into the approved Vibrant Humanism frontend. All existing visual styles, animations, responsive layouts, and accessibility guarantees are preserved.
+
+### Key Deliverables in Phase 5A:
+
+1. **Official Institutional Identity**:
+   - Organization: **SEVA Social Service Society**
+   - Tagline: **Love In Action**
+   - Established: **2015** (all provisional "EST. 2026" references excised)
+   - Operational Reach: Maharashtra, Tamil Nadu, Andhra Pradesh
+   - Legal Status: Registered Not-for-Profit Society
+   - Vision & Mission: Formally embedded in Purpose section and content models.
+2. **Official Logo Integration**:
+   - Client-supplied artwork integrated as original (`/images/seva-logo.jpg`), high-resolution transparent web format (`/images/seva-logo.png`), and focused square emblem (`/images/seva-emblem.png`).
+   - Integrated into SiteHeader (with companion SEVA wordmark), SiteFooter, and MobileNavigation. Proportions strictly maintained without distortion.
+3. **Centralized Content Architecture (`src/content/`)**:
+   - `organization.ts`: Core identity, legal status, vision, mission, core values, branding assets.
+   - `leadership.ts`: 4 official leaders (H E Dr. Mathews Mar Pachomios OIC, Rt Rev. Msgr. Dr. Shaji Mathews Vazhayil, Very Rev. Dr. Joshy Vazhappillethu, Rev. Fr. Abraham Thanuvelil) with neutral portrait placeholders.
+   - `focus-areas.ts`: 7 structured focus areas (Education, Healthcare, Women Empowerment, Community Welfare, Rural & Tribal Development, Skill Development, Relief Works).
+   - `projects.ts`: 6 structured initiatives (CNEWA Non-Formal Education, Vidya Jyoti Scholarship Programme, Jeevan Project, Sui Daga Tailoring Project, SEVA Ruby Meal, Healthcare and Medical Outreach).
+   - `impact.ts`: Sourced headline metrics (1,000+ annual beneficiaries, 15+ programs, 3 states) and project-level statistics with clear audit-pending disclosures.
+   - `partnerships.ts`: CSR alignment areas, governance pillars, and 7 structured volunteering categories.
+   - `contact.ts`: Official directorate contact details (Rev. Fr. Abraham Thanuvelil, Director; +91 8856031349; sevassspune@gmail.com; St. Mary's Cathedral, Bopodi, Pune).
+   - `compliance.ts`: Legal documentation registry (Registration, PAN, 80G, 12AC, FCRA, Audits, CSR).
+   - `donations.ts`: Designated account architecture (Seva Vidhya Jyothi, Society, Ruby Meal) marked as awaiting management authorization without premature banking disclosure.
+   - `home.ts`: Composition hub consuming the modular models for all seven homepage sections.
+4. **Animated Statistics Activation**:
+   - Headline statistics now actively render through `CountValue` with server-visible final values, animated count-ups, and accessible screen-reader labels.
+5. **Comprehensive Verification**:
+   - All 35 Playwright browser tests pass 100% across desktop and mobile Edge/Chromium.
+   - Development server regression tests (`test:styles:dev`) pass 3/3.
+   - TypeScript checks (`next typegen && tsc --noEmit`), ESLint (`max-warnings=0`), Prettier formatting, and Next.js production build pass cleanly.
+
 ## Phase 5 (Vibrant Humanism) visual redesign
 
 The existing seven-section homepage was substantially redesigned with a bold editorial visual identity called **Vibrant Humanism**. The new palette (Yellow `#ffd93d` + Coral Red `#ff4d4d` + Royal Blue `#2541b2` + Near Black `#171717` + Warm Cream `#fff9eb`) replaces the former olive/ivory/terracotta scheme. Three signature scroll interactions were added using the existing Motion library. The navigation was redesigned with a scroll-responsive floating treatment and a SEVA wordmark with a coral accent dot. A kinetic typography marquee runs across the hero section. No new npm dependencies were introduced. All 31 automated tests pass (with `--workers=2`). Phase 5 content approval (official branding, approved copy, sourced statistics, real media, participation destinations) is not implemented and remains pending.

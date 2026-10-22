@@ -25,14 +25,27 @@ export function SiteHeader() {
     >
       <Container width="wide" className="header-inner">
         <div className="wordmark-lockup">
-          <Link href="/" className="wordmark" aria-label="SEVA home">
+          <Link
+            href="/"
+            className="wordmark"
+            aria-label="SEVA Social Service Society home"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/seva-logo.png"
+              alt=""
+              className="wordmark-logo-emblem"
+              width={36}
+              height={32}
+              aria-hidden="true"
+            />
             <span className="wordmark__lettering">SEVA</span>
             <span className="wordmark__dot" aria-hidden="true" />
           </Link>
           <span className="wordmark-note">
-            A new chapter
+            Love In Action
             <br />
-            is taking shape.
+            Est. 2015
           </span>
         </div>
         <nav aria-label="Main navigation" className="desktop-nav">

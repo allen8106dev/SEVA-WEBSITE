@@ -16,7 +16,7 @@ export function ImpactOverviewSection() {
         <div className="section-intro">
           <div>
             <div className="section-chapter-tag" aria-hidden="true">
-              05 / 07 · TRANSPARENCY
+              05 / 07 · REPORTED REACH & TRANSPARENCY
             </div>
             <Eyebrow>{content.eyebrow}</Eyebrow>
             <Heading id="overview-title" size="large">
@@ -33,7 +33,7 @@ export function ImpactOverviewSection() {
         <EditorialCard labelledBy="development-title">
           <div className="transparency-card-header">
             <span className="transparency-pill" aria-hidden="true">
-              STATUS DISCLOSURE
+              ORGANIZATION-REPORTED DATA
             </span>
             <Eyebrow id="development-title">{content.noticeTitle}</Eyebrow>
           </div>

@@ -17,11 +17,11 @@ test("homepage has seven accessible chapters and no misleading previews", async 
   expect(labels.every(Boolean)).toBe(true);
   await expect(page.locator(".impact-area")).toHaveCount(2);
   await expect(page.locator(".impact-area .demo-note")).toHaveText([
-    "Demonstration only — not a confirmed SEVA initiative.",
-    "Demonstration only — not a confirmed SEVA initiative.",
+    "Official SEVA focus area · Encompasses Vidya Jyoti and CNEWA non-formal education programs.",
+    "Official SEVA focus area · Encompasses the Jeevan Project (Raigad) and Sui Daga tailoring centres.",
   ]);
-  await expect(page.locator(".statistics .statistic__pending")).toHaveCount(3);
-  await expect(page.locator(".statistics .statistic__value")).toHaveCount(0);
+  await expect(page.locator(".statistics .statistic__pending")).toHaveCount(0);
+  await expect(page.locator(".statistics .statistic__value")).toHaveCount(3);
   await expect(page.locator(".participation-options li")).toHaveCount(4);
   await expect(
     page.locator(".participation-options a, .participation-options button"),
@@ -53,9 +53,8 @@ test("participation actions reach real content and chapters retain mobile compos
     .getByRole("link", { name: "View the contact status", exact: true })
     .click();
   await expect(page).toHaveURL(/#contact$/);
-  await expect(
-    page.getByText("Official contact details will be added once confirmed."),
-  ).toBeVisible();
+  await expect(page.getByText("sevassspune@gmail.com")).toBeVisible();
+  await expect(page.getByText("+91 8856031349")).toBeVisible();
   for (const width of [320, 390, 768, 1024, 1440, 1920]) {
     await page.setViewportSize({ width, height: 900 });
     for (const id of [

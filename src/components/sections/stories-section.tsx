@@ -19,7 +19,7 @@ export function StoriesSection() {
           className="section-chapter-tag section-chapter-tag--dark"
           aria-hidden="true"
         >
-          04 / 07 · HUMAN VOICES
+          04 / 07 · INITIATIVES IN FOCUS
         </div>
         <Eyebrow className="stories-eyebrow">{content.eyebrow}</Eyebrow>
         <div className="story-layout">
@@ -36,15 +36,15 @@ export function StoriesSection() {
                 <span className="soundwave-bar" />
                 <span className="soundwave-bar" />
                 <span className="soundwave-bar" />
-                <span>UNHEARD PERSPECTIVES</span>
+                <span>JEEVAN PROJECT · RAIGAD</span>
               </div>
             </div>
           </Reveal>
           <div className="story-copy">
             <span className="story-mark" aria-hidden="true">
-              A space
+              Grassroots
               <br />
-              for a voice.
+              Dignity.
             </span>
             <Heading id="stories-title" size="medium">
               {content.heading}

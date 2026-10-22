@@ -130,14 +130,17 @@ test("rapid native scrolling leaves every chapter readable and story movement bo
       () => document.documentElement.scrollWidth <= innerWidth,
     ),
   ).toBe(true);
-  await expect(page.locator("[data-count-value]")).toHaveCount(0);
+  await expect(page.locator("[data-count-value]")).toHaveCount(3);
   if (capable) {
     const area = page.locator(".impact-area").first();
     await area.hover();
-    await expect(area.locator(".media-frame__visual > svg")).not.toHaveCSS(
-      "transform",
-      "none",
-    );
+    await expect(
+      area
+        .locator(
+          ".media-frame__visual > img, .media-frame__visual > svg:not(.media-frame__editorial-stamp)",
+        )
+        .first(),
+    ).not.toHaveCSS("transform", "none");
     await expect(area.locator(".demo-note")).toBeVisible();
     await expect(area).not.toHaveAttribute("tabindex", /.+/);
     await area.screenshot({
