@@ -925,36 +925,6 @@
   align-items: center;
 }
 
-.closing-photo-card {
-  position: relative;
-}
-
-.closing-media .media-frame__visual {
-  border-radius: var(--radius-panel);
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-elevated);
-  overflow: hidden;
-  aspect-ratio: 16 / 10;
-  background: var(--color-surface);
-}
-
-.closing-badge {
-  position: absolute;
-  bottom: -0.75rem;
-  left: 1.5rem;
-  background: var(--color-surface-highlight);
-  color: var(--color-dark-surface);
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-subtle);
-  padding: 0.5rem 1rem;
-  border-radius: var(--radius-panel);
-  display: flex;
-  gap: var(--space-3);
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-}
-
 .closing-content .heading {
   margin-block: var(--space-4);
   font-size: var(--type-heading-lg);
@@ -1034,7 +1004,7 @@
     gap: var(--space-8);
   }
   .closing-wrapper {
-    grid-template-columns: 1.15fr 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: var(--space-8);
   }
 }

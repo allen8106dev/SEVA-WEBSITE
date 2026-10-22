@@ -71,7 +71,7 @@ export function HomeHeroCarousel({ slides }: { slides: HomeHeroSlide[] }) {
   );
 
   useEffect(() => {
-    const hero = carouselRef.current?.closest(".home-hero");
+    const hero = carouselRef.current?.closest<HTMLElement>(".home-hero");
     if (!hero) return;
 
     const pauseForInteraction = () => setHovering(true);
@@ -97,18 +97,26 @@ export function HomeHeroCarousel({ slides }: { slides: HomeHeroSlide[] }) {
 
   useEffect(() => {
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const updatePreference = () => setReducedMotion(preference.matches);
+    const updatePreference = () => {
+      const shouldReduceMotion = preference.matches;
+      setReducedMotion(shouldReduceMotion);
+
+      if (!shouldReduceMotion || slideCount < 1) return;
+
+      transitioningRef.current = false;
+      setTransitioning(false);
+      setRebasing(false);
+
+      const position = positionRef.current;
+      if (position >= slideCount * 2) updatePosition(position - slideCount);
+    };
     updatePreference();
     preference.addEventListener("change", updatePreference);
     return () => preference.removeEventListener("change", updatePreference);
-  }, []);
+  }, [slideCount, updatePosition]);
 
   useEffect(() => {
     if (!reducedMotion || slideCount < 1) return;
-    transitioningRef.current = false;
-    setTransitioning(false);
-    setRebasing(false);
-
     const position = positionRef.current;
     if (position >= slideCount * 2) updatePosition(position - slideCount);
   }, [reducedMotion, slideCount, updatePosition]);

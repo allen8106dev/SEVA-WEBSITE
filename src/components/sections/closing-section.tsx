@@ -3,7 +3,6 @@ import { Container, Section } from "@/components/ui/layout";
 import { Eyebrow, Heading, Text } from "@/components/ui/typography";
 import { Arrow, LinkButton } from "@/components/ui/button";
 import { Reveal } from "@/components/animations/reveal";
-import { HomepageMedia } from "@/components/ui/homepage-media";
 import { KineticClosing } from "@/components/animations/kinetic-closing";
 
 export function ClosingSection() {
@@ -23,21 +22,6 @@ export function ClosingSection() {
               </span>
             </div>
             <div className="closing-wrapper">
-              {content.media && (
-                <div className="closing-media-col">
-                  <div className="closing-photo-card">
-                    <HomepageMedia
-                      media={content.media}
-                      className="closing-media"
-                      sizes="(min-width: 768px) 46vw, 100vw"
-                    />
-                    <div className="closing-badge" aria-hidden="true">
-                      <span>COMMUNITY</span>
-                      <span>CHAPTER 07</span>
-                    </div>
-                  </div>
-                </div>
-              )}
               <div className="closing-content">
                 <div
                   className="section-chapter-tag section-chapter-tag--closing"
