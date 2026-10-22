@@ -2,13 +2,21 @@ import type { StatisticContent } from "@/content/home";
 import { CountValue } from "@/components/animations/count-value";
 
 /** Missing values remain explicit; no zeroes or illustrative impact numbers. */
-export function Statistics({ items }: { items: readonly StatisticContent[] }) {
+export function Statistics({
+  items,
+  presentation = "detailed",
+}: {
+  items: readonly StatisticContent[];
+  presentation?: "detailed" | "compact";
+}) {
+  const compact = presentation === "compact";
+
   return (
     <dl className="statistics">
       {items.map((item) => (
         <div
           key={item.label}
-          className="statistic"
+          className={compact ? "statistic statistic--compact" : "statistic"}
           data-statistic-status={item.status}
         >
           <dt>{item.label}</dt>
@@ -27,17 +35,27 @@ export function Statistics({ items }: { items: readonly StatisticContent[] }) {
                     item.value
                   )}
                 </span>
-                <span className="statistic__source">
+                <span className={compact ? "sr-only" : "statistic__source"}>
                   Source: {item.source} · {item.reportingPeriod}
                 </span>
               </>
             ) : item.status === "reported" ? (
               <>
-                <span className="statistic__value">{item.value}</span>
-                <span className="statistic__source">
+                <span className="statistic__value">
+                  {typeof item.numericValue === "number" ? (
+                    <CountValue
+                      value={item.numericValue}
+                      prefix={item.prefix}
+                      suffix={item.suffix}
+                    />
+                  ) : (
+                    item.value
+                  )}
+                </span>
+                <span className={compact ? "sr-only" : "statistic__source"}>
                   Source: {item.source} · {item.reportingPeriod}
                 </span>
-                <span className="statistic__audit">
+                <span className={compact ? "sr-only" : "statistic__audit"}>
                   Organization-reported · Audit pending
                 </span>
               </>

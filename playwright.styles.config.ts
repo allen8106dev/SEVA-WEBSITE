@@ -11,6 +11,7 @@ export default defineConfig({
     "**/media-styles.spec.ts",
     "**/resources-styles.spec.ts",
     "**/involvement-styles.spec.ts",
+    "**/footer-styles.spec.ts",
   ],
   projects: baseConfig.projects?.filter(
     (project) => project.name === "desktop",

@@ -1,6 +1,5 @@
-import { organization } from "./organization";
+﻿import { organization } from "./organization";
 import { focusAreas } from "./focus-areas";
-import { projects } from "./projects";
 import { impactMetrics } from "./impact";
 import { partnershipsContent } from "./partnerships";
 import { contactInfo } from "./contact";
@@ -25,6 +24,7 @@ export type HomeMedia = {
 
 export type ImpactAreaContent = {
   id: string;
+  number?: string;
   title: string;
   description: string;
   category?: string;
@@ -40,6 +40,9 @@ export type StatisticContent =
       label: string;
       status: "reported";
       value: string;
+      numericValue?: number;
+      prefix?: string;
+      suffix?: string;
       source: string;
       reportingPeriod: string;
       note: string;
@@ -56,9 +59,6 @@ export type StatisticContent =
       suffix?: string;
       maximumFractionDigits?: number;
     };
-
-const featuredProject =
-  projects.find((p) => p.id === "jeevan-project") ?? projects[0];
 
 const headlineStatistics: StatisticContent[] = impactMetrics
   .filter((metric) => metric.isHeadline)
@@ -82,49 +82,38 @@ const headlineStatistics: StatisticContent[] = impactMetrics
       ...shared,
       status: "reported",
       value: metric.displayFormat,
+      numericValue: metric.numericValue,
+      prefix: metric.prefix,
+      suffix:
+        metric.suffix && metric.displayFormat.endsWith(metric.suffix)
+          ? metric.suffix
+          : undefined,
       auditStatus: metric.verificationStatus,
     };
   });
 
 export const homeContent = {
   hero: {
-    eyebrow: `${organization.name.toUpperCase()} · ${organization.tagline.toUpperCase()}`,
     headline: {
       opening: "Love in action.",
       emphasis: "Restoring dignity,",
       ending: "transforming lives.",
     },
-    description: organization.introduction,
-    primary: { href: "#purpose", label: "Explore the beginning" },
-    secondary: { href: "#participation", label: "Ways to take part" },
-    notice: `Official identity · Established ${organization.establishedYear} · ${organization.legalStatus}`,
   },
   purpose: {
-    eyebrow: "01 / Vision & Mission",
-    heading: organization.vision.statement,
-    description: organization.mission.statement,
-    note: `Official institutional commitment of ${organization.name}. Serving communities across ${organization.operationalStates.join(", ")}.`,
-    media: {
-      kind: "image",
-      src: "/images/programmes/education/vidhya-jyothi-sisters.webp",
-      alt: "Religious sisters and SEVA volunteers distributing school bags to children in community outreach",
-      ratio: "landscape",
-      caption:
-        "Authentic SEVA outreach · Vidya Jyothi educational distribution · Maharashtra & Regional Centres.",
-      focalPoint: "50% 50%",
-    } satisfies HomeMedia,
+    vision: organization.vision.statement,
+    mission: organization.mission.statement,
+    about: organization.introduction,
   },
   areas: {
-    eyebrow: "02 / Core Focus Areas",
-    heading: "Seven areas of community work.",
-    description:
-      "SEVA Social Service Society leads seven comprehensive development programs. Below are featured initiatives, with all seven areas detailed across our mission documentation.",
+    heading: "Areas of community work",
     items: [
       {
         id: focusAreas[0].id,
-        title: "Foundational education and academic mentoring.",
+        number: "01",
+        title: "Education",
         category: `Focus Area 01 / ${focusAreas[0].title}`,
-        description: focusAreas[0].homepageSummary,
+        description: "Tuition centres, scholarships, and learning support.",
         note: "Official SEVA focus area · Encompasses Vidya Jyoti and CNEWA non-formal education programs.",
         accent: "green",
         media: {
@@ -138,9 +127,10 @@ export const homeContent = {
       },
       {
         id: focusAreas[2].id,
-        title: "Sustainable livelihoods and women's leadership.",
+        number: "03",
+        title: "Women Empowerment",
         category: `Focus Area 03 / ${focusAreas[2].title}`,
-        description: focusAreas[2].homepageSummary,
+        description: "Self-help groups, tailoring, and livelihood skills.",
         note: "Official SEVA focus area · Encompasses the Jeevan Project (Raigad) and Sui Daga tailoring centres.",
         accent: "earth",
         media: {
@@ -152,25 +142,27 @@ export const homeContent = {
           focalPoint: "50% 50%",
         },
       },
+      {
+        id: focusAreas[3].id,
+        number: "04",
+        title: "Community Welfare",
+        category: `Focus Area 04 / ${focusAreas[3].title}`,
+        description: "Weekly Ruby Meals and support for vulnerable people.",
+        note: "Official SEVA focus area · Includes weekly Ruby Meal food distributions.",
+        accent: "earth",
+        media: {
+          kind: "image",
+          src: focusAreas[3].media.src,
+          alt: focusAreas[3].media.alt,
+          ratio: focusAreas[3].media.ratio,
+          caption: focusAreas[3].media.caption,
+          focalPoint: "50% 50%",
+        },
+      },
     ] satisfies ImpactAreaContent[],
   },
-  story: {
-    eyebrow: "03 / Grassroots Initiatives",
-    heading: `${featuredProject.name}: ${featuredProject.subtitle}.`,
-    description: `${featuredProject.description} In Raigad District, self-help groups and leadership training empower women to lead community governance and build durable livelihoods. Reported reach: ${featuredProject.reportedImpact}.`,
-    note: `Project profile: ${featuredProject.name} (${featuredProject.location}) · Reported figures pending final audit approval. Authentic beneficiary case studies will be published with formal consent.`,
-    media: {
-      kind: "image",
-      src: featuredProject.imagePlaceholder.src,
-      alt: featuredProject.imagePlaceholder.alt,
-      ratio: featuredProject.imagePlaceholder.ratio,
-      caption: featuredProject.imagePlaceholder.caption,
-      focalPoint: "50% 30%",
-    } satisfies HomeMedia,
-    link: undefined as { href: string; label: string } | undefined,
-  },
   overview: {
-    eyebrow: "04 / Reported Impact & Transparency",
+    eyebrow: "05 / Reported Impact & Transparency",
     heading: "Organization-reported reach across 3 states.",
     description:
       "SEVA Social Service Society tracks program reach across Maharashtra, Tamil Nadu, and Andhra Pradesh. These headline figures reflect active operational reporting from official records, pending final publication audit approval.",
@@ -180,7 +172,7 @@ export const homeContent = {
       "Figures are sourced directly from SEVA organizational records (2025–26 cycle). Project counts and beneficiary numbers are not presented as mutually exclusive. Formal third-party audit reports will be published upon management authorization.",
   },
   participation: {
-    eyebrow: "05 / Get Involved",
+    eyebrow: "06 / Get Involved",
     heading: "Stand with SEVA: Action, partnership, and solidarity.",
     description:
       "Whether through corporate CSR partnerships, structured community volunteering, or designated project support, your engagement directly uplifts marginalized communities.",
@@ -217,15 +209,6 @@ export const homeContent = {
     heading: "Join us in turning love into enduring action.",
     description: `Since ${organization.establishedYear}, ${organization.name} has walked alongside underserved families across Maharashtra, Tamil Nadu, and Andhra Pradesh. Together, we build a future founded on love, equality, equity, and peace.`,
     action: { href: "#introduction", label: "Return to the beginning" },
-    media: {
-      kind: "image",
-      src: "/images/programmes/education/vidhya-jyothi-distribution.webp",
-      alt: "SEVA workers presenting educational kits to students gathered in unity",
-      ratio: "landscape",
-      caption:
-        "Authentic SEVA programme · Vidya Jyothi educational support reaching children across four states.",
-      focalPoint: "50% 40%",
-    } satisfies HomeMedia,
   },
   contact: contactInfo,
   partnerships: partnershipsContent,

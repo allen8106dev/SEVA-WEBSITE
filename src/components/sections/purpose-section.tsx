@@ -1,9 +1,7 @@
 import { homeContent } from "@/content/home";
 import { Container, Section } from "@/components/ui/layout";
-import { Eyebrow, Heading, Text } from "@/components/ui/typography";
-import { Reveal } from "@/components/animations/reveal";
-import { HomepageMedia } from "@/components/ui/homepage-media";
-import { ImageMaskReveal } from "@/components/animations/image-mask-reveal";
+import { Heading, Text } from "@/components/ui/typography";
+import { Statistics } from "@/components/ui/statistics";
 
 export function PurposeSection() {
   const content = homeContent.purpose;
@@ -11,53 +9,52 @@ export function PurposeSection() {
     <Section
       id="purpose"
       className="purpose-section"
-      aria-labelledby="purpose-title"
+      aria-labelledby="about-title"
     >
-      <Container width="wide">
-        <div className="purpose-composition">
-          <div className="purpose-copy">
-            <div className="purpose-eyebrow-row">
-              <span className="section-chapter-tag" aria-hidden="true">
-                02 / 07 · VISION & MISSION
-              </span>
-              <Eyebrow className="purpose-eyebrow">{content.eyebrow}</Eyebrow>
-            </div>
-            <Reveal variant="statement">
+      <div className="purpose-section__main">
+        <Container width="wide" className="purpose-container">
+          <div className="purpose-layout">
+            <article className="purpose-about">
               <Heading
-                id="purpose-title"
+                as="h2"
+                id="about-title"
                 size="large"
-                className="purpose-heading"
+                className="purpose-title"
               >
-                {content.heading}
+                About
               </Heading>
-            </Reveal>
-            <div className="purpose-notes">
-              <Text size="large" className="purpose-lead">
-                {content.description}
-              </Text>
-              <Text size="caption" className="purpose-disclaimer">
-                {content.note}
-              </Text>
+              <Text>{content.about}</Text>
+            </article>
+            <div className="purpose-statements">
+              <article className="purpose-card">
+                <Heading as="h3" size="small">
+                  Vision
+                </Heading>
+                <Text>{content.vision}</Text>
+              </article>
+              <article className="purpose-card">
+                <Heading as="h3" size="small">
+                  Mission
+                </Heading>
+                <Text>{content.mission}</Text>
+              </article>
             </div>
           </div>
-          {content.media && (
-            <div className="purpose-media-col">
-              <ImageMaskReveal>
-                <div className="purpose-media-frame">
-                  <HomepageMedia
-                    media={content.media}
-                    className="purpose-media"
-                    sizes="(min-width: 768px) 46vw, 100vw"
-                  />
-                  <div className="purpose-stamp" aria-hidden="true">
-                    LOVE IN ACTION
-                  </div>
-                </div>
-              </ImageMaskReveal>
-            </div>
-          )}
-        </div>
-      </Container>
+        </Container>
+      </div>
+      <div
+        id="website-status"
+        className="home-impact-statistics"
+        role="group"
+        aria-labelledby="impact-statistics-title"
+      >
+        <Container width="wide">
+          <Heading as="h2" id="impact-statistics-title" className="sr-only">
+            SEVA impact statistics
+          </Heading>
+          <Statistics items={homeContent.overview.statistics} presentation="compact" />
+        </Container>
+      </div>
     </Section>
   );
 }

@@ -218,7 +218,7 @@ test("touch portrait and landscape retain content without parallax or hover depe
   ]) {
     await page.setViewportSize(viewport);
     await page.locator("#impact-areas").scrollIntoViewIfNeeded();
-    await expect(page.locator(".impact-area .demo-note")).toHaveCount(2);
+    await expect(page.locator(".impact-area .demo-note")).toHaveCount(3);
     await expect(page.locator("[data-parallax-layer]")).toHaveAttribute(
       "data-motion-active",
       "false",

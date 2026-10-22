@@ -5,18 +5,16 @@ import { useState, type FormEvent } from "react";
 export type InquiryDraft = {
   name: string;
   email: string;
-  subject: string;
   message: string;
 };
 
 export function buildInquiryMailto(recipient: string, draft: InquiryDraft) {
   const params = new URLSearchParams({
-    subject: `Website inquiry: ${draft.subject.trim()}`,
+    subject: "Website inquiry",
     body: [
       `Name: ${draft.name.trim()}`,
       `Email: ${draft.email.trim()}`,
       "",
-      "Message:",
       draft.message.trim(),
     ].join("\n"),
   });
@@ -25,6 +23,7 @@ export function buildInquiryMailto(recipient: string, draft: InquiryDraft) {
 
 export function FooterInquiryForm({ recipient }: { recipient: string }) {
   const [status, setStatus] = useState("");
+  const [messageLength, setMessageLength] = useState(0);
 
   function openEmailDraft(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -32,11 +31,10 @@ export function FooterInquiryForm({ recipient }: { recipient: string }) {
     window.location.href = buildInquiryMailto(recipient, {
       name: String(values.get("name") ?? ""),
       email: String(values.get("email") ?? ""),
-      subject: String(values.get("subject") ?? ""),
       message: String(values.get("message") ?? ""),
     });
     setStatus(
-      "Your email app should open with a draft. This website has not sent your message. If it does not open, email SEVA directly using the address beside this form.",
+      `Your email app should open with a prepared draft. This website has not sent your inquiry. If it does not open, email ${recipient} directly.`,
     );
   }
 
@@ -46,14 +44,11 @@ export function FooterInquiryForm({ recipient }: { recipient: string }) {
       aria-labelledby="footer-inquiry-title"
       onSubmit={openEmailDraft}
     >
-      <p className="footer-inquiry__intro">
-        Send an inquiry through your email app.
-      </p>
       <p className="footer-inquiry__notice">
-        This opens a draft in your email app. The website does not send or store
-        your inquiry.
+        Submit opens a draft in your email app. This website does not send
+        messages.
       </p>
-      <div className="footer-inquiry__fields">
+      <div className="footer-inquiry__contact-fields">
         <label>
           <span>Name</span>
           <input
@@ -74,17 +69,26 @@ export function FooterInquiryForm({ recipient }: { recipient: string }) {
             maxLength={254}
           />
         </label>
-        <label className="footer-inquiry__wide">
-          <span>Subject</span>
-          <input name="subject" type="text" required maxLength={160} />
-        </label>
-        <label className="footer-inquiry__wide">
-          <span>Message</span>
-          <textarea name="message" required rows={3} maxLength={2000} />
-        </label>
       </div>
+      <label className="footer-inquiry__message">
+        <span className="footer-inquiry__message-heading">
+          <span>Message</span>
+          <span className="footer-inquiry__count" aria-hidden="true">
+            {messageLength} / 180
+          </span>
+        </span>
+        <textarea
+          name="message"
+          required
+          rows={5}
+          maxLength={180}
+          onChange={(event) =>
+            setMessageLength(event.currentTarget.value.length)
+          }
+        />
+      </label>
       <button className="footer-inquiry__submit" type="submit">
-        Continue in email app
+        Submit
       </button>
       <p className="footer-inquiry__status" role="status" aria-live="polite">
         {status}

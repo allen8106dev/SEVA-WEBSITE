@@ -4,7 +4,7 @@ import { animate, useInView, useReducedMotion } from "motion/react";
 import { useEffect, useMemo, useRef } from "react";
 import { motionTokens } from "@/config/motion";
 
-/** Only verified numeric values use this component. Assistive technology always gets the final value. */
+/** Count-up animation keeps the final value available to assistive technology. */
 export function CountValue({
   value,
   prefix = "",

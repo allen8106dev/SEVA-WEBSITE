@@ -6,20 +6,23 @@ test("homepage has seven accessible chapters and no misleading previews", async 
 }) => {
   await page.goto("/");
   await expect(page.locator("main h1")).toHaveCount(1);
-  await expect(page.locator("main > section")).toHaveCount(7);
-  const labels = await page.locator("main > section").evaluateAll((sections) =>
-    sections.map((section) => {
-      const label = section.getAttribute("aria-labelledby");
-      return label
-        ? Boolean(document.getElementById(label)?.textContent?.trim())
-        : false;
-    }),
-  );
+  await expect(page.locator("main > .home-page > section")).toHaveCount(7);
+  const labels = await page
+    .locator("main > .home-page > section")
+    .evaluateAll((sections) =>
+      sections.map((section) => {
+        const label = section.getAttribute("aria-labelledby");
+        return label
+          ? Boolean(document.getElementById(label)?.textContent?.trim())
+          : false;
+      }),
+    );
   expect(labels.every(Boolean)).toBe(true);
-  await expect(page.locator(".impact-area")).toHaveCount(2);
+  await expect(page.locator(".impact-area")).toHaveCount(3);
   await expect(page.locator(".impact-area .demo-note")).toHaveText([
     "Official SEVA focus area · Encompasses Vidya Jyoti and CNEWA non-formal education programs.",
     "Official SEVA focus area · Encompasses the Jeevan Project (Raigad) and Sui Daga tailoring centres.",
+    "Official SEVA focus area · Includes weekly Ruby Meal food distributions.",
   ]);
   await expect(page.locator(".statistics .statistic__pending")).toHaveCount(0);
   await expect(page.locator(".statistics .statistic__value")).toHaveCount(3);
@@ -36,22 +39,22 @@ test("homepage has seven accessible chapters and no misleading previews", async 
     "Organization-reported · Audit pending",
     "Organization-reported · Audit pending",
   ]);
-  await expect(page.locator(".focus-area-directory li")).toHaveCount(7);
-  expect(
-    await page
-      .locator(".focus-area-directory a")
-      .evaluateAll((links) =>
-        links.map((link) => (link as HTMLAnchorElement).getAttribute("href")),
-      ),
-  ).toEqual([
-    "/programmes/education",
-    "/programmes/healthcare",
-    "/programmes/women-empowerment",
-    "/programmes/community-welfare",
-    "/programmes/rural-tribal-development",
-    "/programmes/skill-development",
-    "/programmes/relief-works",
-  ]);
+  await expect(page.locator(".areas-section__view-all")).toHaveCount(1);
+  await expect(page.locator(".areas-section__view-all")).toHaveAttribute(
+    "href",
+    "/programmes",
+  );
+  await expect(page.locator("#impact-areas a")).toHaveCount(1);
+  await expect(page.locator(".focus-area-directory")).toHaveCount(0);
+  const whatsapp = page.getByRole("link", {
+    name: "Chat with SEVA on WhatsApp at +91 8856031349",
+  });
+  await expect(whatsapp).toHaveAttribute(
+    "href",
+    "https://wa.me/918856031349",
+  );
+  await expect(whatsapp).toHaveAttribute("target", "_blank");
+  await expect(whatsapp).toHaveCSS("position", "fixed");
   await expect(page.locator(".participation-options li")).toHaveCount(4);
   await expect(
     page.locator(".participation-options a, .participation-options button"),

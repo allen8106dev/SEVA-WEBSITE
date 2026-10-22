@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 import { HeroSection } from "@/components/sections/hero-section";
+import { StoriesSection } from "@/components/sections/stories-section";
 import { PurposeSection } from "@/components/sections/purpose-section";
 import { ImpactAreasSection } from "@/components/sections/impact-areas-section";
-import { StoriesSection } from "@/components/sections/stories-section";
-import { ImpactOverviewSection } from "@/components/sections/impact-overview-section";
-import { ParticipationSection } from "@/components/sections/participation-section";
-import { ClosingSection } from "@/components/sections/closing-section";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -14,14 +11,11 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <>
+    <div className="home-page">
       <HeroSection />
+      <StoriesSection />
       <PurposeSection />
       <ImpactAreasSection />
-      <StoriesSection />
-      <ImpactOverviewSection />
-      <ParticipationSection />
-      <ClosingSection />
-    </>
+    </div>
   );
 }

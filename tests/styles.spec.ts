@@ -42,12 +42,13 @@ for (const width of [375, 768, 1440]) {
       "rgb(255, 255, 255)",
     );
     await expect(page.locator("body")).toHaveCSS("color", "rgb(41, 41, 41)");
-    await expect(page.locator("h1")).toHaveCSS("color", "rgb(41, 41, 41)");
-    const button = page.locator(".home-hero .button--primary");
-    await expect(button).toHaveCSS("background-color", "rgb(43, 36, 105)");
-    await expect(button).toHaveCSS("color", "rgb(255, 255, 255)");
+    await expect(page.locator("h1")).toHaveCSS("color", "rgb(255, 255, 255)");
+    const activePhotoControl = page.locator(
+      '.home-hero-carousel__control[aria-current="true"]',
+    );
+    await expect(activePhotoControl).toHaveCount(1);
     expect(
-      await button.evaluate(
+      await activePhotoControl.evaluate(
         (element) => element.getBoundingClientRect().height,
       ),
     ).toBeGreaterThanOrEqual(46);
@@ -56,6 +57,18 @@ for (const width of [375, 768, 1440]) {
       width < 768 ? "none" : "flex",
     );
     await expect(page.locator(".home-hero__grid")).toHaveCSS("display", "grid");
+    await expect(
+      page.locator(
+        ".home-hero-carousel__slide[aria-hidden='false'] .home-hero-carousel__main-image",
+      ),
+    ).toHaveCSS("object-fit", "cover");
+    await expect(page.locator(".home-hero h1 em")).toHaveCSS(
+      "color",
+      "rgb(255, 255, 255)",
+    );
+    const whatsapp = page.locator(".whatsapp-fab");
+    await expect(whatsapp).toHaveCSS("position", "fixed");
+    expect((await whatsapp.boundingBox())!.height).toBeGreaterThanOrEqual(46);
     const metrics = await page.evaluate(() => {
       const root = getComputedStyle(document.documentElement);
       const h1 = getComputedStyle(document.querySelector("h1")!);
@@ -63,6 +76,18 @@ for (const width of [375, 768, 1440]) {
       const grid = getComputedStyle(
         document.querySelector(".home-hero__grid")!,
       );
+      const hero = document
+        .querySelector(".home-hero")!
+        .getBoundingClientRect();
+      const heroPhoto = document
+        .querySelector(
+          '.home-hero-carousel__slide[aria-hidden="false"] .home-hero-carousel__main-image',
+        )!
+        .getBoundingClientRect();
+      const photoRightMargin = hero.right - heroPhoto.right;
+      const areaColumns = getComputedStyle(
+        document.querySelector(".impact-areas")!,
+      ).gridTemplateColumns;
       // A known Tailwind utility also has to work in the browser, beyond our custom CSS.
       const probe = document.createElement("span");
       probe.className = "sr-only";
@@ -88,6 +113,13 @@ for (const width of [375, 768, 1440]) {
           getComputedStyle(document.querySelector(".home-hero")!).paddingTop,
         ),
         columns: grid.gridTemplateColumns.split(" ").length,
+        cardColumns: areaColumns.split(" ").length,
+        photoLeft: heroPhoto.left,
+        photoRightMargin,
+        photoWidth: heroPhoto.width,
+        heroWidth: hero.width,
+        photoHeight: heroPhoto.height,
+        heroHeight: hero.height,
         overflow: document.documentElement.scrollWidth > window.innerWidth,
         utility,
       };
@@ -99,7 +131,12 @@ for (const width of [375, 768, 1440]) {
     expect(metrics.bodyFont).toContain(metrics.configuredBodyFont);
     expect(metrics.h1Size).toBeGreaterThanOrEqual(43);
     expect(metrics.sectionPadding).toBe(0);
-    expect(metrics.columns).toBe(width >= 768 ? 2 : 1);
+    expect(metrics.columns).toBe(1);
+    expect(metrics.cardColumns).toBe(width >= 1200 ? 3 : width >= 768 ? 2 : 1);
+    expect(metrics.photoLeft).toBeGreaterThan(0);
+    expect(metrics.photoRightMargin).toBeGreaterThan(0);
+    expect(metrics.photoWidth).toBeLessThan(metrics.heroWidth);
+    expect(metrics.photoHeight).toBeLessThan(metrics.heroHeight);
     expect(metrics.utility).toBe("absolute");
     expect(metrics.overflow).toBe(false);
 
@@ -110,7 +147,7 @@ for (const width of [375, 768, 1440]) {
     const { root } = await cdp.send("DOM.getDocument");
     for (const [selector, family] of [
       ["h1", "Cormorant"],
-      [".hero-copy", "Manrope"],
+      [".story-copy .body-text", "Manrope"],
     ]) {
       const { nodeId } = await cdp.send("DOM.querySelector", {
         nodeId: root.nodeId,

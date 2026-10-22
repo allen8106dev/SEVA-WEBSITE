@@ -79,7 +79,7 @@ test("mobile Donate stays in the accordion and the official logo remains visible
   expect((await logo.boundingBox())!.height).toBeGreaterThanOrEqual(46);
 });
 
-test("approved homepage photographs slide horizontally, support controls, and pause on interaction", async ({
+test("approved homepage photographs slide automatically and use dot navigation", async ({
   page,
 }, testInfo) => {
   test.skip(
@@ -100,14 +100,31 @@ test("approved homepage photographs slide horizontally, support controls, and pa
   await expect(carousel).toHaveAttribute("aria-roledescription", "carousel");
   await expect(current).toHaveAttribute(
     "aria-label",
-    "1 of 3: Community Welfare",
+    "1 of 3: Vidya Jyothi",
   );
   await expect(carousel.locator("img")).toHaveCount(3);
+  await expect(
+    carousel.getByRole("button", { name: /automatic slide show/i }),
+  ).toHaveCount(0);
+  await expect(carousel.locator("img").nth(0)).toHaveAttribute(
+    "alt",
+    "SEVA Vidya Jyothi school bag distribution to students in a community centre",
+  );
+  await page.waitForTimeout(6200);
+  await expect(current).toHaveAttribute(
+    "aria-label",
+    "2 of 3: SEVA Ruby Meal",
+  );
   const originalTransform = await carousel
     .locator(".home-hero-carousel__track")
     .evaluate((track) => getComputedStyle(track).transform);
-  await carousel.getByRole("button", { name: "Next photograph" }).click();
-  await expect(current).toHaveAttribute("aria-label", "2 of 3: Education");
+  await carousel
+    .getByRole("button", { name: "Show photograph 3 of 3" })
+    .click();
+  await expect(current).toHaveAttribute(
+    "aria-label",
+    "3 of 3: Housing Project",
+  );
   await expect
     .poll(() =>
       carousel
@@ -115,25 +132,16 @@ test("approved homepage photographs slide horizontally, support controls, and pa
         .evaluate((track) => getComputedStyle(track).transform),
     )
     .not.toBe(originalTransform);
-  await page.waitForTimeout(6200);
-  await expect(current).toHaveAttribute("aria-label", "2 of 3: Education");
-
   await carousel
-    .getByRole("button", { name: "Play automatic slide show" })
+    .getByRole("button", { name: "Show photograph 2 of 3" })
     .click();
-  await expect(
-    carousel.getByRole("button", { name: "Pause automatic slide show" }),
-  ).toHaveAttribute("aria-pressed", "true");
-  await page.waitForTimeout(6200);
   await expect(current).toHaveAttribute(
     "aria-label",
-    "3 of 3: Rural Development",
+    "2 of 3: SEVA Ruby Meal",
   );
-  await carousel.getByRole("button", { name: "Previous photograph" }).click();
-  await expect(current).toHaveAttribute("aria-label", "2 of 3: Education");
 });
 
-test("reduced motion disables autoplay while keeping manual carousel controls", async ({
+test("reduced motion disables autoplay while keeping dot navigation", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
@@ -142,68 +150,73 @@ test("reduced motion disables autoplay while keeping manual carousel controls", 
     name: "SEVA programme photographs",
   });
   await expect(
-    carousel.getByRole("button", { name: "Play automatic slide show" }),
-  ).toBeDisabled();
+    carousel.getByRole("button", { name: /automatic slide show/i }),
+  ).toHaveCount(0);
   await expect(
-    carousel.getByRole("button", { name: "Next photograph" }),
+    carousel.getByRole("button", { name: "Show photograph 2 of 3" }),
   ).toBeEnabled();
   await expect(carousel.locator(".home-hero-carousel__track")).toHaveCSS(
     "transition-duration",
     "0s",
   );
-  await carousel.getByRole("button", { name: "Next photograph" }).click();
+  await carousel
+    .getByRole("button", { name: "Show photograph 2 of 3" })
+    .click();
   await expect(
     carousel.locator('.home-hero-carousel__slide[aria-hidden="false"]'),
-  ).toHaveAttribute("aria-label", "2 of 3: Education");
+  ).toHaveAttribute("aria-label", "2 of 3: SEVA Ruby Meal");
 });
 
-test("footer inquiry validates fields and builds an honest email-app draft", async ({
+test("footer inquiry validates the message and builds an honest email-app draft", async ({
   page,
 }) => {
   await page.goto("/");
   const form = page.locator(".footer-inquiry");
   await expect(form.getByLabel("Name")).toBeVisible();
-  await expect(form.getByLabel("Email")).toBeVisible();
-  await expect(form.getByLabel("Subject")).toBeVisible();
+  await expect(form.getByLabel("Name")).toHaveAttribute("required", "");
+  await expect(form.getByLabel("Email")).toHaveAttribute("type", "email");
+  await expect(form.getByLabel("Email")).toHaveAttribute("required", "");
   await expect(form.getByLabel("Message")).toBeVisible();
+  await expect(form.getByLabel("Message")).toHaveAttribute("maxlength", "180");
+  await expect(form.locator("input")).toHaveCount(2);
   expect(
     await form.evaluate((element: HTMLFormElement) => element.checkValidity()),
   ).toBe(false);
+  await form.getByRole("button", { name: "Submit" }).click();
+  await expect(form.getByRole("status")).toBeEmpty();
 
-  await form.getByLabel("Name").fill("A Visitor");
-  await form.getByLabel("Email").fill("visitor@example.org");
-  await form.getByLabel("Subject").fill("Question about volunteering");
+  await form.getByLabel("Name").fill("Asha Joseph");
+  await form.getByLabel("Email").fill("asha@example.com");
   await form
     .getByLabel("Message")
     .fill("Please share the official contact route.");
   expect(
     await form.evaluate((element: HTMLFormElement) => element.checkValidity()),
   ).toBe(true);
-  await expect(
-    form.getByRole("button", { name: "Continue in email app" }),
-  ).toBeVisible();
-  await expect(form).toContainText(
-    "The website does not send or store your inquiry",
+  await expect(form.getByText("40 / 180")).toBeVisible();
+  await expect(form.getByRole("button", { name: "Submit" })).toBeVisible();
+  await expect(form).toContainText("This website does not send messages");
+
+  await form.getByRole("button", { name: "Submit" }).click();
+  await expect(form.getByRole("status")).toContainText(
+    "Your email app should open with a prepared draft",
+  );
+  await expect(form.getByRole("status")).toContainText(
+    "This website has not sent your inquiry",
   );
 
   const draft = new URL(
     buildInquiryMailto("sevassspune@gmail.com", {
-      name: "A Visitor",
-      email: "visitor@example.org",
-      subject: "Question about volunteering",
-      message: "Please share the official contact route.",
+      name: " Asha Joseph ",
+      email: " asha@example.com ",
+      message: "  Please share the official contact route.  ",
     }),
   );
   expect(draft.protocol).toBe("mailto:");
   expect(draft.pathname).toBe("sevassspune@gmail.com");
-  expect(draft.searchParams.get("subject")).toBe(
-    "Website inquiry: Question about volunteering",
-  );
-  expect(draft.searchParams.get("body")).toContain(
-    "Email: visitor@example.org",
-  );
-  expect(draft.searchParams.get("body")).toContain(
-    "Please share the official contact route.",
+  expect(draft.searchParams.get("subject")).toBe("Website inquiry");
+  expect(draft.searchParams.get("body")).toBe(
+    "Name: Asha Joseph\nEmail: asha@example.com\n\nPlease share the official contact route.",
   );
 });
 
@@ -300,20 +313,6 @@ test("refined header, carousel, footer, and headings fit the required viewport w
         `${width}px control`,
       ).toBeGreaterThanOrEqual(46);
     }
-    const caption = await page
-      .locator(
-        '.home-hero-carousel__slide[aria-hidden="false"] .home-hero-carousel__caption',
-      )
-      .boundingBox();
-    const carouselControls = await page
-      .locator(".home-hero-carousel__controls")
-      .boundingBox();
-    const overlapsControls =
-      caption!.x < carouselControls!.x + carouselControls!.width &&
-      caption!.x + caption!.width > carouselControls!.x &&
-      caption!.y < carouselControls!.y + carouselControls!.height &&
-      caption!.y + caption!.height > carouselControls!.y;
-    expect(overlapsControls, `${width}px caption and controls`).toBe(false);
     const desktopNav = width >= 768;
     await expect(page.locator(".desktop-nav")).toHaveCSS(
       "display",

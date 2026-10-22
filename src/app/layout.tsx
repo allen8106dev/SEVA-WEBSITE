@@ -3,6 +3,8 @@ import Link from "next/link";
 import localFont from "next/font/local";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { SiteMap } from "@/components/layout/site-map";
+import { WhatsAppFab } from "@/components/layout/whatsapp-fab";
 import { siteConfig } from "@/config/site";
 import { motionStyles } from "@/config/motion";
 import { navigation } from "@/config/navigation";
@@ -66,7 +68,7 @@ export default function RootLayout({
       className={`${editorial.variable} ${body.variable}`}
       style={motionStyles}
     >
-      <body>
+      <body id="top">
         <a className="skip-link" href="#main-content">
           Skip to content
         </a>
@@ -87,8 +89,10 @@ export default function RootLayout({
         </noscript>
         <main id="main-content" tabIndex={-1}>
           {children}
+          <SiteMap />
         </main>
         <SiteFooter />
+        <WhatsAppFab />
       </body>
     </html>
   );

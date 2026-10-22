@@ -120,15 +120,13 @@ test("Contact exposes verified channels, address, email pathway and map link", a
   ).toHaveAttribute("href", /google\.com\/maps\/search/);
   await expect(page.locator(".contact-inquiry")).toHaveCount(0);
   const form = page.locator(".footer-inquiry");
-  await expect(form.getByLabel("Name")).toHaveAttribute("maxlength", "120");
+  await expect(form.getByLabel("Name")).toHaveAttribute("required", "");
   await expect(form.getByLabel("Email")).toHaveAttribute("type", "email");
-  await expect(form.getByLabel("Subject")).toHaveAttribute("maxlength", "160");
-  await expect(form.getByLabel("Message")).toHaveAttribute("maxlength", "2000");
-  await expect(
-    form.getByRole("button", { name: "Continue in email app" }),
-  ).toBeVisible();
+  await expect(form.getByLabel("Message")).toHaveAttribute("maxlength", "180");
+  await expect(form.locator("input")).toHaveCount(2);
+  await expect(form.getByRole("button", { name: "Submit" })).toBeVisible();
   await expect(page.locator("footer")).toContainText(
-    "The website does not send or store your inquiry",
+    "This website does not send messages",
   );
 });
 

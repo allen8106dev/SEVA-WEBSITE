@@ -1,13 +1,22 @@
-import { homeContent } from "@/content/home";
+﻿import Image from "next/image";
+import { getMediaAsset } from "@/content/media";
 import { Container, Section } from "@/components/ui/layout";
-import { Eyebrow, Heading, Text } from "@/components/ui/typography";
-import { HomepageMedia } from "@/components/ui/homepage-media";
-import { Arrow, LinkButton } from "@/components/ui/button";
-import { ScrollMedia } from "@/components/animations/scroll-media";
+import { Heading, Text } from "@/components/ui/typography";
 import { Reveal } from "@/components/animations/reveal";
+import { ScrollMedia } from "@/components/animations/scroll-media";
+
+const storyAssetIds = [
+  "collage-vidhya-jyothi",
+  "collage-ruby-meals",
+  "collage-housing-project",
+];
+
+const stories = storyAssetIds.flatMap((id) => {
+  const asset = getMediaAsset(id);
+  return asset?.approvalStatus === "approved_for_publication" ? [asset] : [];
+});
 
 export function StoriesSection() {
-  const content = homeContent.story;
   return (
     <Section
       id="stories"
@@ -15,51 +24,35 @@ export function StoriesSection() {
       aria-labelledby="stories-title"
     >
       <Container width="wide">
-        <div
-          className="section-chapter-tag section-chapter-tag--dark"
-          aria-hidden="true"
-        >
-          04 / 07 · INITIATIVES IN FOCUS
-        </div>
-        <Eyebrow className="stories-eyebrow">{content.eyebrow}</Eyebrow>
-        <div className="story-layout">
-          <Reveal variant="media">
-            <div className="story-frame-outer">
-              <ScrollMedia mediaKind={content.media.kind}>
-                <HomepageMedia
-                  media={content.media}
-                  sizes="(min-width: 768px) 58vw, 100vw"
-                />
-              </ScrollMedia>
-              <div className="story-soundwave-tag" aria-hidden="true">
-                <span className="soundwave-bar" />
-                <span className="soundwave-bar" />
-                <span className="soundwave-bar" />
-                <span className="soundwave-bar" />
-                <span>JEEVAN PROJECT · RAIGAD</span>
+        <Heading id="stories-title" size="large" className="stories-title">
+          Our Stories
+        </Heading>
+        <div className="story-cards">
+          {stories.map((story, index) => (
+            <article className="story-card" key={story.id}>
+              <Reveal variant="media" order={index}>
+                <ScrollMedia mediaKind="image">
+                  <figure className="story-card__figure">
+                    <div className="story-card__image">
+                      <Image
+                        src={story.publicUrl}
+                        alt={story.altText}
+                        fill
+                        sizes="(min-width: 75rem) 30vw, (min-width: 48rem) 45vw, 90vw"
+                      />
+                    </div>
+                    <figcaption className="sr-only">{story.caption}</figcaption>
+                  </figure>
+                </ScrollMedia>
+              </Reveal>
+              <div className="story-card__copy story-copy">
+                <Heading as="h3" size="medium">
+                  {story.programmeAssociation}
+                </Heading>
+                <Text size="caption">{story.description}</Text>
               </div>
-            </div>
-          </Reveal>
-          <div className="story-copy">
-            <span className="story-mark" aria-hidden="true">
-              Grassroots
-              <br />
-              Dignity.
-            </span>
-            <Heading id="stories-title" size="medium">
-              {content.heading}
-            </Heading>
-            <Text>{content.description}</Text>
-            <Text size="caption" className="demo-note">
-              {content.note}
-            </Text>
-            {content.link && (
-              <LinkButton variant="text" href={content.link.href}>
-                {content.link.label}
-                <Arrow direction="right" />
-              </LinkButton>
-            )}
-          </div>
+            </article>
+          ))}
         </div>
       </Container>
     </Section>

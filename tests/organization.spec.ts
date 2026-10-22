@@ -97,9 +97,14 @@ test("rendered homepage faithfully reflects SEVA organizational identity", async
     "Sustainable livelihoods and women's leadership.",
   );
 
-  // Check Story / Jeevan project
-  await expect(page.locator("#stories")).toContainText("Jeevan Project");
-  await expect(page.locator("#stories")).toContainText("Raigad District");
+  // Check the homepage's three approved project story cards.
+  await expect(page.locator("#stories h2")).toHaveText("Our Stories");
+  await expect(page.locator("#stories .story-card")).toHaveCount(3);
+  await expect(page.locator("#stories .story-card h3")).toHaveText([
+    "Vidya Jyothi",
+    "SEVA Ruby Meal",
+    "Housing Project",
+  ]);
 
   // Check Impact statistics
   const stats = page.locator(".statistics .statistic__value");

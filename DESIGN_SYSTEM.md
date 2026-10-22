@@ -35,7 +35,7 @@ Contrast targets use WCAG AA normal-text minimum 4.5:1. Current representative t
 
 ### Color sequencing
 
-Use white and lavender as the main page surfaces, periwinkle as a light supporting surface, and indigo for a small number of strong moments. The homepage pairs its copy with a registry-backed photo carousel on white. Photographs keep their source colors; use a separate neutral caption panel or a restrained black gradient only when text sits over an image. The mission section and compact footer use deep indigo, with white/lavender programme and story areas and light impact cards.
+Use white and lavender as the main page surfaces, periwinkle as a light supporting surface, and indigo for a small number of strong moments. The homepage uses a registry-backed photo carousel in an inset frame, weighted to the right with white side gutters. A full-color blur and subtle indigo tint support the sharp white headline on the left. The purpose and statistics chapter combines a deep indigo About/Vision/Mission area with a white statistics band, followed by white/lavender story and programme areas.
 
 ## Typography
 
@@ -45,9 +45,9 @@ Cormorant Garamond regular/italic at 400 gives headlines a literary quality. Man
 
 ### Kinetic typography notes
 
-The hero h1 headline is structured as three children: `span`, `em`, `span`. The existing reveal styling keeps this semantic shape; the emphasized phrase uses the secondary indigo against the light hero surface. Preserve the element types and count when changing the headline, and update its focused motion assertions with any intentional change.
+The hero h1 headline is structured as three children: `span`, `em`, `span`. The existing reveal styling keeps this semantic shape; white text sits over the indigo-tinted blur for clear contrast. Preserve the element types and count when changing the headline, and update its focused motion assertions with any intentional change.
 
-The marquee in the hero section uses a CSS keyframe (`marquee-scroll`) applied via the `.kinetic-marquee` class, centralized in `globals.css`. Speed is controlled by `--motion-marquee: 40s` defined in `src/config/motion.ts`. The marquee pauses on hover and immediately stops when `prefers-reduced-motion: reduce` is set.
+The homepage hero fills the area below the sticky header with three approved landscape programme photos in an inset, right-weighted carousel. Movement always travels right to left, including at the wrap; the left photo area is blurred and subtly tinted while the crisp photo remains on the right. The sharp white headline stays above the image treatment, with white page gutters visible on both sides of the photo frame. Homepage order is Hero, Our Stories, About with Vision and Mission above the white statistics band in the same chapter, then compact focus-area cards. The three official collages appear in the Our Stories card section. Each homepage chapter fills the viewport below the sticky header and grows if its content needs more room.
 
 ## Component conventions
 
@@ -88,7 +88,7 @@ Example composition for an approved future section:
 </Section>
 ```
 
-The Media archive uses the approved registry and keeps empty video/news states explicit until publication material is approved. The footer inquiry form uses the canonical SEVA address to create a draft in the visitor's email app; it does not send or store messages. There is no direct-submission provider, newsletter, tracker, payment gateway, or donation processing. Keep future contact or giving workflows tied to an implemented, approved destination.
+The Media archive uses the approved registry and keeps empty video/news states explicit until publication material is approved. A lazy-loaded Google map uses SEVA's canonical address immediately above the footer. The footer places the original logo below the address, beside a stacked Name, Email, and Message form. Message input is limited to 180 characters. Submitting creates a draft in the visitor's email app using the canonical SEVA address; it does not send or store messages. There is no direct-submission provider, newsletter, tracker, payment gateway, or donation processing. Keep future contact or giving workflows tied to an implemented, approved destination.
 
 ## Interaction, motion, and navigation
 
@@ -108,7 +108,7 @@ Both navigation versions mark the explicit current anchor with `aria-current="lo
 
 Use the spacing scale from 0.25rem through 6rem; section spacing and gutters are fluid. The single navigation/grid breakpoint is 48rem, mirrored in the mobile matchMedia query. Keep these aligned when changing breakpoints. Headlines may rewrap naturally on tablet and small phones; never force desktop line lengths using nowrap.
 
-Use authentic, consented human moments when photography is supplied. The existing documentary photographs are visibly captioned provisional illustrations under the Unsplash license; they make no documentary claim about SEVA. Replace them with verified imagery using the same MediaFrame contract. Keep captions outside images for reliable contrast. Future media should preserve focal points and reserved ratios.
+Use authentic, consented human moments when photography is supplied. The current hero uses approved SEVA programme photographs, and the Our Stories cards use the approved project collages. Keep alternative text and registry captions available to assistive technology; preserve each image's focal point and reserved ratio.
 
 ## Accessibility and extension
 
@@ -120,23 +120,20 @@ The header (`site-header.tsx`), mobile nav (`mobile-navigation.tsx`), and all an
 
 The following phase summaries preserve historical implementation context. Their old color names are superseded by the Phase 6.1 palette above.
 
-`src/styles/home.css` extends the existing tokens. Seven independent Server Components compose the page: HeroSection, PurposeSection, ImpactAreasSection, StoriesSection, ImpactOverviewSection, ParticipationSection, and ClosingSection. The hero uses an asymmetric first-viewport composition with actions before media in mobile reading order.
+`src/styles/home.css` extends the existing tokens. The current homepage uses four Server Components: HeroSection, StoriesSection, PurposeSection, and ImpactAreasSection. PurposeSection contains both the indigo About/Vision/Mission panel and the white statistics band, retaining the `website-status` anchor. ParticipationSection, ImpactOverviewSection, and ClosingSection are not rendered on the homepage.
 
 ### Visual chapter sequence
 
-The seven sections follow a deliberate alternating rhythm of high-energy and quiet moments:
+The four homepage sections follow this sequence:
 
-| Chapter | Section ID       | Current surface                      | Visual treatment                         |
-| ------- | ---------------- | ------------------------------------ | ---------------------------------------- |
-| 01      | `introduction`   | Full-width photo with indigo overlay | Clear mission headline and actions       |
-| 02      | `purpose`        | Deep indigo                          | Vision, mission, and one authentic photo |
-| 03      | `impact-areas`   | White                                | Seven-area programme directory           |
-| 04      | `stories`        | Soft lavender                        | Photo and editorial story content        |
-| 05      | `website-status` | White                                | Static sourced impact figures and notes  |
-| 06      | `participation`  | Pale periwinkle                      | Noninteractive participation previews    |
-| 07      | `next-chapter`   | White                                | Restrained closing message and motion    |
+| Chapter | Section ID     | Current surface                               | Visual treatment                               |
+| ------- | -------------- | --------------------------------------------- | ---------------------------------------------- |
+| 01      | `introduction` | Inset landscape photo                         | Crisp headline; movement stays right to left   |
+| 02      | `stories`      | Soft lavender                                 | Three official project collage cards           |
+| 03      | `purpose`      | Indigo panel with white statistics band below | About left; Vision and Mission stacked right   |
+| 04      | `impact-areas` | White                                         | Numbered programme links and link to all seven |
 
-`src/content/home.ts` holds all section copy and the typed `HomeMedia`, `ImpactAreaContent`, and `StatisticContent` contracts. ImpactArea supports optional category, link, and restrained color accent. Statistics renders a semantic definition list: pending entries show words rather than fabricated numbers; a verified entry requires both value and source. Participation previews are plain list content, with real anchor actions kept separate.
+`src/content/home.ts` holds section copy and the typed `HomeMedia`, `ImpactAreaContent`, and `StatisticContent` contracts. ImpactArea supports optional category, link, and restrained color accent. Statistics renders a semantic definition list: missing entries show words rather than fabricated numbers; organization-reported figures retain their source and audit status while counting up. The homepage's compact presentation shows only the animated value and label, with provenance available to assistive technology. Count animation respects reduced-motion preferences.
 
 HomepageMedia reuses MediaFrame. Set kind to image with an approved local src, alt, caption, ratio, and optional focalPoint to replace illustrations. Below-the-fold images retain Next.js lazy-loading defaults; the hero alone may be preloaded. Set kind to video only when approved local media, a poster, descriptive label, and English caption track exist. Do not insert placeholders that trigger broken requests.
 
@@ -170,6 +167,6 @@ The involvement compositions continue Vibrant Humanism through a yellow overview
 
 ## Phase 6.1 management-approved visual system
 
-This Phase 6.1 design system supersedes the earlier color sequencing. Shreyas's supplied screenshots were visually reviewed; sampled flat regions yielded `#2B2469` (indigo), `#EFEEFF` (lavender), and `#DEE1FF` (periwinkle), with white navigation and cards. The homepage pairs the approved editorial copy with an automatically advancing horizontal carousel of publication-approved SEVA photos. Images are not color-filtered or brand-tinted; captions use a separate neutral dark panel. Only the first carousel image is preloaded. Interior templates use content-led compact heroes; the logo, Donate action, footer, and mailto inquiry behavior follow the conventions above.
+This Phase 6.1 design system supersedes the earlier color sequencing. Shreyas's supplied screenshots were visually reviewed; sampled flat regions yielded `#2B2469` (indigo), `#EFEEFF` (lavender), and `#DEE1FF` (periwinkle), with white navigation and cards. The homepage hero shows approved landscape SEVA photos in an inset, right-weighted frame with white gutters at both sides. The photo stays crisp on the right and transitions into a full-color, indigo-tinted blur beneath the clear white headline on the left. Selectable dots indicate the active photo, and all carousel movement travels right to left. Only the first carousel image is preloaded. The carousel pauses while the pointer or keyboard focus is within the hero, and reduced motion disables autoplay. Our Stories presents the three approved project collages as responsive cards. About appears on the left of the indigo purpose section, with Vision and Mission stacked on the right. Within that same chapter, a white band below shows animated numbers over their labels; source and audit details remain available to assistive technology. The homepage previews three focus areas with their official section numbers; each card links to its programme page, with a separate link to `/programmes` for all seven. Every homepage chapter fills the area below the sticky header and can grow for its content. Interior templates use content-led compact heroes. The fixed WhatsApp link uses the canonical SEVA phone number. The logo, Donate action, footer, and mailto inquiry behavior follow the conventions above.
 
 The previous screenshot references remain intact. Refinement-specific baselines use `phase6-1-refinements-*` names for the homepage and styled interiors at mobile and desktop widths. See `PHASE_6_1_REPORT.md` for reviewed routes, contrast values, verification, and remaining limitations.

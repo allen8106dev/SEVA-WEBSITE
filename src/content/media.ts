@@ -225,6 +225,7 @@ export const mediaRegistry: readonly MediaAsset[] = [
       "PurposeSection",
       "FocusAreasSection",
       "Projects: Vidya Jyothi",
+      "Homepage Hero Carousel",
     ],
     focalPoint: "50% 50%",
   },
@@ -251,6 +252,7 @@ export const mediaRegistry: readonly MediaAsset[] = [
       "PurposeSection",
       "ClosingSection",
       "Education Initiatives",
+      "Homepage Hero Carousel",
     ],
     focalPoint: "55% 45%",
   },
@@ -347,7 +349,7 @@ export const mediaRegistry: readonly MediaAsset[] = [
     approvalStatus: "approved_for_publication",
     identityConfidence: "not_applicable",
     intendedPlacements: [
-      "HeroSection",
+      "Homepage Hero Carousel",
       "ParticipationSection",
       "Projects: SEVA Ruby Meal",
     ],
@@ -401,6 +403,7 @@ export const mediaRegistry: readonly MediaAsset[] = [
     intendedPlacements: [
       "FocusAreas: Rural & Tribal Development",
       "Regional Initiatives",
+      "Homepage Hero Carousel",
     ],
     focalPoint: "50% 50%",
   },
@@ -426,6 +429,7 @@ export const mediaRegistry: readonly MediaAsset[] = [
     approvalStatus: "approved_for_publication",
     identityConfidence: "not_applicable",
     intendedPlacements: [
+      "Homepage Stories",
       "ImpactOverviewSection",
       "Rural Development Page",
       "Documentation Gallery",
@@ -451,6 +455,7 @@ export const mediaRegistry: readonly MediaAsset[] = [
     approvalStatus: "approved_for_publication",
     identityConfidence: "not_applicable",
     intendedPlacements: [
+      "Homepage Stories",
       "ImpactOverviewSection",
       "Education Page",
       "Documentation Gallery",
@@ -476,6 +481,7 @@ export const mediaRegistry: readonly MediaAsset[] = [
     approvalStatus: "approved_for_publication",
     identityConfidence: "not_applicable",
     intendedPlacements: [
+      "Homepage Stories",
       "ImpactOverviewSection",
       "Community Welfare Page",
       "Documentation Gallery",
