@@ -35,13 +35,15 @@ export const leadershipProfiles: readonly LeadershipProfile[] = [
     title: "Eparchial Bishop",
     role: "Eparchial Bishop",
     order: 1,
-    imagePlaceholder: {
-      kind: "neutral-placeholder",
-      label: "H E Dr. Mathews Mar Pachomios OIC",
-      caption:
-        "Official portrait awaiting verified high-resolution management asset delivery.",
+    image: {
+      src: "/images/leadership/mathews-mar-pachomios.webp",
+      alt: "Official portrait of H E Dr. Mathews Mar Pachomios OIC, Eparchial Bishop",
+      width: 800,
+      height: 1000,
+      caption: "H E Dr. Mathews Mar Pachomios OIC · Eparchial Bishop.",
+      focalPoint: "50% 30%",
     },
-    publicationStatus: "pending_photo",
+    publicationStatus: "confirmed_official",
   },
   {
     id: "shaji-mathews-vazhayil",
@@ -81,12 +83,14 @@ export const leadershipProfiles: readonly LeadershipProfile[] = [
     title: "SEVA Director",
     role: "Director",
     order: 4,
-    imagePlaceholder: {
-      kind: "neutral-placeholder",
-      label: "Rev. Fr. Abraham Thanuvelil",
-      caption:
-        "Official portrait awaiting verified high-resolution management asset delivery.",
+    image: {
+      src: "/images/leadership/fr-abraham-thanuvelil.webp",
+      alt: "Official portrait of Rev. Fr. Abraham Thanuvelil, SEVA Director",
+      width: 800,
+      height: 1000,
+      caption: "Rev. Fr. Abraham Thanuvelil · SEVA Director.",
+      focalPoint: "50% 30%",
     },
-    publicationStatus: "pending_photo",
+    publicationStatus: "confirmed_official",
   },
 ] as const;

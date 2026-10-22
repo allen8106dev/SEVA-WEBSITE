@@ -119,3 +119,11 @@ The unchanged style baselines use reduced motion and must still match developmen
 ## Phase 5B navigation motion
 
 Route disclosures use existing `--motion-fast`, `--motion-menu-distance` and underline timings. CSS discrete display transitions provide short opacity/translation entrances and exits; panels become inert immediately when closed. Browsers without discrete transitions close immediately. Indicators rotate with fast timing. Focus and links remain immediately usable. Reduced motion removes transitions. No GSAP, timers, body scroll locking, scroll hijacking or new dependency is introduced. Homepage Motion primitives and original reduced-motion screenshot references remain preserved.
+
+## Phase 5C.1: Profile motion
+
+Profile pages reuse SplitReveal, Reveal and ImageMaskReveal. SplitReveal now takes distance, viewport threshold and bounded word stagger from the central motion tokens; it keeps text fully opaque during its word-mask settle. No essential text starts hidden in server HTML. Documentary mask enhancement retains the existing wide/fine-pointer/non-reduced-motion gating. Portrait entrances use the existing modest media settle; hover adds a small lift/shadow only on suitable devices.
+
+`ValueEmphasis` uses Motion useScroll/useSpring/useTransform to progress decorative rules beneath Love, Equality, Equity and Peace and translate labels by at most `motionTokens.statement.distance`. The shared spring drives native-scroll progress; there is no per-frame React state update. This small typographic interaction also works on mobile without enabling photographic parallax. A cleaned-up media-query subscription switches to a static list when reduced motion changes; unmounting the active subtree releases Motion subscriptions. Static words and complete rules remain readable without JavaScript or with reduced motion. All motion timings remain centralized; no new library, scroll hijacking, pinning or body scroll lock is introduced.
+
+`tests/profile.spec.ts` checks the native-scroll progression at mobile/desktop widths, dynamic reduced-motion teardown, server-visible content and no-JavaScript reading. Separate Profile opening references are used by production and actual-development style checks; homepage references remain unchanged.

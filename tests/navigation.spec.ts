@@ -17,7 +17,7 @@ test("every configured route has real content, breadcrumbs and unique noindex me
     const html = await response.text();
     expect(html).toContain('aria-label="Breadcrumb"');
     expect(html).toContain("noindex");
-    expect(html).toContain("<h1>");
+    expect(html).toMatch(/<h1(?:\s[^>]*)?>/);
     const title = html.match(/<title>(.*?)<\/title>/)?.[1];
     expect(title, item.href).toBeTruthy();
     expect(titles.has(title!), item.href).toBe(false);
@@ -61,8 +61,8 @@ test("desktop disclosures support pointer, keyboard, focus, dismissal and parent
   await expect(panel).toBeHidden();
   await nav.getByRole("link", { name: "Programmes", exact: true }).click();
   await expect(page).toHaveURL(/\/programmes$/);
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "Programmes",
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(
+    "Restoring Dignity",
   );
   await page.goto("/programmes/education");
   await expect(
@@ -186,11 +186,9 @@ test("archive approval, project arrays and leadership identity safeguards surviv
   for (const asset of gallery)
     expect((await request.get(asset.publicUrl)).status(), asset.id).toBe(200);
   await page.goto("/profile/leadership");
-  await expect(
-    page.locator("main .interior-grid").first().locator("article"),
-  ).toHaveCount(4);
-  await expect(page.locator(".portrait-image")).toHaveCount(2);
-  await expect(page.locator(".portrait-slot")).toHaveCount(2);
+  await expect(page.locator(".leadership-directory > article")).toHaveCount(4);
+  await expect(page.locator(".portrait-image")).toHaveCount(4);
+  await expect(page.locator(".portrait-slot")).toHaveCount(0);
   expect(await page.locator("main").innerHTML()).not.toMatch(
     /yoohanon|santhosh/i,
   );

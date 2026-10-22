@@ -13,6 +13,29 @@ export function ContentStatusNotice({ children }: { children: ReactNode }) {
   );
 }
 
+export function Breadcrumbs({ item }: { item: NavigationItem }) {
+  const parent = navigation.find((group) =>
+    group.children?.some((child) => child.href === item.href),
+  );
+  return (
+    <nav className="breadcrumbs" aria-label="Breadcrumb">
+      <ol>
+        <li>
+          <Link href="/">Home</Link>
+        </li>
+        {parent && (
+          <li>
+            <Link href={parent.href}>{parent.label}</Link>
+          </li>
+        )}
+        <li>
+          <span aria-current="page">{item.label}</span>
+        </li>
+      </ol>
+    </nav>
+  );
+}
+
 export function InteriorPage({
   item,
   children,
@@ -27,21 +50,7 @@ export function InteriorPage({
     <>
       <div className="interior-hero">
         <Container>
-          <nav className="breadcrumbs" aria-label="Breadcrumb">
-            <ol>
-              <li>
-                <Link href="/">Home</Link>
-              </li>
-              {parent && (
-                <li>
-                  <Link href={parent.href}>{parent.label}</Link>
-                </li>
-              )}
-              <li>
-                <span aria-current="page">{item.label}</span>
-              </li>
-            </ol>
-          </nav>
+          <Breadcrumbs item={item} />
           <Eyebrow>SEVA · Love In Action</Eyebrow>
           <h1>{item.label}</h1>
           <p>{item.description}</p>

@@ -1,4 +1,4 @@
-# SEVA website · Phase 5B
+# SEVA website · Phase 5C.1
 
 The official website for **SEVA Social Service Society** ("Love In Action", Est. 2015), built on Next.js App Router and the approved **Vibrant Humanism** design system.
 
@@ -122,3 +122,11 @@ Phase 5B adds seven navigation categories, animated desktop disclosures, accessi
 Phase 5B verification passed typecheck, lint, formatting, production build, all 49 production browser tests and all three checks against the existing development server. See [PHASE_5B_REPORT.md](PHASE_5B_REPORT.md) for files, results, limitations and readiness for detailed page work.
 
 All original photographs, derivatives and the existing media registry are preserved. Leadership has four profile slots: two approved portraits and two pending confirmation. Gallery and project previews use approved arrays independently of homepage placement. See MEDIA_ASSET_REGISTER.md for unused and pending media. The original reduced-motion baselines are retained alongside separately named Phase 5B references.
+
+## Phase 5C.1: completed Profile section
+
+The Profile overview, About, Vision & Mission, Leadership and History pages now have distinct editorial compositions, approved documentary photography and accessible motion. The official vision/mission and leadership identities remain canonical in the existing content modules. Two portraits are confirmed; two remain explicitly pending. History contains only the documented 2015 establishment milestone. Preview noindex safeguards, homepage behavior and other route foundations remain preserved. See [PHASE_5C_1_REPORT.md](PHASE_5C_1_REPORT.md) for the full delivery report. Phase 5C.2 has not begun.
+
+`test:styles:dev` now runs both the original homepage styling checks and Profile opening/font/palette checks against the actual development server. Separately named Profile references cover all five pages at 375/1440px. Existing homepage references are unchanged.
+
+Verification passed TypeScript, lint, formatting and the production build. The full production suite passed 71/71; after a final caption-spacing refinement, all 20 Profile browser checks and both production Profile styling checks passed again. The expanded actual-development-server suite passed 5/5. See PHASE_5C_1_REPORT.md for the results and pending content approvals.

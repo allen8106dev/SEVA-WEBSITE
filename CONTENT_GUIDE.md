@@ -145,13 +145,13 @@ Phase 5A.1 integrated authentic SEVA photography into the website. The following
 
 The following sections still use licensed documentary placeholders and require authentic replacements:
 
-| Section                        | Placeholder type          | Required replacement                                    |
-| ------------------------------ | ------------------------- | ------------------------------------------------------- |
-| Jeevan Project / Human Stories | Unsplash stock photograph | Authentic Raigad women empowerment photo                |
-| Healthcare                     | No image integrated yet   | Authentic healthcare outreach photo                     |
-| Women Empowerment              | No image integrated yet   | Authentic SHG/tailoring programme photo                 |
-| Bishop portrait                | Neutral placeholder SVG   | Confirmed portrait of H E Dr. Mathews Mar Pachomios OIC |
-| Fr. Abraham portrait           | Neutral placeholder SVG   | Confirmed portrait of Rev. Fr. Abraham Thanuvelil       |
+| Section                        | Placeholder type          | Required replacement                     |
+| ------------------------------ | ------------------------- | ---------------------------------------- |
+| Jeevan Project / Human Stories | Unsplash stock photograph | Authentic Raigad women empowerment photo |
+| Healthcare                     | No image integrated yet   | Authentic healthcare outreach photo      |
+| Women Empowerment              | No image integrated yet   | Authentic SHG/tailoring programme photo  |
+
+_(Note: Official leadership portraits for Bishop Mathews Mar Pachomios OIC and Director Rev. Fr. Abraham Thanuvelil were confirmed by the client and integrated in Phase 5C.2A.)_
 
 ### Process for Replacing a Placeholder
 
@@ -273,16 +273,13 @@ if (asset?.publicUrl) {
 3. Reference `asset.publicUrl` in the relevant content model (`focus-areas.ts`, `projects.ts`, `home.ts`).
 4. Never hardcode `/images/...` paths directly in components — always read from the registry or a content model that was populated from the registry.
 
-### Withheld Portrait Policy
+### Leadership Portrait Resolution (Phase 5C.2A)
 
-Two portraits from `Founders.zip` are **permanently withheld** until the organization confirms identities in writing:
+The two previously unassigned portraits from `Founders.zip` were formally confirmed by SEVA management in Phase 5C.2A:
 
-| Source filename                   | Reason withheld                                                                                                                                   |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ChatGPT Image Sep 8, 2026...png` | Hardcoded text identifies a different bishop (Yoohanon Mar Alexios, Auxiliary Bishop of Trivandrum) — not SEVA's Bishop Mathews Mar Pachomios OIC |
-| `32 fr santhosh.jpg.jpeg`         | Filename says "Fr. Santhosh"; SEVA Director is Rev. Fr. Abraham Thanuvelil                                                                        |
-
-These records exist in the registry with `approvalStatus: "pending_identity_confirmation"` and **no `publicUrl`** field. Do not add a `publicUrl` to these records without explicit written confirmation from SEVA management.
+- **H E Dr. Mathews Mar Pachomios OIC**: Confirmed by client from `ChatGPT Image Sep 8, 2026, 02_28_12 PM.png`. The non-official lower text banner was cropped out and the portrait published as `/images/leadership/mathews-mar-pachomios.webp`.
+- **Rev. Fr. Abraham Thanuvelil**: Confirmed by client from `32 fr santhosh.jpg.jpeg`. Official display name is strictly preserved as Rev. Fr. Abraham Thanuvelil and the portrait published as `/images/leadership/fr-abraham-thanuvelil.webp`.
+  Both records in `src/content/media.ts` now have `approvalStatus: "approved_for_publication"` and `identityConfidence: "confirmed"`. All four leadership profiles on `/profile/leadership` now feature confirmed authentic portraits.
 
 ---
 
@@ -300,3 +297,11 @@ The following items are deliberately withheld or marked pending until official a
 `src/config/navigation.ts` owns category/child labels, descriptions and route implementation status. `interior-content.tsx` consumes the existing modular organizational records; `InteriorPage` supplies breadcrumbs, hero and related routes. See NAVIGATION_GUIDE.md for the complete hierarchy and extension instructions. History milestones, detailed biographies, two verified portraits, videos, events and public document downloads remain pending. Giving mechanisms remain awaiting management authorization. Contact uses `contact.ts`. All interior previews explicitly remain noindex.
 
 `src/content/route-media.ts` returns approved gallery and project image arrays independent of homepage use. Leadership additionally requires confirmed identity and a matching leadership record. Preserve every original, derivative and withheld registry record. See MEDIA_ASSET_REGISTER.md for the unused/pending inventory and subsequent integration work. Do not infer identities or new project associations.
+
+## Phase 5C.1: editing Profile pages
+
+`src/content/profile.ts` owns editorial headings, metadata descriptions, registered media IDs, placeholder monograms and the typed confirmed timeline. Canonical name, year, legal status, states, vision, mission and mission pillars remain in `organization.ts`; leadership names/titles and publication status remain in `leadership.ts`. `profile-pages.tsx` composes the five pages without duplicating the official vision or mission statements. `src/styles/profile.css` scopes page-specific presentation.
+
+Append history entries only after confirmation, with an ID, year, source and confirmed status. The current timeline has one entry: establishment in 2015. Current programme links do not assert launch dates. Do not fill gaps with invented milestones or biographies. To approve a portrait, update both the leadership reference/status and the registry approval/identity fields; the page checks all of them. The Bishop and Director remain name-based placeholders until correctly identified portraits are approved.
+
+Profile photography references `tuition-classroom-group`, `ruby-meals-service` and `vidhya-jyothi-sisters`; captions and alt text come from the unchanged registry. Original assets and all other gallery/project arrays are retained. Phase 5C.2 and full media curation remain separate. See PHASE_5C_1_REPORT.md for verification and limitations.

@@ -24,14 +24,19 @@ export function SplitReveal({
             initial={false}
             whileInView={
               reducedMotion === false
-                ? { y: [28, 0], opacity: [0.3, 1] }
+                ? { y: [motionTokens.distance, 0] }
                 : undefined
             }
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: motionTokens.viewport.amount }}
             transition={{
               duration: motionTokens.reveal,
               ease: motionTokens.ease,
-              delay: delay + index * 0.045,
+              delay:
+                delay +
+                Math.min(
+                  index * motionTokens.stagger.line,
+                  motionTokens.stagger.maximum,
+                ),
             }}
           >
             {word}

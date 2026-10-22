@@ -53,3 +53,7 @@ History milestones, leadership biographies, two verified portraits, detailed pro
 ## Verification
 
 Run `npm run typecheck`, `npm run lint`, `npm run format:check`, `npm run build`, `npm run test:e2e -- --workers=2` and `npm run test:styles:dev`. `tests/navigation.spec.ts` covers routes, metadata, breadcrumbs, matching boundaries, pointer/keyboard dismissal, mobile behavior, approval filtering, no-JavaScript routes, reduced motion and screenshots at 320/375/768/1024/1440/1920px. Review screenshots and computed stylesheet/font evidence before changing any baseline. Phase 4/5A.1 `homepage-styled-*` reduced-motion baselines remain preserved; separately reviewed `homepage-navigation-*` Phase 5B baselines cover the intentional header changes with the same computed-style/font checks and pixel-difference tolerance.
+
+## Phase 5C.1: Profile composition extension
+
+The five Profile destinations now dispatch to `ProfilePage` from the existing route allowlist. They reuse the extracted `Breadcrumbs` component and canonical navigation configuration; Profile implementation statuses are now available. Editorial sibling links provide the same destinations without introducing a second menu hierarchy. Other categories retain their Phase 5B foundations. All original desktop/mobile behavior, active matching and no-JavaScript fallback routes remain. History is an implemented page with limited confirmed source material, not a claim that every historical record is available. See PHASE_5C_1_REPORT.md.

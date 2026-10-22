@@ -9,6 +9,8 @@ import { navigation } from "@/config/navigation";
 import "./globals.css";
 import "@/styles/home.css";
 import "@/styles/navigation.css";
+import "@/styles/profile.css";
+import "@/styles/programmes.css";
 
 const editorial = localFont({
   src: [

@@ -5,7 +5,7 @@ import baseConfig from "./playwright.config";
 export default defineConfig({
   ...baseConfig,
   outputDir: "./test-results/dev-styles",
-  testMatch: "**/styles.spec.ts",
+  testMatch: ["**/styles.spec.ts", "**/profile-styles.spec.ts"],
   projects: baseConfig.projects?.filter(
     (project) => project.name === "desktop",
   ),

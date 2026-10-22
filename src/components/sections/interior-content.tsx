@@ -2,16 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import type { NavigationItem } from "@/config/navigation";
 import { ContentStatusNotice } from "@/components/layout/interior-page";
-import { organization } from "@/content/organization";
-import { leadershipProfiles } from "@/content/leadership";
-import { focusAreas } from "@/content/focus-areas";
-import { projects } from "@/content/projects";
 import { contactInfo } from "@/content/contact";
 import { partnershipsContent } from "@/content/partnerships";
 import { donationsContent } from "@/content/donations";
 import { complianceRegistry } from "@/content/compliance";
-import { getApprovedMediaByCategory, type MediaAsset } from "@/content/media";
-import { getGalleryAssets, getProjectAssets } from "@/content/route-media";
+import type { MediaAsset } from "@/content/media";
+import { getGalleryAssets } from "@/content/route-media";
 
 export function ContactDetails() {
   return (
@@ -52,140 +48,6 @@ function MediaCollection({ assets }: { assets: readonly MediaAsset[] }) {
 
 export function InteriorContent({ item }: { item: NavigationItem }) {
   if (item.id === "contact") return <ContactDetails />;
-  if (item.href === "/profile" || item.id === "about")
-    return (
-      <section>
-        <h2>Love In Action</h2>
-        <p>{organization.introduction}</p>
-        <p>
-          {organization.legalStatus} · Established{" "}
-          {organization.establishedYear}
-        </p>
-      </section>
-    );
-  if (item.id === "vision-mission")
-    return (
-      <>
-        <section>
-          <h2>Our vision</h2>
-          <p>{organization.vision.statement}</p>
-          <ul>
-            {organization.vision.coreValues.map((value) => (
-              <li key={value}>{value}</li>
-            ))}
-          </ul>
-        </section>
-        <section>
-          <h2>Our mission</h2>
-          <p>{organization.mission.statement}</p>
-        </section>
-      </>
-    );
-  if (item.id === "history")
-    return (
-      <>
-        <p>
-          SEVA Social Service Society was established in{" "}
-          {organization.establishedYear}.
-        </p>
-        <ContentStatusNotice>
-          Further historical milestones and archival material await
-          organizational confirmation.
-        </ContentStatusNotice>
-      </>
-    );
-  if (item.id === "leadership") {
-    const portraits = getApprovedMediaByCategory("Leadership");
-    return (
-      <>
-        <ContentStatusNotice>
-          Full biographies and two official portraits await confirmation.
-          Unverified archival portraits are withheld.
-        </ContentStatusNotice>
-        <div className="interior-grid">
-          {leadershipProfiles.map((leader) => {
-            const portrait = portraits.find(
-              (asset) =>
-                asset.publicUrl === leader.image?.src &&
-                asset.identityConfidence === "confirmed",
-            );
-            return (
-              <article className="interior-card" key={leader.id}>
-                <figure>
-                  {portrait ? (
-                    <>
-                      <Image
-                        className="portrait-image"
-                        src={portrait.publicUrl}
-                        alt={portrait.altText}
-                        width={portrait.width}
-                        height={portrait.height}
-                        sizes="(min-width: 768px) 40vw, 90vw"
-                        style={{ objectPosition: portrait.focalPoint }}
-                      />
-                      <figcaption>{portrait.caption}</figcaption>
-                    </>
-                  ) : (
-                    <div className="portrait-slot">
-                      Official portrait pending confirmation
-                    </div>
-                  )}
-                </figure>
-                <h2>{leader.name}</h2>
-                <p>{leader.role}</p>
-              </article>
-            );
-          })}
-        </div>
-      </>
-    );
-  }
-  if (item.id === "programmes") return <p>{organization.mission.statement}</p>;
-  if (item.href.startsWith("/programmes/")) {
-    const area = focusAreas.find((area) => area.id === item.id);
-    if (!area) return null;
-    const related = projects.filter(
-      (project) => project.focusAreaId === area.id,
-    );
-    return (
-      <>
-        <section>
-          <h2>{area.category}</h2>
-          <p>{area.detailedDescription}</p>
-          <ul>
-            {area.activities.map((activity) => (
-              <li key={activity}>{activity}</li>
-            ))}
-          </ul>
-        </section>
-        {related.length > 0 && (
-          <section>
-            <h2>Associated projects</h2>
-            {related.map((project) => (
-              <article className="interior-card" key={project.id}>
-                <h3>{project.name}</h3>
-                <p>{project.description}</p>
-                <p>
-                  Project details and extended photography are in preparation.
-                </p>
-                <details>
-                  <summary>
-                    Approved project photographs (
-                    {getProjectAssets(project).length})
-                  </summary>
-                  <MediaCollection assets={getProjectAssets(project)} />
-                </details>
-              </article>
-            ))}
-          </section>
-        )}
-        <ContentStatusNotice>
-          Detailed programme pages and project stories will follow in a later
-          phase.
-        </ContentStatusNotice>
-      </>
-    );
-  }
   if (item.id === "media")
     return (
       <p>

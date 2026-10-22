@@ -8,16 +8,16 @@
 
 ## 1. Executive Summary & Asset Count
 
-| Metric                                        | Count    | Details                                                                                      |
-| :-------------------------------------------- | :------- | :------------------------------------------------------------------------------------------- |
-| **Total Images Inspected**                    | **13**   | 4 leadership files in `Founders.zip`, 9 activity files in `Pictures.zip`                     |
-| **Confirmed Official Portraits**              | **2**    | Rt Rev. Msgr. Dr. Shaji Mathews Vazhayil, Very Rev. Dr. Joshy Vazhappillethu                 |
-| **Portraits Withheld (Identity Discrepancy)** | **2**    | `ChatGPT Image...` (Bishop Yoohanon of Trivandrum), `32 fr santhosh.jpg.jpeg` (Fr. Santhosh) |
-| **Official Project Collages**                 | **3**    | Housing Project (1.png), Vidhya Jyothi (2.png), Ruby Meals (3.png)                           |
-| **Individual Programme Photos**               | **6**    | Education (3), Community Welfare / Ruby Meals (2), Rural Housing (1)                         |
-| **Sub-frame Extractions Created**             | **3**    | Vidyarambham ceremony, classroom group, and assembly blessing from tuition composite         |
-| **Web Derivatives Generated**                 | **15**   | Optimized WebP derivatives (lossless/near-lossless, metadata stripped)                       |
-| **Raw Archives Preserved**                    | **100%** | Original uncompressed files preserved intact in `incoming-assets/` outside `public/`         |
+| Metric                                        | Count    | Details                                                                                                                                      |
+| :-------------------------------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Total Images Inspected**                    | **13**   | 4 leadership files in `Founders.zip`, 9 activity files in `Pictures.zip`                                                                     |
+| **Confirmed Official Portraits**              | **4**    | H E Dr. Mathews Mar Pachomios OIC, Rt Rev. Msgr. Dr. Shaji Mathews Vazhayil, Very Rev. Dr. Joshy Vazhappillethu, Rev. Fr. Abraham Thanuvelil |
+| **Portraits Withheld (Identity Discrepancy)** | **0**    | Identity discrepancies formally resolved by client confirmation in Phase 5C.2A                                                               |
+| **Official Project Collages**                 | **3**    | Housing Project (1.png), Vidhya Jyothi (2.png), Ruby Meals (3.png)                                                                           |
+| **Individual Programme Photos**               | **6**    | Education (3), Community Welfare / Ruby Meals (2), Rural Housing (1)                                                                         |
+| **Sub-frame Extractions Created**             | **3**    | Vidyarambham ceremony, classroom group, and assembly blessing from tuition composite                                                         |
+| **Web Derivatives Generated**                 | **17**   | Optimized WebP derivatives (lossless/near-lossless, metadata stripped)                                                                       |
+| **Raw Archives Preserved**                    | **100%** | Original uncompressed files preserved intact in `incoming-assets/` outside `public/`                                                         |
 
 ---
 
@@ -25,12 +25,12 @@
 
 ### Archive A: `Founders.zip` (Leadership Portraits)
 
-| #   | Original Filename                            | Source Archive | Dimensions  | Format | File Size | Orientation    | Visual Subject                                                                                                                                                 | SEVA Governance Role                                                                                                       | Identity Confidence                                          | Approval Status                 | Web Derivative                                                          |
-| :-- | :------------------------------------------- | :------------- | :---------- | :----- | :-------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------- | :------------------------------ | :---------------------------------------------------------------------- |
-| 1   | `28 Msgr Shaji.png`                          | `Founders.zip` | 1102 × 1427 | PNG    | 1,527 KB  | Portrait (4:5) | Studio portrait of senior priest in white clerical cassock, glasses, white beard, pure white background                                                        | Rt Rev. Msgr. Dr. Shaji Mathews Vazhayil · Vicar General                                                                   | **Confirmed** (Official match)                               | `approved_for_publication`      | `/images/leadership/msgr-shaji-mathews-vazhayil.webp` (800×1036, 80 KB) |
-| 2   | `41 Fr Joshy.png`                            | `Founders.zip` | 1127 × 1396 | PNG    | 1,433 KB  | Portrait (4:5) | Studio portrait of priest in white clerical cassock, glasses, smiling warmly, pure white background                                                            | Very Rev. Dr. Joshy Vazhappillethu · Chancellor                                                                            | **Confirmed** (Official match)                               | `approved_for_publication`      | `/images/leadership/fr-joshy-vazhappillethu.webp` (800×991, 58 KB)      |
-| 3   | `ChatGPT Image Sep 8, 2026, 02_28_12 PM.png` | `Founders.zip` | 1024 × 1536 | PNG    | 1,559 KB  | Portrait (2:3) | Formal hierarchical portrait of bishop holding ceremonial cross and staff with caption: _"MOST REV. DR. YOOHANON MAR ALEXIOS, AUXILIARY BISHOP OF TRIVANDRUM"_ | Intended for Bishop Mathews Mar Pachomios OIC, but artwork explicitly identifies Bishop Yoohanon Mar Alexios of Trivandrum | **Unconfirmed / Discrepancy** (Does not match SEVA Bishop)   | `withheld_identity_discrepancy` | _None (Withheld from public distribution; kept in archival storage)_    |
-| 4   | `32 fr santhosh.jpg.jpeg`                    | `Founders.zip` | 1205 × 1280 | JPEG   | 76 KB     | Portrait (1:1) | Studio portrait of priest in white cassock and spectacles against blue studio backdrop. Filename explicitly indicates "Fr. Santhosh"                           | Intended for SEVA Director, but SEVA Director is Rev. Fr. Abraham Thanuvelil                                               | **Unconfirmed / Discrepancy** (Does not match Director name) | `withheld_identity_discrepancy` | _None (Withheld from public distribution; kept in archival storage)_    |
+| #   | Original Filename                            | Source Archive | Dimensions  | Format | File Size | Orientation    | Visual Subject                                                                                                      | SEVA Governance Role                                     | Identity Confidence                                      | Approval Status            | Web Derivative                                                          |
+| :-- | :------------------------------------------- | :------------- | :---------- | :----- | :-------- | :------------- | :------------------------------------------------------------------------------------------------------------------ | :------------------------------------------------------- | :------------------------------------------------------- | :------------------------- | :---------------------------------------------------------------------- |
+| 1   | `28 Msgr Shaji.png`                          | `Founders.zip` | 1102 × 1427 | PNG    | 1,527 KB  | Portrait (4:5) | Studio portrait of senior priest in white clerical cassock, glasses, white beard, pure white background             | Rt Rev. Msgr. Dr. Shaji Mathews Vazhayil · Vicar General | **Confirmed** (Official match)                           | `approved_for_publication` | `/images/leadership/msgr-shaji-mathews-vazhayil.webp` (800×1036, 80 KB) |
+| 2   | `41 Fr Joshy.png`                            | `Founders.zip` | 1127 × 1396 | PNG    | 1,433 KB  | Portrait (4:5) | Studio portrait of priest in white clerical cassock, glasses, smiling warmly, pure white background                 | Very Rev. Dr. Joshy Vazhappillethu · Chancellor          | **Confirmed** (Official match)                           | `approved_for_publication` | `/images/leadership/fr-joshy-vazhappillethu.webp` (800×991, 58 KB)      |
+| 3   | `ChatGPT Image Sep 8, 2026, 02_28_12 PM.png` | `Founders.zip` | 1024 × 1536 | PNG    | 1,559 KB  | Portrait (4:5) | Formal hierarchical portrait of Bishop Mathews Mar Pachomios OIC in episcopal vestments (lower text banner cropped) | H E Dr. Mathews Mar Pachomios OIC · Eparchial Bishop     | **Confirmed** (Client confirmed identity in Phase 5C.2A) | `approved_for_publication` | `/images/leadership/mathews-mar-pachomios.webp` (800×1000, 54 KB)       |
+| 4   | `32 fr santhosh.jpg.jpeg`                    | `Founders.zip` | 1205 × 1280 | JPEG   | 76 KB     | Portrait (4:5) | Studio portrait of priest in white cassock and spectacles against blue studio backdrop                              | Rev. Fr. Abraham Thanuvelil · SEVA Director              | **Confirmed** (Client confirmed identity in Phase 5C.2A) | `approved_for_publication` | `/images/leadership/fr-abraham-thanuvelil.webp` (800×1000, 52 KB)       |
 
 ---
 
@@ -73,13 +73,13 @@
 
 3. **H E Dr. Mathews Mar Pachomios OIC — Eparchial Bishop**:
    - **Supplied Asset**: `ChatGPT Image Sep 8, 2026, 02_28_12 PM.png`
-   - **Audit Verdict**: **Withheld — Identity Discrepancy**. The image bears hardcoded printed text: _"MOST REV. DR. YOOHANON MAR ALEXIOS, AUXILIARY BISHOP OF TRIVANDRUM"_. He is the Auxiliary Bishop of the Major Archieparchy of Trivandrum, whereas SEVA's Eparchial Bishop is H E Dr. Mathews Mar Pachomios OIC (Bishop of the Eparchy of St. Ephrem Khadki-Pune).
-   - **Action**: The asset was immediately quarantined and withheld from public web deployment. The existing neutral SVG portrait placeholder is retained in `src/content/leadership.ts` until an authentic high-resolution portrait of Bishop Mathews Mar Pachomios OIC is delivered.
+   - **Audit Verdict**: **Confirmed Official** (Confirmed by client in Phase 5C.2A). The client verified that this photograph represents Bishop Mathews Mar Pachomios. The lower banner with text referring to another bishop was cropped out in the public WebP derivative.
+   - **Action**: Published as `/images/leadership/mathews-mar-pachomios.webp` (800×1000px, 4:5 ratio, 54 KB).
 
 4. **Rev. Fr. Abraham Thanuvelil — SEVA Director**:
    - **Supplied Asset**: `32 fr santhosh.jpg.jpeg`
-   - **Audit Verdict**: **Withheld — Identity Discrepancy**. The filename explicitly designates "Fr. Santhosh". SEVA's official directorate documentation confirms Rev. Fr. Abraham Thanuvelil as the registered Director.
-   - **Action**: The asset was withheld from public web deployment. The existing neutral SVG portrait placeholder is retained in `src/content/leadership.ts` until an authentic high-resolution portrait of Rev. Fr. Abraham Thanuvelil is delivered.
+   - **Audit Verdict**: **Confirmed Official** (Confirmed by client in Phase 5C.2A). The client verified that the individual in this photograph represents Rev. Fr. Abraham Thanuvelil. Official display name is preserved strictly as Rev. Fr. Abraham Thanuvelil.
+   - **Action**: Published as `/images/leadership/fr-abraham-thanuvelil.webp` (800×1000px, 4:5 ratio, 52 KB).
 
 ---
 
@@ -161,3 +161,7 @@ The actual homepage currently renders three authentic programme photographs: `ru
 | `32 fr santhosh.jpg.jpeg`                                                                              | Retained privately; withheld identity discrepancy                                                          | Written organizational confirmation or a correctly identified replacement is required; never assign to Abraham Thanuvelil based on resemblance    |
 
 `getGalleryAssets()` selects all approved `Pictures.zip` registry records with a public URL, without consulting homepage flags. Future approved photographs become eligible by registry entry, including photographs currently unused. `getProjectAssets()` returns multiple associated photographs for CNEWA, Vidya Jyoti and Ruby Meal; other projects return an empty array until their photography is confirmed. Leadership supports four portrait slots and filters against approval plus confirmed identity. Two official slots remain explicitly pending portrait confirmation. Full media curation remains deferred; no photograph is forced onto the homepage.
+
+## 9. Phase 5C.1 Profile placements
+
+No original, derivative, withheld entry or existing media registry record was changed. Profile now places `tuition-classroom-group` in the overview, `ruby-meals-service` in About and `vidhya-jyothi-sisters` in the mission chapter. These are three distinct approved programme photographs, each used once across the Profile section. The official emblem appears in the overview seal. Confirmed portraits `portrait-msgr-shaji` and `portrait-fr-joshy` remain correctly mapped in the redesigned Leadership features; the other two official slots retain name-based placeholders pending confirmation. Portraits keep natural framing and are never masked over faces. History introduces no falsely dated archival photography. The composite and other pending media documented above remain available for the later media pass.
