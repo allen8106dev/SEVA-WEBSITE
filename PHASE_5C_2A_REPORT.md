@@ -117,7 +117,7 @@ Each page features a distinct composition rooted in Vibrant Humanism:
 | **Production Build** | `next build` (Turbopack) | **Passed** | All 33 static pages generated cleanly. |
 | **Programmes Tests** | Playwright (24 tests) | **Passed (24/24)** | Desktop & mobile Edge/Chromium: responsive widths (320px–1920px), media loading, SEO metadata, breadcrumbs, zero console errors. |
 | **Leadership Tests** | Playwright (`profile.spec.ts` & `navigation.spec.ts`) | **Passed** | All 4 leadership portraits verified rendering with correct alt text and natural dimensions. |
-| **Full Regression Suite** | Playwright (`--workers=2`) | **In progress / Passed** | Full suite execution. |
+| **Full Regression Suite** | Playwright (`--workers=2`) | **94/95 passed** | One intermittent mobile timeout in `homepage.spec.ts:43` (viewport screenshot loop timed out at 60 s under parallel load). Confirmed non-regression: isolated re-run passed 2/2 in 56 s. Desktop counterpart (#4) passed in 36.3 s. Pre-existing environment flakiness. |
 
 ---
 

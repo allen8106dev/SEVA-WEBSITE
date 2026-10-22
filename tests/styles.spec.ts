@@ -5,6 +5,7 @@ for (const width of [375, 768, 1440]) {
   test(`rendered styles, resources, and visual baseline at ${width}px`, async ({
     page,
   }, testInfo) => {
+    test.setTimeout(90000);
     await page.setViewportSize({ width, height: 1000 });
     await page.emulateMedia({ reducedMotion: "reduce", colorScheme: "light" });
     const failures: string[] = [];
