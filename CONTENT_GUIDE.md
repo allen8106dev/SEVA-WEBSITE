@@ -1,5 +1,9 @@
 # SEVA Content Architecture & Maintenance Guide
 
+## Child image privacy
+
+Blur identifiable child faces in every public photograph and collage derivative that contains minors. Keep adult faces, documentary context, and readable organizational text intact. The client-supplied key-handover photo is the first homepage carousel item and contains adults only. Apply the blur before publishing new or replaced child imagery; the public asset is the reviewed derivative, not an unblurred source.
+
 ## Phase 5E participation and contact content
 
 Edit volunteering categories, CSR alignment areas, and implementation/reporting statements in `src/content/partnerships.ts`; designated giving purposes in `src/content/donations.ts`; and all contact channels/address in `src/content/contact.ts`. The Get Involved pages render these records directly. Inquiry links use the central email and do not submit forms. Do not describe areas as open applications, add payment instructions, or publish donor benefits without explicit verification and authorization. The map link is derived from the approved postal address and does not encode guessed coordinates.

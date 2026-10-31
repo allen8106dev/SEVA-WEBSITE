@@ -127,6 +127,10 @@
 3. **Quarantine of Unconfirmed Originals**:
    Original archives and discrepancy portraits remain in `incoming-assets/`, strictly outside the public web root (`public/`). Large archives are excluded from Git commits via `.gitignore` to preserve repository hygiene.
 
+### Child-face privacy update
+
+Published derivatives with visible minors now have face blur applied, including the Education programme photographs and collage, Ruby Meal service photographs and collage, the tuition composite, and the learning placeholder image. Active content references use the cache-busted `-faces-blurred` filenames so browsers and the image optimizer fetch these derivatives instead of an older cached image. Adult faces and non-photographic text/logos were retained where visible. The client-supplied `key.jpeg` housing-project event photo is registered as `housing-keys-handover` and appears first in the homepage carousel; it depicts adults.
+
 ---
 
 ## 7. How to Add New Media in Future Phases

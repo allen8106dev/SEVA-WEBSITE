@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteMap } from "@/components/layout/site-map";
 import { WhatsAppFab } from "@/components/layout/whatsapp-fab";
+import { BrandSplash } from "@/components/layout/brand-splash";
 import { siteConfig } from "@/config/site";
 import { motionStyles } from "@/config/motion";
 import { navigation } from "@/config/navigation";
@@ -69,6 +70,7 @@ export default function RootLayout({
       style={motionStyles}
     >
       <body id="top">
+        <BrandSplash />
         <a className="skip-link" href="#main-content">
           Skip to content
         </a>

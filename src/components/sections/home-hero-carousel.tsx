@@ -216,6 +216,7 @@ export function HomeHeroCarousel({ slides }: { slides: HomeHeroSlide[] }) {
                   fill
                   sizes="(min-width: 48rem) 78vw, 94vw"
                   className="home-hero-carousel__backdrop"
+                  loading={position === slideCount ? "eager" : "lazy"}
                   style={{ objectPosition: slide.focalPoint ?? "50% 50%" }}
                 />
                 <Image
@@ -223,9 +224,9 @@ export function HomeHeroCarousel({ slides }: { slides: HomeHeroSlide[] }) {
                   alt={slide.alt}
                   fill
                   sizes="(min-width: 48rem) 78vw, 94vw"
-                  preload={position === slideCount}
+                  loading={position === slideCount ? "eager" : "lazy"}
                   className="home-hero-carousel__main-image"
-                  style={{ objectPosition: "right center" }}
+                  style={{ objectPosition: slide.focalPoint ?? "right center" }}
                 />
               </div>
             </figure>

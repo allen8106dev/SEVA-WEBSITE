@@ -1746,6 +1746,15 @@
 .home-hero__grid {
   align-content: center;
   min-height: calc(100svh - var(--header-height));
+  pointer-events: none;
+}
+
+.home-hero__container {
+  pointer-events: none;
+}
+
+.home-hero__copy {
+  pointer-events: auto;
 }
 
 .home-hero .container {

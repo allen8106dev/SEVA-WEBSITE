@@ -644,14 +644,71 @@ button {
 .wordmark-logo-emblem {
   display: block;
   width: auto;
-  height: 5.75rem;
-  max-width: min(6rem, 34vw);
+  height: 6.5rem;
+  max-width: min(6.5rem, 34vw);
   object-fit: contain;
   transition: height var(--motion-base) var(--motion-ease);
 }
 
 .site-header--compact .wordmark-logo-emblem {
-  height: 3.75rem;
+  height: 4.5rem;
+}
+
+.brand-splash {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 1.5rem;
+  background: var(--color-background);
+  opacity: 1;
+  transition:
+    opacity 400ms var(--motion-ease),
+    visibility 400ms;
+}
+
+.brand-splash--hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.brand-splash__logo {
+  width: min(12rem, 48vw);
+  height: auto;
+  animation: brand-splash-breathe 1.15s ease-in-out infinite alternate;
+}
+
+.brand-splash__loader {
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: brand-splash-spin 750ms linear infinite;
+}
+
+@keyframes brand-splash-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes brand-splash-breathe {
+  to {
+    transform: scale(1.045);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-splash,
+  .brand-splash__logo,
+  .brand-splash__loader {
+    animation: none;
+    transition: none;
+  }
 }
 
 .wordmark-note {

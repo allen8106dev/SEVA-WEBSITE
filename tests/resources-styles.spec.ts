@@ -28,6 +28,9 @@ for (const width of [375, 1440]) {
       ["compliance", "rgb(255, 255, 255)"],
     ]) {
       await page.goto(`/resources${slug ? `/${slug}` : ""}`);
+      await expect(page.locator(".brand-splash")).toHaveClass(
+        /brand-splash--hidden/,
+      );
       await page.evaluate(() => document.fonts.ready);
       await expect(page.locator(".resource-hero")).toHaveCSS(
         "background-color",

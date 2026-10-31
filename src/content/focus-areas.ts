@@ -45,7 +45,7 @@ export const focusAreas: readonly FocusArea[] = [
     accent: "green",
     iconName: "book-open",
     media: {
-      src: "/images/programmes/education/vidhya-jyothi-distribution.webp",
+      src: "/images/programmes/education/vidhya-jyothi-distribution-faces-blurred.webp",
       alt: "SEVA Vidya Jyothi school bag distribution for students",
       caption:
         "Authentic SEVA programme · Vidya Jyothi educational distribution · Maharashtra & Regional Centres.",
@@ -123,7 +123,7 @@ export const focusAreas: readonly FocusArea[] = [
     accent: "earth",
     iconName: "heart",
     media: {
-      src: "/images/programmes/community-welfare/ruby-meals-service.webp",
+      src: "/images/programmes/community-welfare/ruby-meals-service-faces-blurred.webp",
       alt: "SEVA Ruby Meal food distribution serving fresh hot meals to community members",
       caption:
         "Authentic SEVA programme · Weekly Friday Ruby Meal distribution in Khadki-Pune.",
@@ -172,7 +172,7 @@ export const focusAreas: readonly FocusArea[] = [
     accent: "blue",
     iconName: "tool",
     media: {
-      src: "/images/impact-learning.jpg",
+      src: "/images/impact-learning-faces-blurred.jpg",
       alt: "Vocational training and hands-on skill development session",
       caption:
         "Provisional documentary study · CDC (Unsplash) · Hands-on skills building sustainable futures.",

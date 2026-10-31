@@ -17,6 +17,9 @@ for (const width of [375, 768, 1440]) {
       if (message.type() === "error") failures.push(message.text());
     });
     await page.goto("/");
+    await expect(page.locator(".brand-splash")).toHaveClass(
+      /brand-splash--hidden/,
+    );
     await page.evaluate(() => document.fonts.ready);
 
     const links = await page

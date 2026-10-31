@@ -35,6 +35,9 @@ for (const width of [375, 1440]) {
     });
     for (const item of pages) {
       await page.goto(item.route);
+      await expect(page.locator(".brand-splash")).toHaveClass(
+        /brand-splash--hidden/,
+      );
       await page.evaluate(() => document.fonts.ready);
       await expect(page.locator(".profile-opening")).toHaveCSS(
         "background-color",

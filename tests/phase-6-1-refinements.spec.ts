@@ -100,30 +100,29 @@ test("approved homepage photographs slide automatically and use dot navigation",
   await expect(carousel).toHaveAttribute("aria-roledescription", "carousel");
   await expect(current).toHaveAttribute(
     "aria-label",
-    "1 of 3: Vidya Jyothi",
+    "1 of 4: Housing Project",
   );
-  await expect(carousel.locator("img")).toHaveCount(3);
+  await expect(
+    carousel.locator(".home-hero-carousel__controls button"),
+  ).toHaveCount(4);
   await expect(
     carousel.getByRole("button", { name: /automatic slide show/i }),
   ).toHaveCount(0);
-  await expect(carousel.locator("img").nth(0)).toHaveAttribute(
+  await expect(current.locator("img").last()).toHaveAttribute(
     "alt",
-    "SEVA Vidya Jyothi school bag distribution to students in a community centre",
+    "Representatives presenting a ceremonial key at a housing project event",
   );
   await page.waitForTimeout(6200);
-  await expect(current).toHaveAttribute(
-    "aria-label",
-    "2 of 3: SEVA Ruby Meal",
-  );
+  await expect(current).toHaveAttribute("aria-label", "2 of 4: Vidya Jyothi");
   const originalTransform = await carousel
     .locator(".home-hero-carousel__track")
     .evaluate((track) => getComputedStyle(track).transform);
   await carousel
-    .getByRole("button", { name: "Show photograph 3 of 3" })
+    .getByRole("button", { name: "Show photograph 4 of 4" })
     .click();
   await expect(current).toHaveAttribute(
     "aria-label",
-    "3 of 3: Housing Project",
+    "4 of 4: Housing Project",
   );
   await expect
     .poll(() =>
@@ -133,12 +132,9 @@ test("approved homepage photographs slide automatically and use dot navigation",
     )
     .not.toBe(originalTransform);
   await carousel
-    .getByRole("button", { name: "Show photograph 2 of 3" })
+    .getByRole("button", { name: "Show photograph 2 of 4" })
     .click();
-  await expect(current).toHaveAttribute(
-    "aria-label",
-    "2 of 3: SEVA Ruby Meal",
-  );
+  await expect(current).toHaveAttribute("aria-label", "2 of 4: Vidya Jyothi");
 });
 
 test("reduced motion disables autoplay while keeping dot navigation", async ({
@@ -153,18 +149,18 @@ test("reduced motion disables autoplay while keeping dot navigation", async ({
     carousel.getByRole("button", { name: /automatic slide show/i }),
   ).toHaveCount(0);
   await expect(
-    carousel.getByRole("button", { name: "Show photograph 2 of 3" }),
+    carousel.getByRole("button", { name: "Show photograph 2 of 4" }),
   ).toBeEnabled();
   await expect(carousel.locator(".home-hero-carousel__track")).toHaveCSS(
     "transition-duration",
     "0s",
   );
   await carousel
-    .getByRole("button", { name: "Show photograph 2 of 3" })
+    .getByRole("button", { name: "Show photograph 2 of 4" })
     .click();
   await expect(
     carousel.locator('.home-hero-carousel__slide[aria-hidden="false"]'),
-  ).toHaveAttribute("aria-label", "2 of 3: SEVA Ruby Meal");
+  ).toHaveAttribute("aria-label", "2 of 4: Vidya Jyothi");
 });
 
 test("footer inquiry validates the message and builds an honest email-app draft", async ({

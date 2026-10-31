@@ -5,6 +5,7 @@ import { Heading } from "@/components/ui/typography";
 import { HomeHeroCarousel, type HomeHeroSlide } from "./home-hero-carousel";
 
 const homepageHeroAssetIds = [
+  "housing-keys-handover",
   "vidhya-jyothi-distribution",
   "tuition-vidyarambham-initiation",
   "housing-project-paderu",

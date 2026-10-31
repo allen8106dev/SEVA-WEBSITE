@@ -115,7 +115,7 @@ export const projects: readonly ProjectRecord[] = [
       "tuition-centre-composite",
     ],
     imagePlaceholder: {
-      src: "/images/programmes/education/vidyarambham-initiation.webp",
+      src: "/images/programmes/education/vidyarambham-initiation-faces-blurred.webp",
       alt: "Vidyarambham foundational learning ceremony at a SEVA education centre",
       caption:
         "Authentic SEVA programme · CNEWA Non-Formal Education & Tuition Centre.",
@@ -190,7 +190,7 @@ export const projects: readonly ProjectRecord[] = [
       "seva-vidhya-jyothi-collage",
     ],
     imagePlaceholder: {
-      src: "/images/programmes/education/vidhya-jyothi-distribution.webp",
+      src: "/images/programmes/education/vidhya-jyothi-distribution-faces-blurred.webp",
       alt: "Vidya Jyothi school bag and educational kit distribution to children",
       caption:
         "Authentic SEVA programme · Vidya Jyothi educational distribution · Maharashtra and Regional Centres.",
@@ -385,7 +385,7 @@ export const projects: readonly ProjectRecord[] = [
       "seva-ruby-meals-collage",
     ],
     imagePlaceholder: {
-      src: "/images/programmes/community-welfare/ruby-meals-service.webp",
+      src: "/images/programmes/community-welfare/ruby-meals-service-faces-blurred.webp",
       alt: "SEVA Ruby Meal food distribution serving fresh hot meals to community members",
       caption:
         "Authentic SEVA programme · Ruby Meal food distribution program · Khadki-Pune.",

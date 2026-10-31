@@ -47,6 +47,7 @@ export interface MediaAsset {
     | "Pictures.zip"
     | "Founders.zip"
     | "Official Branding"
+    | "Client Supplied"
     | "Provisional Baseline";
   publicUrl: string;
   thumbnailUrl?: string;
@@ -206,7 +207,8 @@ export const mediaRegistry: readonly MediaAsset[] = [
     id: "vidhya-jyothi-distribution",
     sourceFilename: "WhatsApp Image 2026-09-11 at 12.11.24 PM.jpeg",
     sourceArchive: "Pictures.zip",
-    publicUrl: "/images/programmes/education/vidhya-jyothi-distribution.webp",
+    publicUrl:
+      "/images/programmes/education/vidhya-jyothi-distribution-faces-blurred.webp",
     description:
       "Catholic priest and SEVA team presenting academic backpacks and study supplies to children standing in a community hall.",
     altText:
@@ -233,7 +235,8 @@ export const mediaRegistry: readonly MediaAsset[] = [
     id: "vidhya-jyothi-sisters",
     sourceFilename: "WhatsApp Image 2026-09-11 at 10.33.12 AM (2).jpeg",
     sourceArchive: "Pictures.zip",
-    publicUrl: "/images/programmes/education/vidhya-jyothi-sisters.webp",
+    publicUrl:
+      "/images/programmes/education/vidhya-jyothi-sisters-faces-blurred.webp",
     description:
       "Religious sisters and volunteer handing school backpacks to smiling children in an underserved neighbourhood.",
     altText:
@@ -260,7 +263,8 @@ export const mediaRegistry: readonly MediaAsset[] = [
     id: "tuition-vidyarambham-initiation",
     sourceFilename: "WhatsApp Image 2026-09-11 at 12.09.46 PM.jpeg (frame 2)",
     sourceArchive: "Pictures.zip",
-    publicUrl: "/images/programmes/education/vidyarambham-initiation.webp",
+    publicUrl:
+      "/images/programmes/education/vidyarambham-initiation-faces-blurred.webp",
     description:
       "Vidyarambham ceremony: Priest guiding a young child's finger to write initial letters in rice as mother holds the plate.",
     altText:
@@ -285,7 +289,8 @@ export const mediaRegistry: readonly MediaAsset[] = [
     id: "tuition-learning-session",
     sourceFilename: "WhatsApp Image 2026-09-11 at 12.09.46 PM.jpeg (frame 3)",
     sourceArchive: "Pictures.zip",
-    publicUrl: "/images/programmes/education/tuition-learning-session.webp",
+    publicUrl:
+      "/images/programmes/education/tuition-learning-session-faces-blurred.webp",
     description:
       "Children seated on mats with alphabet charts on corrugated walls during an educational assembly and blessing.",
     altText: "Students seated for study in a non-formal education classroom",
@@ -309,7 +314,8 @@ export const mediaRegistry: readonly MediaAsset[] = [
     id: "tuition-classroom-group",
     sourceFilename: "WhatsApp Image 2026-09-11 at 12.09.46 PM.jpeg (frame 1)",
     sourceArchive: "Pictures.zip",
-    publicUrl: "/images/programmes/education/tuition-classroom-group.webp",
+    publicUrl:
+      "/images/programmes/education/tuition-classroom-group-faces-blurred.webp",
     description:
       "Group photo of students, educator, priest, and community volunteers in the non-formal education classroom.",
     altText:
@@ -333,7 +339,8 @@ export const mediaRegistry: readonly MediaAsset[] = [
     id: "ruby-meals-service",
     sourceFilename: "WhatsApp Image 2026-09-11 at 12.20.06 PM.jpeg",
     sourceArchive: "Pictures.zip",
-    publicUrl: "/images/programmes/community-welfare/ruby-meals-service.webp",
+    publicUrl:
+      "/images/programmes/community-welfare/ruby-meals-service-faces-blurred.webp",
     description:
       "SEVA volunteer serving freshly cooked rice and meals into pots and bowls brought by community members in need.",
     altText:
@@ -359,7 +366,8 @@ export const mediaRegistry: readonly MediaAsset[] = [
     id: "ruby-meals-outreach",
     sourceFilename: "WhatsApp Image 2026-09-11 at 10.35.21 AM.jpeg",
     sourceArchive: "Pictures.zip",
-    publicUrl: "/images/programmes/community-welfare/ruby-meals-outreach.webp",
+    publicUrl:
+      "/images/programmes/community-welfare/ruby-meals-outreach-faces-blurred.webp",
     description:
       "SEVA volunteer dishing hot meals from a large cooking pot to families living in temporary settlements under a Pune flyover.",
     altText: "Community food relief outreach under a flyover in Pune",
@@ -407,6 +415,27 @@ export const mediaRegistry: readonly MediaAsset[] = [
     ],
     focalPoint: "50% 50%",
   },
+  {
+    id: "housing-keys-handover",
+    sourceFilename: "key.jpeg",
+    sourceArchive: "Client Supplied",
+    publicUrl: "/images/seva-housing-keys-handover.jpeg",
+    description:
+      "Representatives holding a large ceremonial key at a housing project event.",
+    altText:
+      "Representatives presenting a ceremonial key at a housing project event",
+    caption: "Housing project key handover event.",
+    width: 1600,
+    height: 1066,
+    aspectRatio: "landscape",
+    category: "Rural Development",
+    programmeAssociation: "Housing Project",
+    creditSource: "Client-supplied photograph",
+    approvalStatus: "approved_for_publication",
+    identityConfidence: "not_applicable",
+    intendedPlacements: ["Homepage Hero Carousel"],
+    focalPoint: "50% 55%",
+  },
 
   // --- OFFICIAL PROJECT COLLAGES ---
   {
@@ -439,7 +468,7 @@ export const mediaRegistry: readonly MediaAsset[] = [
     id: "collage-vidhya-jyothi",
     sourceFilename: "2.png",
     sourceArchive: "Pictures.zip",
-    publicUrl: "/images/collages/seva-vidhya-jyothi-collage.webp",
+    publicUrl: "/images/collages/seva-vidhya-jyothi-collage-faces-blurred.webp",
     description:
       "Official SEVA Vidhya Jyothi photo collage poster covering educational interventions across Maharashtra, Tamil Nadu, Andhra Pradesh & Telangana.",
     altText:
@@ -465,7 +494,7 @@ export const mediaRegistry: readonly MediaAsset[] = [
     id: "collage-ruby-meals",
     sourceFilename: "3.png",
     sourceArchive: "Pictures.zip",
-    publicUrl: "/images/collages/seva-ruby-meals-collage.webp",
+    publicUrl: "/images/collages/seva-ruby-meals-collage-faces-blurred.webp",
     description:
       "Official SEVA Ruby Meals photo collage poster from the Eparchy of St. Ephrem Khadki-Pune food distribution program.",
     altText:
