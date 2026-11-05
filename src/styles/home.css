@@ -1812,15 +1812,8 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .home-hero__copy {
+  .home-hero__copy--intro {
     animation: hero-text-fade-slide-left 5.5s var(--motion-ease) forwards;
-  }
-
-  .home-hero:hover .home-hero__copy,
-  .home-hero:focus-within .home-hero__copy {
-    opacity: 1;
-    transform: translateX(0);
-    animation: none;
   }
 }
 

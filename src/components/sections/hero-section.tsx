@@ -3,6 +3,7 @@ import { getMediaAsset } from "@/content/media";
 import { Container, Section } from "@/components/ui/layout";
 import { Heading } from "@/components/ui/typography";
 import { HomeHeroCarousel, type HomeHeroSlide } from "./home-hero-carousel";
+import { HomeHeroCopy } from "./home-hero-copy";
 
 const homepageHeroAssetIds = [
   "housing-keys-handover",
@@ -42,13 +43,13 @@ export function HeroSection() {
     >
       <Container width="wide" className="home-hero__container">
         <div className="home-hero__grid">
-          <div className="home-hero__copy">
+          <HomeHeroCopy>
             <Heading as="h1" size="display" id="intro-title">
               <span>{content.headline.opening}</span>{" "}
               <em>{content.headline.emphasis}</em>{" "}
               <span>{content.headline.ending}</span>
             </Heading>
-          </div>
+          </HomeHeroCopy>
         </div>
       </Container>
       <HomeHeroCarousel slides={heroSlides} />

@@ -26,7 +26,7 @@ Adjust this vocabulary centrally rather than adding unrelated durations to secti
 
 ## Phase 6.1 header and homepage carousel
 
-The sticky header changes between expanded and compact states at the existing 60px scroll threshold. CSS transitions the bounded header and logo sizes; reduced motion removes these transitions. The listener updates only when the state changes, and the logo remains linked and accessible in both states.
+The sticky header compacts after 72px of scrolling and expands again below 20px. This hysteresis keeps the header from oscillating when its compact height changes the page's scroll position. CSS transitions the bounded header and logo sizes; reduced motion removes these transitions. The listener updates only when the state changes, and the logo remains linked and accessible in both states.
 
 `HomeHeroCarousel` uses three publication-approved landscape programme photos and CSS horizontal translation. The 650ms transition and six-second interval come from the shared motion tokens. Movement advances through a repeated track so automatic changes, dot selection, and wraparound all travel right to left. Only the initially visible photo is preloaded; the remaining Next Images keep lazy-loading behavior. Pointer entry or keyboard focus within the hero pauses automatic movement; it resumes when the pointer and focus leave. Three dot controls indicate and select slides; arrow keys also move between slides when a dot has focus. The carousel disables autoplay and its transition for `prefers-reduced-motion: reduce`, while retaining dot navigation. The visible slide remains in server HTML, and inactive repeated slides are hidden from assistive technology.
 
@@ -34,7 +34,7 @@ The carousel fills the homepage hero below the sticky header. Each landscape pho
 
 ## Hero choreography
 
-CSS in `src/styles/home.css` animates the hero headline spans and media. Media begins immediately; headline lines follow at 55/130/205ms. Following the initial entrance, `.home-hero__copy` remains shown for ~3.5 seconds to ensure the headline is read, then gently fades out while sliding left (`hero-text-fade-slide-left`) to leave the photograph and participants completely unobstructed. Hovering or focusing within the hero smoothly restores the copy into view. Reduced-motion preferences keep the copy visible and static without animation. Mobile uses a halved translation distance.
+CSS in `src/styles/home.css` animates the hero headline spans and media. Media begins immediately; headline lines follow at 55/130/205ms. Following the initial entrance, `.home-hero__copy` remains shown for ~3.5 seconds to ensure the headline is read, then gently fades out while sliding left (`hero-text-fade-slide-left`) to leave the photograph and participants completely unobstructed. Reloading or using a Home link replays this intro; pointer hover and focus do not bring the copy back. Reduced-motion preferences keep the copy visible and static without animation. Mobile uses a halved translation distance.
 
 ### h1 structure constraint
 
