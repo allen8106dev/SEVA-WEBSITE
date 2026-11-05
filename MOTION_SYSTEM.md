@@ -34,7 +34,7 @@ The carousel fills the homepage hero below the sticky header. Each landscape pho
 
 ## Hero choreography
 
-CSS in `src/styles/home.css` animates the hero headline spans and media. Media begins immediately; headline lines follow at 55/130/205ms. Text keeps full opacity and contrast throughout. Critical content is present in server HTML. There is no artificial delay or initial invisible state awaiting hydration. CSS media queries disable the sequence for reduced motion. Mobile uses half the translation distance and a shorter media settle.
+CSS in `src/styles/home.css` animates the hero headline spans and media. Media begins immediately; headline lines follow at 55/130/205ms. Following the initial entrance, `.home-hero__copy` remains shown for ~3.5 seconds to ensure the headline is read, then gently fades out while sliding left (`hero-text-fade-slide-left`) to leave the photograph and participants completely unobstructed. Hovering or focusing within the hero smoothly restores the copy into view. Reduced-motion preferences keep the copy visible and static without animation. Mobile uses a halved translation distance.
 
 ### h1 structure constraint
 

@@ -1785,58 +1785,62 @@
   inset: 0;
   background: linear-gradient(
     90deg,
-    color-mix(in srgb, var(--color-dark-surface) 92%, transparent) 0%,
-    color-mix(in srgb, var(--color-dark-surface) 90%, transparent) 34%,
-    color-mix(in srgb, var(--color-dark-surface) 58%, transparent) 56%,
-    transparent 78%
+    color-mix(in srgb, var(--color-dark-surface) 55%, transparent) 0%,
+    color-mix(in srgb, var(--color-dark-surface) 32%, transparent) 28%,
+    transparent 52%
   );
   content: "";
   pointer-events: none;
 }
 
 .home-hero-carousel__slide .home-hero-carousel__backdrop {
-  z-index: 0;
-  object-fit: cover;
-  background: transparent;
-  opacity: 1;
-  filter: blur(1.5rem);
-  transform: scale(1.06);
-  -webkit-mask-image: linear-gradient(
-    90deg,
-    #000 0%,
-    #000 44%,
-    transparent 76%
-  );
-  mask-image: linear-gradient(90deg, #000 0%, #000 44%, transparent 76%);
+  display: none;
 }
 
 .home-hero-carousel__slide .home-hero-carousel__main-image {
   z-index: 1;
   background: transparent;
   object-fit: cover;
-  -webkit-mask-image: linear-gradient(
-    90deg,
-    transparent 0%,
-    transparent 35%,
-    #000 56%,
-    #000 100%
-  );
-  mask-image: linear-gradient(
-    90deg,
-    transparent 0%,
-    transparent 35%,
-    #000 56%,
-    #000 100%
-  );
 }
 
 .home-hero__copy {
   color: var(--color-on-primary);
+  will-change: transform, opacity;
+  transition:
+    opacity 0.7s var(--motion-ease),
+    transform 0.7s var(--motion-ease);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .home-hero__copy {
+    animation: hero-text-fade-slide-left 5.5s var(--motion-ease) forwards;
+  }
+
+  .home-hero:hover .home-hero__copy,
+  .home-hero:focus-within .home-hero__copy {
+    opacity: 1;
+    transform: translateX(0);
+    animation: none;
+  }
+}
+
+@keyframes hero-text-fade-slide-left {
+  0%,
+  68% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-3.5rem);
+    pointer-events: none;
+  }
 }
 
 .home-hero h1 {
   margin-block: 0;
   color: var(--color-on-primary);
+  text-shadow: 0 2px 16px rgba(10, 10, 24, 0.4);
 }
 
 .home-hero h1 em {
